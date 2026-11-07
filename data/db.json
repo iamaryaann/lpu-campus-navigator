@@ -1,0 +1,1634 @@
+{
+  "campusLocations": [
+    {
+      "id": "gate-1",
+      "code": "Main Gate 1",
+      "name": "LPU Main Entrance Gate 1A & 1B (NH-44)",
+      "category": "Gates & Transit",
+      "zone": "Main Entrance Zone",
+      "lat": 31.252,
+      "lng": 75.7032,
+      "walkFromGate": "0 mins (Starting Point)",
+      "landmark": "On Jalandhar-Delhi GT Road (NH-44), opposite Haveli side",
+      "erickshaw": "Main E-Rickshaw Terminal right inside Gate 1 (₹10 per seat)",
+      "inside": [
+        "Main Security Control Room & Visitor Pass Counter",
+        "Campus E-Rickshaw & Bus Shuttle Starting Point",
+        "24x7 ATM Booths (SBI, PNB, ICICI, HDFC)"
+      ],
+      "description": "Primary entry gate for students, parents, and visitors arriving from Phagwara or Jalandhar.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/campus.webp"
+    },
+    {
+      "id": "law-gate",
+      "code": "Law Gate (Gate 2)",
+      "name": "LPU Law Gate / Green Valley West Entrance",
+      "category": "Gates & Transit",
+      "zone": "West & Law Gate Zone",
+      "lat": 31.2562,
+      "lng": 75.7008,
+      "walkFromGate": "10 mins from Gate 1 (0 mins from Law Gate Market)",
+      "landmark": "Adjacent to Block 36 (Law) & Law Gate PG Hub",
+      "erickshaw": "Auto & Campus E-Rickshaw stand right at Law Gate",
+      "inside": [
+        "Biometric Turnstile Entry for Day Scholars & PG Students",
+        "Direct Entry to Block 36 (Law), Block 38 & Block 14",
+        "Food Street, Cafes, Printout & Stationery Hub outside gate"
+      ],
+      "description": "Main western pedestrian and transit gate connecting LPU to Law Gate PG area and Green Valley.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/infrastructure.webp"
+    },
+    {
+      "id": "gate-3",
+      "code": "North Gate 3",
+      "name": "LPU Gate 3 (North Service & Hostel Transit Gate)",
+      "category": "Gates & Transit",
+      "zone": "North Campus Zone",
+      "lat": 31.2602,
+      "lng": 75.705,
+      "walkFromGate": "15 mins from Gate 1 (Near BH-5 to BH-8 & Polyhouse)",
+      "landmark": "North end of campus near Block 56 & BH-6",
+      "erickshaw": "North Zone E-Rickshaw Terminal",
+      "inside": [
+        "North Campus Security Post & Logistics Entry",
+        "Transit Point for North Boys Hostels & Agriculture Farms"
+      ],
+      "description": "Northern boundary gate serving the agriculture research fields and North Hostel towers.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/green-campus.webp"
+    },
+    {
+      "id": "block-1-2",
+      "code": "Block 1 & 2",
+      "name": "Directorate of Distance & Online Education (ODL)",
+      "category": "Admin & Support",
+      "zone": "West Entrance Wing",
+      "lat": 31.2522,
+      "lng": 75.7024,
+      "walkFromGate": "2 mins walk from Main Gate 1 (Left lane)",
+      "landmark": "Immediately left after entering Main Gate 1",
+      "erickshaw": "2 mins from Gate 1 Stand",
+      "inside": [
+        "Block 1: LPU Online & Distance Education Student Support Cell",
+        "Block 2: ODL Study Material Distribution, Counseling & Exam Wing"
+      ],
+      "description": "Dedicated administrative and academic blocks for LPU Distance Education and LPU Online programs.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/infrastructure.webp"
+    },
+    {
+      "id": "block-3",
+      "code": "Block 3",
+      "name": "School of Education & Physical Education",
+      "category": "Academic",
+      "zone": "West Entrance Wing",
+      "lat": 31.2524,
+      "lng": 75.702,
+      "walkFromGate": "3 mins walk from Main Gate 1",
+      "landmark": "Between Block 2 and Block 4 Pharmacy",
+      "erickshaw": "Drop at Block 4 / West Wing Stop",
+      "inside": [
+        "Ground Floor: Curriculum Pedagogy Labs & Psychology Testing Lab",
+        "1st - 3rd Floor: B.Ed., M.Ed., B.A. B.Ed. & B.P.Ed. Lecture Halls"
+      ],
+      "description": "Houses teacher training, educational research, and physical education academic departments.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/classroom.webp"
+    },
+    {
+      "id": "block-4-5",
+      "code": "Block 4 & 5",
+      "name": "School of Pharmaceutical Sciences (Pharmacy)",
+      "category": "Academic",
+      "zone": "West Entrance Wing",
+      "lat": 31.2527,
+      "lng": 75.7017,
+      "walkFromGate": "3 mins walk from Main Gate 1",
+      "landmark": "West Academic Lane before Block 14 (MSB)",
+      "erickshaw": "2 mins from Gate 1 Stand",
+      "inside": [
+        "Block 4: Pharmaceutics, Pharmacology, Medicinal Chemistry & Machine Room",
+        "Block 5: B.Pharm, M.Pharm Classrooms, Herbal Garden & Drug Formulation Labs"
+      ],
+      "description": "PCI-approved School of Pharmaceutical Sciences with advanced drug discovery and clinical laboratories.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/pharmaceutical-sciences/pharmaceutical-sciences-bg.webp"
+    },
+    {
+      "id": "block-6",
+      "code": "Block 6",
+      "name": "School of Physiotherapy & Paramedical Sciences",
+      "category": "Academic",
+      "zone": "West Entrance Wing",
+      "lat": 31.253,
+      "lng": 75.7014,
+      "walkFromGate": "4 mins walk from Main Gate 1",
+      "landmark": "Adjacent to Block 5 (Pharmacy) & Ayurvedic Clinic",
+      "erickshaw": "Drop at Block 5 / Block 6 Stop",
+      "inside": [
+        "Ground Floor: Orthopaedic & Neuro Physiotherapy OPD Clinic, Electrotherapy Lab",
+        "1st - 4th Floor: BPT, MPT, Medical Lab Technology (MLT), Radiology & Optometry Labs"
+      ],
+      "description": "Features live physiotherapy rehabilitation clinics and clinical pathology laboratories.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/pharmaceutical-sciences/beyondclass/anatomy-and-physiology-lab.webp"
+    },
+    {
+      "id": "block-7-8",
+      "code": "Block 7 & 8",
+      "name": "Lovely Polytechnic (Diploma Engineering) & Applied Medical",
+      "category": "Academic",
+      "zone": "West Entrance Wing",
+      "lat": 31.2533,
+      "lng": 75.7012,
+      "walkFromGate": "4 mins walk from Main Gate 1",
+      "landmark": "West Wing behind Block 6, near Block 9",
+      "erickshaw": "Drop at Block 7 / Block 14 Turn",
+      "inside": [
+        "Block 7: Diploma in CSE, Civil, Mechanical & Electrical Classrooms",
+        "Block 8: Polytechnic Basic Engineering Workshops, Drawing Halls & Labs"
+      ],
+      "description": "Dedicated campus wing for 3-year Engineering Diploma (Polytechnic) students and foundational labs.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/practical-applications.webp"
+    },
+    {
+      "id": "block-9-10",
+      "code": "Block 9 & 10",
+      "name": "School of Architecture, Interior & Product Design",
+      "category": "Academic",
+      "zone": "West & Central Zone",
+      "lat": 31.2535,
+      "lng": 75.7015,
+      "walkFromGate": "5 mins walk from Main Gate 1",
+      "landmark": "Right next to Block 14 (Mittal School of Business)",
+      "erickshaw": "Drop at Block 14 / Block 10 Plaza",
+      "inside": [
+        "Block 9: B.Arch Drafting Studios, Model Making Workshop, Climatology Lab",
+        "Block 10: Interior Design, Furniture Design, Multimedia & Gaming Studios"
+      ],
+      "description": "Creative hub approved by Council of Architecture (COA) with model-making and 3D prototyping studios.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/architectural-marvels.webp"
+    },
+    {
+      "id": "block-11-12",
+      "code": "Block 11 & 12",
+      "name": "School of Fashion Design, Journalism, Film & Performing Arts",
+      "category": "Academic",
+      "zone": "Central Academic Zone",
+      "lat": 31.2537,
+      "lng": 75.7021,
+      "walkFromGate": "5 mins walk from Main Gate 1",
+      "landmark": "Between Block 14 (MSB) and Block 13 (DSW)",
+      "erickshaw": "Drop at Unipolis / Block 13 Stand",
+      "inside": [
+        "Block 11: Fashion Designing Pattern Labs, Garment Construction & Ramp Studio",
+        "Block 12: TV Newsroom Studio, Green Screen Floor, Audio Recording & Radio Room"
+      ],
+      "description": "Houses LPU's live TV broadcast studio, sound engineering suites, and fashion runway labs.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/tv-news-studio.webp"
+    },
+    {
+      "id": "block-13",
+      "code": "Block 13",
+      "name": "Division of Student Welfare (DSW) & Cultural Hub",
+      "category": "Admin & Support",
+      "zone": "Central Academic Zone",
+      "lat": 31.2542,
+      "lng": 75.7024,
+      "walkFromGate": "5 mins walk from Main Gate 1",
+      "landmark": "Right beside Baldev Raj Mittal Unipolis & Block 14",
+      "erickshaw": "Drop at Unipolis / Block 13 Stand",
+      "inside": [
+        "Ground Floor: DSW Helpdesk, Student Outpass / Leave Queries, Lost & Found",
+        "1st Floor: Student Organizations, Clubs, Hackathon & Event Approvals",
+        "2nd Floor: Music, Dance, Theatre & Fine Arts Practice Studios"
+      ],
+      "description": "Central student welfare office for joining clubs, cultural fests, duty leaves, and counselling.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/music-percussion-lab.webp"
+    },
+    {
+      "id": "block-14",
+      "code": "Block 14",
+      "name": "Mittal School of Business (MSB - MBA / BBA / Commerce)",
+      "category": "Academic",
+      "zone": "Central Academic Zone",
+      "lat": 31.2539,
+      "lng": 75.7018,
+      "walkFromGate": "5 mins walk from Main Gate 1",
+      "landmark": "Near Girls Hostel Zone (GH-1/GH-2) & Unipolis",
+      "erickshaw": "Direct E-Rickshaw from Gate 1 to Block 14 (₹10)",
+      "inside": [
+        "Ground Floor: Executive Seminar Halls & Bloomberg Financial Markets Lab",
+        "1st - 4th Floor: MBA, BBA & B.Com (Hons.) Amphitheater Lecture Rooms",
+        "5th & 6th Floor: Economics Wing, HOD Cabins & Corporate Relations Cell"
+      ],
+      "description": "ACBSP-accredited business school housing management, commerce, banking, and economics programs.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/business/business-bg.webp"
+    },
+    {
+      "id": "block-15",
+      "code": "Block 15",
+      "name": "School of Social Sciences, Languages & Liberal Arts",
+      "category": "Academic",
+      "zone": "Central Academic Zone",
+      "lat": 31.2544,
+      "lng": 75.702,
+      "walkFromGate": "6 mins walk from Main Gate 1",
+      "landmark": "Behind Block 14 (MSB) & near GH-1 Gate",
+      "erickshaw": "Drop at Block 14 / Unipolis Stop",
+      "inside": [
+        "Ground Floor: Psychology Counselling Labs & Foreign Language Labs",
+        "1st - 4th Floor: B.A. (Hons.), M.A. English, Political Science, History, Sociology & Geography"
+      ],
+      "description": "Dedicated to Humanities, Liberal Arts, Clinical Psychology, Civil Services prep, and Foreign Languages.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/business/beyondclass/classroom1.webp"
+    },
+    {
+      "id": "block-16-17",
+      "code": "Block 16 & 17 (GH-1 & GH-2)",
+      "name": "Girls Hostel 1 & Girls Hostel 2 (GH-1 / GH-2)",
+      "category": "Hostels",
+      "zone": "Girls Residential Zone",
+      "lat": 31.2546,
+      "lng": 75.7014,
+      "walkFromGate": "5 mins walk from Main Gate 1",
+      "landmark": "Right next to Block 14 (MSB) & Block 15",
+      "erickshaw": "Drop at GH Main Security Gate (Near Block 14)",
+      "inside": [
+        "Block 16 (GH-1): AC/Non-AC Rooms, GH-1 Central Girls Mess & Warden Office",
+        "Block 17 (GH-2): Girls Residential Wing, Tuck Shop, Salon & Laundry"
+      ],
+      "description": "Closest girls hostels to Block 14, Block 30 Admin, and Uni Mall with 3-tier biometric security.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/girls-hostel.webp"
+    },
+    {
+      "id": "block-18-19",
+      "code": "Block 18 & 19 (GH-3 & GH-4)",
+      "name": "Girls Hostel 3 & Girls Hostel 4 (GH-3 / GH-4)",
+      "category": "Hostels",
+      "zone": "Girls Residential Zone",
+      "lat": 31.255,
+      "lng": 75.7012,
+      "walkFromGate": "6 mins walk from Main Gate 1",
+      "landmark": "Inside Girls Hostel Enclave behind Block 15",
+      "erickshaw": "Drop at GH Main Security Gate",
+      "inside": [
+        "Block 18 (GH-3): 2/3/4 Seater Rooms, Indoor Badminton Court & Study Room",
+        "Block 19 (GH-4): GH-4 Executive Dining Hall, Night Canteen & Gym"
+      ],
+      "description": "Centrally located girls hostel towers with in-house dining hall, medical room, and study lounges.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/girls-hostel.webp"
+    },
+    {
+      "id": "block-20-21",
+      "code": "Block 20 & 21 (GH-5 & GH-6)",
+      "name": "Girls Hostel 5 & Girls Hostel 6 (GH-5 / GH-6)",
+      "category": "Hostels",
+      "zone": "Girls Residential Zone",
+      "lat": 31.2555,
+      "lng": 75.701,
+      "walkFromGate": "7 mins walk from Gate 1 (2 mins from Law Gate)",
+      "landmark": "Between GH-4 and Block 36 (Law Block)",
+      "erickshaw": "Drop at GH Gate / Block 36 Turn",
+      "inside": [
+        "Block 20 (GH-5): High-Rise Girls Hostel with AC Rooms & Mess",
+        "Block 21 (GH-6): Modern Residential Wing, Bakery Kiosk & Departmental Store"
+      ],
+      "description": "High-rise girls hostels located just 3 minutes away from Central Library (Block 37) and Block 32 CSE.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/girls-hostel.webp"
+    },
+    {
+      "id": "block-22-24",
+      "code": "Block 22, 23 & 24",
+      "name": "Faculty Residences, Staff Quarters & University Guest House",
+      "category": "Admin & Support",
+      "zone": "East Residential Zone",
+      "lat": 31.2528,
+      "lng": 75.7055,
+      "walkFromGate": "4 mins walk from Main Gate 1 (East Wing)",
+      "landmark": "East of Block 30 Admin & near Uni Hospital",
+      "erickshaw": "Drop at Uni Hospital / Staff Colony Lane",
+      "inside": [
+        "Block 22 & 23: Senior Faculty & Warden Residential Apartments",
+        "Block 24: University VIP Guest House & Parent Stay Suites"
+      ],
+      "description": "On-campus residential quarters for faculty members, wardens, and visiting guests.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/environment-first-campus.webp"
+    },
+    {
+      "id": "block-25",
+      "code": "Block 25",
+      "name": "School of Chemical Engineering & Physical Sciences",
+      "category": "Academic",
+      "zone": "Central Academic Zone",
+      "lat": 31.2539,
+      "lng": 75.7056,
+      "walkFromGate": "5 mins walk from Main Gate 1 (Right lane past Admin)",
+      "landmark": "Behind Block 29/30 & next to Block 26",
+      "erickshaw": "Drop at Block 26 / Uni Hospital Turn",
+      "inside": [
+        "Ground Floor: Chemical Process Technology, Fluid Mechanics & Heat Transfer Labs",
+        "1st - 4th Floor: B.Sc. / M.Sc. Physics, Chemistry, Mathematics & Statistics Classrooms"
+      ],
+      "description": "Houses Chemical Engineering pilot plants along with Physics, Chemistry, and Mathematics departments.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/pharmaceutical-sciences/beyondclass/pharmaceutical-chemistry-lab.webp"
+    },
+    {
+      "id": "block-26",
+      "code": "Block 26",
+      "name": "School of Electronics & Communication Engineering (ECE)",
+      "category": "Academic",
+      "zone": "Central Academic Zone",
+      "lat": 31.2543,
+      "lng": 75.7058,
+      "walkFromGate": "6 mins walk from Main Gate 1",
+      "landmark": "East of Uni Mall, between Block 25 and Block 27",
+      "erickshaw": "Drop at Block 26 / Uni Mall East Stop",
+      "inside": [
+        "Ground Floor: VLSI Design, PCB Fabrication, Microwave & Optical Fiber Labs",
+        "1st - 5th Floor: B.Tech ECE Lecture Halls, IoT & Embedded Systems Studios"
+      ],
+      "description": "Core Electronics & Communication Engineering block featuring semiconductor, VLSI, and IoT labs.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/digital-electronic.webp"
+    },
+    {
+      "id": "block-27",
+      "code": "Block 27",
+      "name": "School of Electrical, Robotics & Biomedical Engineering (EEE)",
+      "category": "Academic",
+      "zone": "Central Academic Zone",
+      "lat": 31.2547,
+      "lng": 75.706,
+      "walkFromGate": "6 mins walk from Main Gate 1",
+      "landmark": "Adjacent to Block 26 & behind Uni Mall",
+      "erickshaw": "Drop at Uni Mall / Block 27 Stop",
+      "inside": [
+        "Ground Floor: High-Voltage Electrical Machines, Power Systems & Transformer Bay",
+        "1st - 4th Floor: B.Tech EEE, Robotics, Automation & Biomedical Engineering Labs",
+        "5th Floor: Solar Power & Smart Grid Research Center"
+      ],
+      "description": "Equipped with heavy electrical machinery bays, industrial robotics arms, and power electronics labs.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/advance-manufacturing-lab.webp"
+    },
+    {
+      "id": "block-28",
+      "code": "Block 28",
+      "name": "School of Bioengineering & Biosciences (Biotech & Forensic)",
+      "category": "Academic",
+      "zone": "Central Academic Zone",
+      "lat": 31.2537,
+      "lng": 75.705,
+      "walkFromGate": "4 mins walk from Main Gate 1",
+      "landmark": "Right next to Uni Hospital & Block 29",
+      "erickshaw": "Drop at Block 28 / Uni Hospital Stop",
+      "inside": [
+        "Ground Floor: Molecular Biology, Genetic Engineering & Fermentation Labs",
+        "1st - 4th Floor: B.Tech/B.Sc. Biotechnology, Microbiology, Biochemistry & Forensic Science",
+        "5th Floor: Food Technology & Bioprocess Research Wing"
+      ],
+      "description": "Life sciences hub housing Biotechnology, Forensic Science, Microbiology, and Food Technology.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/bioengineering-and-biosciences/bioengineering-and-biosciences-bg.webp"
+    },
+    {
+      "id": "uni-hospital",
+      "code": "Uni Hospital",
+      "name": "24x7 Uni Hospital, Emergency & Pharmacy (Block 28B)",
+      "category": "Admin & Support",
+      "zone": "Central Academic Zone",
+      "lat": 31.2534,
+      "lng": 75.7053,
+      "walkFromGate": "4 mins walk from Main Gate 1 (Right turn from Block 30)",
+      "landmark": "Adjacent to Block 28 & Block 30 Admin",
+      "erickshaw": "Priority Ambulance & E-Rickshaw drop at Emergency Gate",
+      "inside": [
+        "Ground Floor: 24x7 Emergency Casualty Ward, Ambulance Bay & 24hr Medicine Pharmacy",
+        "1st Floor: Doctor OPD (General, Dental, Eye, Skin, Gynae) & Physiotherapy",
+        "2nd Floor: Pathology Blood Test Lab, X-Ray, ECG & Student Inpatient Wards"
+      ],
+      "description": "24x7 on-campus hospital with free doctor OPD consultation for LPU students and emergency ambulances (01824-501227).",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/unihospital.webp"
+    },
+    {
+      "id": "block-29",
+      "code": "Block 29",
+      "name": "Division of Examination, ID Card & Academic Operations",
+      "category": "Admin & Support",
+      "zone": "Main Entrance Zone",
+      "lat": 31.253,
+      "lng": 75.7037,
+      "walkFromGate": "2 mins walk from Main Gate 1",
+      "landmark": "Connected adjacent to Block 30 (Admin Block)",
+      "erickshaw": "Drop at Block 30 Roundabout",
+      "inside": [
+        "Ground Floor: Student ID Card Printing, Biometric Registration & Vehicle Pass Desk",
+        "1st Floor: Controller of Examinations, Re-appear / Backlog & Result Queries",
+        "2nd Floor: UMS Technical Helpdesk, Section Allotment & Transcripts"
+      ],
+      "description": "Visit Block 29 for new/duplicate Student ID cards, UMS login issues, exam seating, and official degree transcripts.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/e-cell-logic-room.webp"
+    },
+    {
+      "id": "block-30",
+      "code": "Block 30",
+      "name": "Main Administrative & Admissions Block (Chancellery)",
+      "category": "Admin & Support",
+      "zone": "Main Entrance Zone",
+      "lat": 31.2532,
+      "lng": 75.7042,
+      "walkFromGate": "2 mins walk straight from Main Gate 1",
+      "landmark": "First iconic glass building straight ahead from Main Gate 1",
+      "erickshaw": "Drop at Block 30 Roundabout (2 mins from Gate 1)",
+      "inside": [
+        "Ground Floor: New Admissions Hall, Document Verification & Parent Counseling",
+        "1st Floor: Accounts & Fee Counter, LPUNEST Scholarship & Education Loan Desk",
+        "2nd & 3rd Floor: Chancellor Office, Vice-Chancellor & Registrar Secretariat"
+      ],
+      "description": "Main administrative headquarters of LPU for admissions, fee payment, scholarships, and registrar services.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/architectural-marvels.webp"
+    },
+    {
+      "id": "block-31",
+      "code": "Block 31",
+      "name": "Division of International Affairs, Ph.D. Research & HRDC",
+      "category": "Admin & Support",
+      "zone": "Main Entrance Zone",
+      "lat": 31.2535,
+      "lng": 75.7045,
+      "walkFromGate": "3 mins walk from Main Gate 1",
+      "landmark": "Just behind Block 30 Admin toward Uni Mall",
+      "erickshaw": "Drop at Block 30 / Block 31 Plaza",
+      "inside": [
+        "Ground Floor: International Student Visa, FRRO & Exchange Program Helpdesk",
+        "1st Floor: Semester Exchange / Credit Transfer & Study Abroad Cell",
+        "2nd Floor: Division of Research & Development (Ph.D. Scholars) & HRDC"
+      ],
+      "description": "Dedicated block for international students (50+ countries), study-abroad programs, and Ph.D. research scholars.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/business/beyondclass/amphitheatre.webp"
+    },
+    {
+      "id": "unipolis",
+      "code": "Unipolis",
+      "name": "Baldev Raj Mittal Unipolis (Open Amphitheater)",
+      "category": "Facilities & Mall",
+      "zone": "Central Academic Zone",
+      "lat": 31.2544,
+      "lng": 75.703,
+      "walkFromGate": "5 mins walk straight from Main Gate 1",
+      "landmark": "Central open-air amphitheater between Block 13 and Uni Mall",
+      "erickshaw": "Central Campus E-Rickshaw Junction",
+      "inside": [
+        "Open-Air Concert Stage & YouthVibe / One India / One World Fest Arena",
+        "Surrounding Food Kiosks, Shake Bars & Amphitheater Steps"
+      ],
+      "description": "Iconic open-air amphitheater hosting celebrity concerts, cultural fests, and convocation ceremonies.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/uni-polis.webp"
+    },
+    {
+      "id": "uni-mall",
+      "code": "Uni Mall",
+      "name": "LPU Uni Mall, Food Court, Banks & Uni Hotel",
+      "category": "Facilities & Mall",
+      "zone": "Central Academic Zone",
+      "lat": 31.2548,
+      "lng": 75.7045,
+      "walkFromGate": "6 mins walk straight along Main Avenue",
+      "landmark": "Opposite Block 34 Auditorium, heart of the campus",
+      "erickshaw": "Every campus E-Rickshaw stops at Uni Mall Junction",
+      "inside": [
+        "Ground Floor: Domino's, Subway, Cafe Coffee Day, Supermarket, Bookstore & Bank Branches",
+        "1st Floor: Multi-Cuisine Food Court, WHSmith, Salon, Optical & Apparel Stores",
+        "Upper Floors: Uni Hotel, Bowling Alley & Student Startup Offices"
+      ],
+      "description": "8-story campus shopping mall with food courts, grocery supermarket, stationery, banks, and student hangout spots.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/uni-mall.webp"
+    },
+    {
+      "id": "block-32",
+      "code": "Block 32",
+      "name": "School of Computer Science & Engineering (Main CSE Hub)",
+      "category": "Academic",
+      "zone": "CSE & Tech Zone",
+      "lat": 31.2558,
+      "lng": 75.7056,
+      "walkFromGate": "8 mins walk straight past Block 34 Auditorium",
+      "landmark": "Right after Block 34 Auditorium & opposite Block 33",
+      "erickshaw": "Direct E-Rickshaw from Gate 1 or BH-1 to Block 32 (₹10)",
+      "inside": [
+        "Ground Floor: Apple iMac Lab, Google Cloud Lab, BYOD Coding Labs & CSE Helpdesk",
+        "1st - 4th Floor: B.Tech CSE Lecture Halls (Rooms 32-101 to 32-415)",
+        "5th & 6th Floor: AI/ML Research Labs, HOD Cabins & Faculty Cubicles"
+      ],
+      "description": "The largest and busiest academic block at LPU, housing B.Tech CSE, AI/ML, Data Science, and Software Engineering.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/computer-science-engineering/computer-science-engineering-bg.webp"
+    },
+    {
+      "id": "block-33",
+      "code": "Block 33",
+      "name": "School of Computer Applications & IT (BCA / MCA / B.Sc IT)",
+      "category": "Academic",
+      "zone": "CSE & Tech Zone",
+      "lat": 31.2555,
+      "lng": 75.7062,
+      "walkFromGate": "8 mins walk from Main Gate 1",
+      "landmark": "Directly connected/adjacent to Block 32 (CSE)",
+      "erickshaw": "Drop at Block 32 / Block 33 Stop",
+      "inside": [
+        "Ground Floor: Full-Stack Web Dev Labs, Cisco Networking Lab & Server Room",
+        "1st - 5th Floor: BCA, MCA, B.Sc. IT Classrooms & Cyber Security Labs"
+      ],
+      "description": "Adjacent to Block 32, hosting Computer Applications (BCA/MCA), Cloud Computing, and Networking labs.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/i-mac-lab-1.webp"
+    },
+    {
+      "id": "block-34",
+      "code": "Block 34",
+      "name": "Shanti Devi Mittal Auditorium & Placement Cell (Career Services)",
+      "category": "Academic",
+      "zone": "CSE & Tech Zone",
+      "lat": 31.2552,
+      "lng": 75.7052,
+      "walkFromGate": "7 mins walk straight from Gate 1",
+      "landmark": "Directly opposite Uni Mall, before Block 32",
+      "erickshaw": "Drop at Uni Mall / Block 34 Stop",
+      "inside": [
+        "Ground Floor: 2,500-Seater Shanti Devi Mittal Main Auditorium",
+        "1st & 2nd Floor: Division of Career Services (Campus Placements, GD/Interview Rooms)",
+        "3rd - 6th Floor: CSE Honors, PEP Classes & Online Assessment Labs"
+      ],
+      "description": "Houses the main university auditorium as well as LPU's central Placement & Career Services cell.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/shanti-devi-auditorium.webp"
+    },
+    {
+      "id": "block-35",
+      "code": "Block 35",
+      "name": "Innovation Studio, Startup School & Entrepreneurship Cell",
+      "category": "Academic",
+      "zone": "CSE & Tech Zone",
+      "lat": 31.2561,
+      "lng": 75.7059,
+      "walkFromGate": "8 mins walk from Gate 1",
+      "landmark": "Just behind Block 32 & Block 33",
+      "erickshaw": "Drop at Block 32 Stop",
+      "inside": [
+        "Ground Floor: 24x7 Hackathon Arena, 3D Printing & IoT Maker Space",
+        "1st - 4th Floor: Student Startup Incubator, Patent Filing Cell & Industry Tie-up Labs (Bosch, Intel)"
+      ],
+      "description": "Dedicated innovation and startup incubation building where students build funded startups, patents, and hackathon projects.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/innovation-studio.webp"
+    },
+    {
+      "id": "block-36",
+      "code": "Block 36",
+      "name": "School of Law (BA LLB / BBA LLB / LLM & Moot Court)",
+      "category": "Academic",
+      "zone": "CSE & Tech Zone",
+      "lat": 31.2566,
+      "lng": 75.7038,
+      "walkFromGate": "9 mins walk from Gate 1 (2 mins from Law Gate)",
+      "landmark": "Between Central Library (Block 37) and Law Gate (Gate 2)",
+      "erickshaw": "Drop at Block 37 Library or Law Gate Stop",
+      "inside": [
+        "Ground Floor: National Moot Court Hall & Free Legal Aid Clinic",
+        "1st - 4th Floor: BCI-Approved BA LLB, BBA LLB, LLB & LLM Lecture Halls",
+        "5th Floor: Law Library Reference Section & Faculty Chambers"
+      ],
+      "description": "Bar Council of India (BCI) approved Law School located right near Law Gate (Gate 2) and Central Library.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/classroom.webp"
+    },
+    {
+      "id": "block-37",
+      "code": "Block 37",
+      "name": "Dr. B.R. Ambedkar Central Library (9-Story Knowledge Center)",
+      "category": "Facilities & Mall",
+      "zone": "CSE & Tech Zone",
+      "lat": 31.2564,
+      "lng": 75.7049,
+      "walkFromGate": "9 mins walk straight down Main Avenue",
+      "landmark": "Just ahead of Block 32 & opposite Block 36",
+      "erickshaw": "Drop right in front of Central Library (Block 37)",
+      "inside": [
+        "Basement & Ground Floor: 24x7 Reading Room, Automated RFID Book Issue/Return",
+        "1st - 3rd Floor: Engineering, Computer Science, Management & Law Book Stacks",
+        "4th - 8th Floor: Digital Library (300+ iMacs/PCs), Silent AC Study Floors & Research Carrels"
+      ],
+      "description": "Iconic 9-story central library with 20+ lakh books, digital terminals, and silent AC study zones open till midnight.",
+      "photo": "https://www.lpu.in/lpu-assets/images/libraries/lpu-libraries.webp"
+    },
+    {
+      "id": "block-38",
+      "code": "Block 38",
+      "name": "School of Hotel Management, Airlines & Tourism",
+      "category": "Academic",
+      "zone": "CSE & Tech Zone",
+      "lat": 31.2569,
+      "lng": 75.7044,
+      "walkFromGate": "10 mins walk from Gate 1",
+      "landmark": "Adjacent to Central Library (Block 37) & Block 36",
+      "erickshaw": "Drop at Central Library (Block 37) Stop",
+      "inside": [
+        "Ground Floor: 5-Star Training Kitchens, Bakery & Confectionery Lab, Mock Training Restaurant",
+        "1st & 2nd Floor: Mock Aircraft Cabin (Airlines & Hospitality Lab), Front Office & Housekeeping Suites",
+        "3rd & 4th Floor: BHMCT, B.Sc. Airlines, Tourism & Culinary Arts Classrooms"
+      ],
+      "description": "Features a real mock aircraft fuselage for aviation training, commercial culinary kitchens, and hospitality suites.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/lovely-sweets.webp"
+    },
+    {
+      "id": "block-39-40",
+      "code": "Block 39 & 40",
+      "name": "Central Instrumentation Facility (CIF) & Computing Annex",
+      "category": "Academic",
+      "zone": "CSE & Tech Zone",
+      "lat": 31.2567,
+      "lng": 75.7055,
+      "walkFromGate": "9 mins walk from Gate 1",
+      "landmark": "Between Block 32/35 and Boys Hostel BH-1",
+      "erickshaw": "Drop at Block 37 / BH-1 Turn",
+      "inside": [
+        "Block 39: Scanning Electron Microscopy (SEM), XRD, NMR & Nanotechnology Research Labs",
+        "Block 40: Online Examination Center (Computer Based Test Labs 1 to 12)"
+      ],
+      "description": "Houses high-end scientific research equipment and large-scale computer test centers.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/cif.webp"
+    },
+    {
+      "id": "block-41-bh1",
+      "code": "Block 41 (BH-1)",
+      "name": "Boys Hostel 1 (BH-1) & BH-1 Central Mess",
+      "category": "Hostels",
+      "zone": "Boys Hostel Zone 1",
+      "lat": 31.2574,
+      "lng": 75.706,
+      "walkFromGate": "10 mins from Gate 1 (Only 2 mins from Block 32 CSE & Library)",
+      "landmark": "Immediately north of Block 32 CSE & Block 37 Library",
+      "erickshaw": "Drop right outside BH-1 Main Gate",
+      "inside": [
+        "Ground Floor: BH-1 Central Pure Veg Mess, Warden Office, Barber & Stationery Shop",
+        "1st - 8th Floor: Boys Residential Rooms (1/2/3/4 Seater AC & Non-AC)",
+        "Courtyard: Outdoor Badminton Courts & Evening Snack Kiosks"
+      ],
+      "description": "The most sought-after boys hostel for CSE/IT students because it is just a 2-minute walk from Block 32 and Central Library.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel.webp"
+    },
+    {
+      "id": "block-42-bh2",
+      "code": "Block 42 (BH-2)",
+      "name": "Boys Hostel 2 (BH-2)",
+      "category": "Hostels",
+      "zone": "Boys Hostel Zone 1",
+      "lat": 31.2577,
+      "lng": 75.7065,
+      "walkFromGate": "11 mins from Gate 1 (3 mins from Block 32 CSE)",
+      "landmark": "Adjacent to Boys Hostel 1 (BH-1)",
+      "erickshaw": "Drop at BH-1 / BH-2 Chowk",
+      "inside": [
+        "Ground Floor: Dining Hall, Laundry Drop Point, Tuck Shop & Medical First-Aid",
+        "Upper Floors: 2/3/4 Seater Rooms & Common Study Hall"
+      ],
+      "description": "Connected closely with BH-1, offering quick walking access to Central Library and CSE blocks.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel.webp"
+    },
+    {
+      "id": "block-43-bh3",
+      "code": "Block 43 (BH-3)",
+      "name": "Boys Hostel 3 (BH-3) & Night Food Plaza",
+      "category": "Hostels",
+      "zone": "Boys Hostel Zone 1",
+      "lat": 31.2581,
+      "lng": 75.7068,
+      "walkFromGate": "12 mins from Gate 1 (4 mins from Block 32 CSE)",
+      "landmark": "Between BH-2 and BH-4 along the hostel avenue",
+      "erickshaw": "Drop at BH-3 / BH-4 Plaza",
+      "inside": [
+        "Ground Floor: BH-3 Mess, Midnight Food Court (Open till 1 AM), ATM & Grocery Store",
+        "Upper Floors: Boys Hostel Residential Wings & Reading Lounge"
+      ],
+      "description": "Popular boys hostel featuring lively evening food stalls, juice bars, and sports grounds nearby.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel.webp"
+    },
+    {
+      "id": "block-44-bh4",
+      "code": "Block 44 (BH-4)",
+      "name": "Boys Hostel 4 (BH-4) & Mega Dining Hall",
+      "category": "Hostels",
+      "zone": "Boys Hostel Zone 1",
+      "lat": 31.2585,
+      "lng": 75.7072,
+      "walkFromGate": "13 mins from Gate 1 (4 mins by E-Rickshaw)",
+      "landmark": "Opposite Cricket Ground & before Block 55",
+      "erickshaw": "Major E-Rickshaw Stand right outside BH-4 Gate",
+      "inside": [
+        "Ground Floor: 2,400-Capacity BH-4 Mega Mess (North, South & Continental Counters)",
+        "In-House Gym, Automated Laundry, Salon, Bakery & Stationery Store"
+      ],
+      "description": "One of LPU's largest boys hostels with a massive multi-cuisine dining hall and adjacent cricket stadium.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel.webp"
+    },
+    {
+      "id": "block-45-46-apt",
+      "code": "Block 45 & 46 (Apartments)",
+      "name": "LPU Executive Studio Apartments (Residential Suites)",
+      "category": "Hostels",
+      "zone": "North Sports & Hostel Zone",
+      "lat": 31.2575,
+      "lng": 75.7038,
+      "walkFromGate": "10 mins from Gate 1 (Next to Indoor Sports Complex)",
+      "landmark": "Between Central Library (Block 37) and Indoor Stadium (Block 51)",
+      "erickshaw": "Drop at Apartment / Indoor Stadium Chowk",
+      "inside": [
+        "1-Seater, 2-Seater & 3-Seater Fully Air-Conditioned Studio Suites",
+        "Attached Private Washroom, Pantry Area, Wooden Wardrobe & Housekeeping",
+        "Dedicated Executive Dining Lounge"
+      ],
+      "description": "Premium hotel-style AC studio apartments located right next to the Olympic Indoor Sports Complex.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel-room.webp"
+    },
+    {
+      "id": "block-47-48-bh5-6",
+      "code": "Block 47 & 48 (BH-5 & BH-6)",
+      "name": "Boys Hostel 5 & Boys Hostel 6 (BH-5 / BH-6)",
+      "category": "Hostels",
+      "zone": "North Hostel Zone 2",
+      "lat": 31.2594,
+      "lng": 75.7078,
+      "walkFromGate": "15 mins walk from Gate 1 (4 mins by E-Rickshaw)",
+      "landmark": "North of BH-4 & near Block 55/56",
+      "erickshaw": "Continuous E-Rickshaws from BH-5/6 Stand to Block 32 & Uni Mall",
+      "inside": [
+        "Block 47 (BH-5): 10-Story Hostel Tower, North Mess & Night Canteen",
+        "Block 48 (BH-6): Modern Rooms, Basketball Courts, Supermarket & Gym"
+      ],
+      "description": "High-rise boys hostel complex in North Campus, just 2 minutes from Mechanical (Block 55) and Agriculture (Block 56).",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel.webp"
+    },
+    {
+      "id": "block-49-50-bh7-8",
+      "code": "Block 49 & 50 (BH-7 & BH-8)",
+      "name": "Boys Hostel 7 & Boys Hostel 8 (BH-7 / BH-8 Towers)",
+      "category": "Hostels",
+      "zone": "North Hostel Zone 2",
+      "lat": 31.26,
+      "lng": 75.7084,
+      "walkFromGate": "16 mins walk from Gate 1 (5 mins by E-Rickshaw)",
+      "landmark": "Northernmost high-rise hostel towers near Gate 3",
+      "erickshaw": "Dedicated E-Rickshaw Terminal at BH-7/8 Gate",
+      "inside": [
+        "High-Speed Elevators, Spacious Balconies & Central Dining Hall",
+        "24x7 Tuck Shop, Laundry, Table Tennis & Outdoor Volleyball Courts"
+      ],
+      "description": "Newest high-rise boys hostel towers with open green views and direct shuttle connectivity.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel.webp"
+    },
+    {
+      "id": "block-51-sports",
+      "code": "Block 51 (Sports Arena)",
+      "name": "Shanti Devi Mittal Indoor Sports Complex & Olympic Pool",
+      "category": "Facilities & Mall",
+      "zone": "North Sports & Hostel Zone",
+      "lat": 31.2573,
+      "lng": 75.7026,
+      "walkFromGate": "11 mins from Gate 1 (Near Apartments & BH-1)",
+      "landmark": "North-West of Central Library (Block 37)",
+      "erickshaw": "Drop at Indoor Sports Complex Chowk",
+      "inside": [
+        "Olympic-Size All-Weather Heated Swimming Pool & Diving Pool",
+        "12 Badminton Courts, Squash Courts, Indoor Basketball, Wrestling & Boxing Ring",
+        "10-Meter Shooting Range, Roller Skating Rink & Pro Fitness Gym"
+      ],
+      "description": "World-class indoor sports arena where LPU's Olympic and Asian Games medalists train daily.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/indoor-sports-complex.webp"
+    },
+    {
+      "id": "block-52-robopark",
+      "code": "Block 52 (RoboPark)",
+      "name": "LPU RoboPark, Automobile Garage & Drone Innovation Center",
+      "category": "Academic",
+      "zone": "North Engineering Zone",
+      "lat": 31.2584,
+      "lng": 75.7052,
+      "walkFromGate": "12 mins from Gate 1",
+      "landmark": "Between BH-1/BH-3 and Block 55 Mechanical",
+      "erickshaw": "Drop at Block 52 / Block 55 Junction",
+      "inside": [
+        "Formula Bharat / Go-Kart / Solar Car Student Fabrication Bays",
+        "UAV / Drone Testing Cage & Autonomous Robotics Arena",
+        "Welding, Foundry, Sheet Metal & Central Carpentry Workshops"
+      ],
+      "description": "Hands-on engineering fabrication hub where student teams build solar cars, F1-style buggies, and drones.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/solar-bus.webp"
+    },
+    {
+      "id": "block-53-54",
+      "code": "Block 53 & 54",
+      "name": "School of Civil Engineering & Aerospace / Mechatronics",
+      "category": "Academic",
+      "zone": "North Engineering Zone",
+      "lat": 31.2588,
+      "lng": 75.706,
+      "walkFromGate": "13 mins from Gate 1 (4 mins by E-Rickshaw)",
+      "landmark": "Just before Block 55 Mechanical & opposite BH-4",
+      "erickshaw": "Drop at BH-4 / Block 54 Stop",
+      "inside": [
+        "Block 53: Concrete Technology, Structural Testing, Geotechnical & Surveying Labs",
+        "Block 54: Subsonic Wind Tunnel, Jet Engine Bay, Avionics & Mechatronics Labs"
+      ],
+      "description": "Houses Civil Engineering structural labs and Aerospace Engineering wind-tunnel & aircraft propulsion labs.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/civil-engineering/civil-engineering-bg.webp"
+    },
+    {
+      "id": "block-55",
+      "code": "Block 55",
+      "name": "School of Mechanical Engineering (CAD/CAM, Thermal & CNC)",
+      "category": "Academic",
+      "zone": "North Engineering Zone",
+      "lat": 31.2591,
+      "lng": 75.7068,
+      "walkFromGate": "14 mins from Gate 1 (4 mins by E-Rickshaw)",
+      "landmark": "Adjacent to BH-4 & Block 56 Agriculture",
+      "erickshaw": "Drop right at Block 55 / BH-4 Stop",
+      "inside": [
+        "Ground Floor: CNC Machining Center, IC Engines, Thermodynamics & Fluid Machinery Labs",
+        "1st - 4th Floor: B.Tech Mechanical, Automobile & Robotics Lecture Halls, CAD/CAM Studios"
+      ],
+      "description": "Core Mechanical and Automobile Engineering building equipped with industrial CNC machines and thermal labs.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/mechanical-engineering/mechanical-engineering-bg.webp"
+    },
+    {
+      "id": "block-56",
+      "code": "Block 56",
+      "name": "School of Agriculture (ICAR-Accredited Agriculture Sciences)",
+      "category": "Academic",
+      "zone": "North Agriculture Zone",
+      "lat": 31.2595,
+      "lng": 75.7072,
+      "walkFromGate": "15 mins from Gate 1 (5 mins by E-Rickshaw)",
+      "landmark": "Next to Block 55 & Boys Hostel BH-5",
+      "erickshaw": "Direct North Campus E-Rickshaw from Gate 1 / Uni Mall (₹10)",
+      "inside": [
+        "Ground Floor: Soil Science, Agronomy, Entomology & Plant Pathology Labs",
+        "1st - 4th Floor: B.Sc. (Hons.) Agriculture & M.Sc. Genetics / Horticulture Classrooms"
+      ],
+      "description": "ICAR-accredited School of Agriculture located right beside LPU's experimental research farms.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/agriculture/agriculture-bg.webp"
+    },
+    {
+      "id": "block-57-58",
+      "code": "Block 57 & 58",
+      "name": "Agricultural Polyhouse Farms, Dairy & Horticulture Research",
+      "category": "Academic",
+      "zone": "North Agriculture Zone",
+      "lat": 31.2601,
+      "lng": 75.7064,
+      "walkFromGate": "16 mins from Gate 1 (5 mins by E-Rickshaw)",
+      "landmark": "Northern green belt behind Block 56 & Sports Stadium",
+      "erickshaw": "Drop at Block 56 / Polyhouse Gate",
+      "inside": [
+        "Block 57: Automated Climate-Controlled Polyhouses, Hydroponics & Mushroom Farming Units",
+        "Block 58: Organic Research Fields, Floriculture, Apiculture & Farm Machinery Yard"
+      ],
+      "description": "Live agricultural research fields and smart polyhouses where B.Sc./M.Sc. Agriculture students conduct field trials.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/agriculture/beyondclass/hi-tech-polyhouse1.webp"
+    },
+    {
+      "id": "outdoor-stadium",
+      "code": "Main Stadium & Helipad",
+      "name": "LPU Outdoor Cricket/Football Stadium, Athletics Track & Helipad",
+      "category": "Facilities & Mall",
+      "zone": "North Sports & Hostel Zone",
+      "lat": 31.2586,
+      "lng": 75.7036,
+      "walkFromGate": "12 mins from Gate 1",
+      "landmark": "Between Block 51 Indoor Stadium and Boys Hostels BH-3/BH-4",
+      "erickshaw": "Drop at Stadium / BH-3 Chowk",
+      "inside": [
+        "400m Standard Athletics Track, Football Turf & Floodlit Cricket Ground",
+        "University Helipad & Open Parade Ground"
+      ],
+      "description": "Massive outdoor sports complex hosting inter-university tournaments, cricket leagues, and athletic meets.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/football-field.webp"
+    }
+  ],
+  "quickHelpFinder": [
+    {
+      "task": "New Admission / Scholarship / Fee Payment",
+      "blockCode": "Block 30",
+      "locationId": "block-30",
+      "floor": "Ground & 1st Floor"
+    },
+    {
+      "task": "Student ID Card / UMS Password / Exam Issue",
+      "blockCode": "Block 29",
+      "locationId": "block-29",
+      "floor": "Ground & 1st Floor"
+    },
+    {
+      "task": "B.Tech CSE / AI-ML / Cyber Security Classes",
+      "blockCode": "Block 32",
+      "locationId": "block-32",
+      "floor": "1st to 6th Floor"
+    },
+    {
+      "task": "Campus Placements & Internship Cell",
+      "blockCode": "Block 34",
+      "locationId": "block-34",
+      "floor": "1st & 2nd Floor"
+    },
+    {
+      "task": "MBA / BBA / Commerce Classes",
+      "blockCode": "Block 14",
+      "locationId": "block-14",
+      "floor": "1st to 4th Floor"
+    },
+    {
+      "task": "Student Clubs / Duty Leave / Lost & Found (DSW)",
+      "blockCode": "Block 13",
+      "locationId": "block-13",
+      "floor": "Ground & 1st Floor"
+    },
+    {
+      "task": "Central Library & 24x7 Reading Room",
+      "blockCode": "Block 37",
+      "locationId": "block-37",
+      "floor": "Ground to 4th Floor"
+    },
+    {
+      "task": "Medical Emergency / Doctor / Pharmacy",
+      "blockCode": "Uni Hospital",
+      "locationId": "uni-hospital",
+      "floor": "Ground Floor (24x7)"
+    },
+    {
+      "task": "Food Court, Domino's, Books & Grocery",
+      "blockCode": "Uni Mall",
+      "locationId": "uni-mall",
+      "floor": "Ground & 1st Floor"
+    }
+  ],
+  "messes": [
+    {
+      "id": "mess-bh1",
+      "name": "BH-1 & BH-2 Central Mess",
+      "zone": "Near Block 32 & Central Library",
+      "type": "Pure Veg • North & South Indian",
+      "capacity": 1800,
+      "crowdStatus": "Low",
+      "crowdPercent": 32,
+      "rating": 4.6,
+      "timings": {
+        "breakfast": "07:30 AM - 09:30 AM",
+        "lunch": "12:15 PM - 02:30 PM",
+        "snacks": "04:45 PM - 05:45 PM",
+        "dinner": "07:30 PM - 09:30 PM"
+      },
+      "signatureDishes": [
+        {
+          "id": "dish-1",
+          "name": "Amritsari Aloo Paratha & Curd",
+          "meal": "Breakfast",
+          "calories": "420 kcal",
+          "votes": 342,
+          "image": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=600&q=80"
+        },
+        {
+          "id": "dish-2",
+          "name": "Paneer Butter Masala & Garlic Naan",
+          "meal": "Dinner",
+          "calories": "610 kcal",
+          "votes": 518,
+          "image": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80"
+        },
+        {
+          "id": "dish-3",
+          "name": "Rajma Chawal Bowl with Boondi Raita",
+          "meal": "Lunch",
+          "calories": "540 kcal",
+          "votes": 410,
+          "image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80"
+        }
+      ],
+      "weeklyMenu": {
+        "Monday": {
+          "breakfast": "Aloo Pyaz Paratha, Fresh Curd, Pickle, Sweet Corn, Masala Tea & Milk",
+          "lunch": "Rajma Masala, Jeera Rice, Aloo Gobhi, Tawa Roti, Boondi Raita, Green Salad",
+          "snacks": "Crispy Samosa (2 pcs), Tamarind Chutney, Ginger Tea & Cold Coffee",
+          "dinner": "Paneer Butter Masala, Dal Makhani, Steamed Rice, Roti, Hot Gulab Jamun"
+        },
+        "Tuesday": {
+          "breakfast": "Masala Dosa, Coconut Chutney, Sambar, Boiled Chickpeas, Coffee & Milk",
+          "lunch": "Kadhi Pakora, Plain Rice, Bhindi Masala, Chapati, Papad, Fresh Salad",
+          "snacks": "Veg Hakka Noodles, Tomato Ketchup, Hot Masala Tea",
+          "dinner": "Aloo Matar, Yellow Dal Tadka, Jeera Pulao, Roti, Kheer"
+        },
+        "Wednesday": {
+          "breakfast": "Poha with Sev & Peanuts, Jalebi, Banana, Masala Tea & Milk",
+          "lunch": "Chole Masala, Jeera Rice, Mix Veg Dry, Roti, Cucumber Raita, Salad",
+          "snacks": "Grilled Veg Sandwich, Mint Chutney, Cold Drink / Tea",
+          "dinner": "Kadhai Paneer, Dal Fry, Peas Pulao, Butter Roti, Ice Cream Cup"
+        },
+        "Thursday": {
+          "breakfast": "Gobhi Paratha, Butter, Curd, Mixed Pickle, Tea & Milk",
+          "lunch": "Dal Panchmel, Steamed Rice, Aloo Jeera, Chapati, Curd, Salad",
+          "snacks": "Pav Bhaji with Butter Pav, Chopped Onions, Lemon Tea",
+          "dinner": "Malai Kofta, Chana Dal, Rice, Tawa Roti, Moong Dal Halwa"
+        },
+        "Friday": {
+          "breakfast": "Idli Vada Combo, Sambar, Coconut Chutney, Sprouts, Coffee & Milk",
+          "lunch": "Punjabi Chole, Bhature / Roti, Pulao, Boondi Raita, Onion Salad",
+          "snacks": "Aloo Tikki Chaat with Curd & Chutney, Masala Tea",
+          "dinner": "Shahi Paneer, Dal Makhani, Veg Biryani, Raita, Rasgulla"
+        },
+        "Saturday": {
+          "breakfast": "Puri Bhaji, Suji Halwa, Pickle, Masala Tea & Milk",
+          "lunch": "Black Dal, Rice, Seasonal Veg, Chapati, Mix Raita, Salad",
+          "snacks": "Red Sauce Pasta, Iced Tea / Hot Coffee",
+          "dinner": "Veg Manchurian, Fried Rice, Dal Tadka, Roti, Custard"
+        },
+        "Sunday": {
+          "breakfast": "Amritsari Kulcha, Chana, Butter, Lassi & Masala Tea",
+          "lunch": "Special Veg Dum Biryani, Mirchi Salan, Pineapple Raita, Papad",
+          "snacks": "Bhel Puri, Sev, Lemon, Hot Ginger Tea",
+          "dinner": "Matar Paneer, Dal Fry, Jeera Rice, Butter Naan, Chocolate Brownie"
+        }
+      }
+    },
+    {
+      "id": "mess-bh4",
+      "name": "BH-3 & BH-4 Mega Dining Hall",
+      "zone": "North Hostel Zone",
+      "type": "North, South & Continental Counters",
+      "capacity": 2400,
+      "crowdStatus": "Moderate",
+      "crowdPercent": 58,
+      "rating": 4.5,
+      "timings": {
+        "breakfast": "07:30 AM - 09:30 AM",
+        "lunch": "12:15 PM - 02:30 PM",
+        "snacks": "04:45 PM - 05:45 PM",
+        "dinner": "07:30 PM - 09:30 PM"
+      },
+      "signatureDishes": [
+        {
+          "id": "dish-4",
+          "name": "Mysore Masala Dosa Platter",
+          "meal": "Breakfast",
+          "calories": "390 kcal",
+          "votes": 295,
+          "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80"
+        },
+        {
+          "id": "dish-5",
+          "name": "Hyderabadi Veg Dum Biryani",
+          "meal": "Lunch",
+          "calories": "580 kcal",
+          "votes": 460,
+          "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80"
+        }
+      ],
+      "weeklyMenu": {
+        "Monday": {
+          "breakfast": "Paneer Paratha, Curd, Butter, Sprouts, Tea & Coffee",
+          "lunch": "Dal Makhani, Jeera Rice, Mix Veg, Roti, Raita, Salad",
+          "snacks": "Bread Pakora, Green Chutney, Ginger Tea",
+          "dinner": "Kadhai Paneer, Yellow Dal, Steamed Rice, Roti, Gulab Jamun"
+        },
+        "Tuesday": {
+          "breakfast": "Uttapam, Sambar, Tomato Chutney, Boiled Corn, Coffee",
+          "lunch": "Rajma Chawal, Aloo Methi, Chapati, Boondi Raita, Salad",
+          "snacks": "Veg Chowmein, Chili Sauce, Hot Tea",
+          "dinner": "Matar Mushroom, Dal Fry, Rice, Roti, Fruit Custard"
+        },
+        "Wednesday": {
+          "breakfast": "Aloo Paratha, Curd, Pickle, Banana, Tea & Milk",
+          "lunch": "Chole Bhature, Jeera Rice, Sweet Lassi, Onion Rings",
+          "snacks": "Patties, Ketchup, Cold Coffee",
+          "dinner": "Paneer Lababdar, Dal Tadka, Pulao, Roti, Ice Cream"
+        },
+        "Thursday": {
+          "breakfast": "Poha, Jalebi, Peanuts, Sprouts, Tea & Milk",
+          "lunch": "Kadhi Pakora, Steamed Rice, Jeera Aloo, Roti, Papad",
+          "snacks": "Macaroni Pasta, Masala Tea",
+          "dinner": "Soya Chaap Masala, Chana Dal, Rice, Roti, Sewaiyan Kheer"
+        },
+        "Friday": {
+          "breakfast": "Masala Dosa, Sambar, Coconut Chutney, Tea & Coffee",
+          "lunch": "Black Chana Curry, Rice, Gobhi Masala, Roti, Curd",
+          "snacks": "Samosa Chaat, Tamarind Sauce, Tea",
+          "dinner": "Paneer Tikka Masala, Dal Makhani, Naan, Rice, Rasmalai"
+        },
+        "Saturday": {
+          "breakfast": "Bedmi Puri, Aloo Sabzi, Halwa, Tea & Milk",
+          "lunch": "Dal Fry, Veg Pulao, Bhindi Do Pyaza, Roti, Raita",
+          "snacks": "Burger with Coleslaw, Cold Drink / Tea",
+          "dinner": "Chilli Paneer, Fried Rice, Dal, Roti, Hot Brownie"
+        },
+        "Sunday": {
+          "breakfast": "Chole Kulche, Butter, Sweet Lassi, Tea",
+          "lunch": "Veg Dum Biryani, Mirchi Ka Salan, Boondi Raita, Salad",
+          "snacks": "Dhokla, Green Chutney, Ginger Tea",
+          "dinner": "Shahi Paneer, Dal Makhani, Jeera Rice, Tandoori Roti, Jalebi"
+        }
+      }
+    },
+    {
+      "id": "mess-gh1",
+      "name": "GH-1 & GH-2 Central Girls Mess",
+      "zone": "Near Block 14 (MSB)",
+      "type": "Hygienic Veg + Salad & Juice Bar",
+      "capacity": 1600,
+      "crowdStatus": "Low",
+      "crowdPercent": 28,
+      "rating": 4.8,
+      "timings": {
+        "breakfast": "07:30 AM - 09:30 AM",
+        "lunch": "12:15 PM - 02:30 PM",
+        "snacks": "04:45 PM - 05:45 PM",
+        "dinner": "07:30 PM - 09:30 PM"
+      },
+      "signatureDishes": [
+        {
+          "id": "dish-7",
+          "name": "Mumbai Style Butter Pav Bhaji",
+          "meal": "Snacks",
+          "calories": "450 kcal",
+          "votes": 489,
+          "image": "https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=600&q=80"
+        },
+        {
+          "id": "dish-8",
+          "name": "White Sauce Penne Pasta & Garlic Bread",
+          "meal": "Snacks",
+          "calories": "470 kcal",
+          "votes": 412,
+          "image": "https://images.unsplash.com/photo-1621996346565-e3d5d6281298?auto=format&fit=crop&w=600&q=80"
+        }
+      ],
+      "weeklyMenu": {
+        "Monday": {
+          "breakfast": "Multigrain Paratha, Curd, Fruit Bowl, Green Tea & Milk",
+          "lunch": "Rajma Chawal, Cabbage Peas, Phulka, Fresh Sprouts Salad, Raita",
+          "snacks": "Mumbai Pav Bhaji, Chopped Onions, Lemon Iced Tea",
+          "dinner": "Paneer Bhurji, Dal Tadka, Brown/White Rice, Roti, Gulab Jamun"
+        },
+        "Tuesday": {
+          "breakfast": "Rava Idli, Sambar, Coconut Chutney, Corn Salad, Coffee",
+          "lunch": "Chole, Jeera Rice, Aloo Baingan, Phulka, Mint Raita, Salad",
+          "snacks": "White Sauce Penne Pasta, Garlic Bread, Hot Coffee",
+          "dinner": "Palak Paneer, Dal Makhani, Rice, Roti, Fruit Custard"
+        },
+        "Wednesday": {
+          "breakfast": "Indori Poha, Sev, Jalebi, Boiled Eggless Protein Sprouts, Tea",
+          "lunch": "Kadhi Pakora, Steamed Rice, Bhindi Fry, Roti, Papad, Salad",
+          "snacks": "Paneer Grilled Sandwich, Ketchup, Masala Tea",
+          "dinner": "Kadhai Paneer, Arhar Dal, Pulao, Roti, Chocolate Ice Cream"
+        },
+        "Thursday": {
+          "breakfast": "Aloo Methi Paratha, Curd, Pickle, Banana, Tea & Milk",
+          "lunch": "Black Dal, Rice, Mix Veg, Phulka, Cucumber Raita, Salad",
+          "snacks": "Dahi Bhalla Papdi Chaat, Ginger Tea",
+          "dinner": "Mushroom Matar, Chana Dal, Rice, Roti, Moong Dal Halwa"
+        },
+        "Friday": {
+          "breakfast": "Crispy Masala Dosa, Sambar, Chutney, Sprouts, Filter Coffee",
+          "lunch": "Punjabi Chole, Bhature / Phulka, Rice, Boondi Raita, Salad",
+          "snacks": "Spring Rolls, Schezwan Dip, Lemon Tea",
+          "dinner": "Shahi Paneer, Dal Fry, Veg Biryani, Raita, Rasgulla"
+        },
+        "Saturday": {
+          "breakfast": "Ajwain Puri, Aloo Tamatar Sabzi, Sooji Halwa, Tea",
+          "lunch": "Lobhiya Masala, Rice, Gajar Matar, Roti, Curd, Salad",
+          "snacks": "Veg Hakka Noodles, Hot Tea / Cold Coffee",
+          "dinner": "Veg Manchurian Gravy, Fried Rice, Dal, Roti, Kheer"
+        },
+        "Sunday": {
+          "breakfast": "Stuffed Kulcha, Chana Masala, Sweet Lassi, Tea",
+          "lunch": "Subz Dum Biryani, Mirchi Salan, Pineapple Raita, Papad",
+          "snacks": "Sweet Corn Chaat, Masala Tea",
+          "dinner": "Paneer Butter Masala, Dal Makhani, Garlic Naan, Rice, Brownie"
+        }
+      }
+    }
+  ],
+  "roomTemplates": [
+    {
+      "id": "room-4s",
+      "title": "Standard 4-Seater Room (AC / Non-AC)",
+      "price": "₹70,000 – ₹85,000 / year",
+      "size": "320 sq. ft.",
+      "image": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel-room.webp",
+      "features": [
+        "4 Individual Beds",
+        "4 Study Desks & Chairs",
+        "4 Steel Almirahs",
+        "Attached Balcony & 2 Washrooms"
+      ]
+    },
+    {
+      "id": "room-2s",
+      "title": "Executive 2-Seater AC Room",
+      "price": "₹1,05,000 – ₹1,20,000 / year",
+      "size": "260 sq. ft.",
+      "image": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/girls-hostel-room.webp",
+      "features": [
+        "Split AC & Geyser",
+        "2 Study Workstations",
+        "Attached Modern Washroom",
+        "High-Speed Wi-Fi Router"
+      ]
+    },
+    {
+      "id": "room-apt",
+      "title": "1-Seater / 2-Seater Studio Apartment",
+      "price": "₹1,40,000 – ₹1,75,000 / year",
+      "size": "240 sq. ft. Private Suite",
+      "image": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel-room.webp",
+      "features": [
+        "Private AC Bedroom",
+        "Wooden Wardrobe & Pantry",
+        "Attached En-Suite Bath",
+        "Housekeeping Included"
+      ]
+    }
+  ],
+  "hostels": [
+    {
+      "id": "bh1",
+      "name": "Boys Hostel 1 & 2 (Block 41 & 42)",
+      "type": "Boys",
+      "locationId": "block-41-bh1",
+      "nearestBlocks": "Block 32 CSE (2 mins), Block 37 Library (2 mins)",
+      "warden": "+91 1824-444001",
+      "curfew": "10:00 PM",
+      "feeRange": "₹70,000 - ₹1,10,000 / yr",
+      "mess": "BH-1 Central Mess (Ground Floor)",
+      "facilities": [
+        "Closest to Block 32 CSE",
+        "24x7 Reading Room",
+        "Barber & Stationery Shop",
+        "Badminton Courts"
+      ]
+    },
+    {
+      "id": "bh3",
+      "name": "Boys Hostel 3 & 4 (Block 43 & 44)",
+      "type": "Boys",
+      "locationId": "block-44-bh4",
+      "nearestBlocks": "Block 32 CSE (4 mins), Block 53–55 Mech/Civil (3 mins)",
+      "warden": "+91 1824-444004",
+      "curfew": "10:00 PM",
+      "feeRange": "₹70,000 - ₹1,15,000 / yr",
+      "mess": "BH-4 Mega Dining Hall",
+      "facilities": [
+        "Night Food Court till 1 AM",
+        "In-House Gym",
+        "Cricket Stadium Adjacent",
+        "Automated Laundry"
+      ]
+    },
+    {
+      "id": "bh5",
+      "name": "Boys Hostel 5, 6, 7 & 8 (Block 47 to 50)",
+      "type": "Boys",
+      "locationId": "block-47-48-bh5-6",
+      "nearestBlocks": "Block 55 & 56 (2 mins), E-Rickshaw to Block 32 (4 mins)",
+      "warden": "+91 1824-444006",
+      "curfew": "10:00 PM",
+      "feeRange": "₹68,000 - ₹1,05,000 / yr",
+      "mess": "North Zone Multi-Counter Mess",
+      "facilities": [
+        "Dedicated E-Rickshaw Stand at Gate",
+        "Departmental Store",
+        "Basketball Court",
+        "High-Speed Lifts"
+      ]
+    },
+    {
+      "id": "apt",
+      "name": "Executive Studio Apartments (Block 45 & 46)",
+      "type": "Boys",
+      "locationId": "block-45-46-apt",
+      "nearestBlocks": "Block 51 Sports Complex (1 min), Block 37 Library (3 mins)",
+      "warden": "+91 1824-444020",
+      "curfew": "10:30 PM",
+      "feeRange": "₹1,40,000 - ₹1,75,000 / yr",
+      "mess": "Apartment Executive Dining Lounge",
+      "facilities": [
+        "1/2-Seater AC Private Suite",
+        "Attached Pantry & Bath",
+        "Housekeeping Included",
+        "Next to Olympic Pool"
+      ]
+    },
+    {
+      "id": "gh1",
+      "name": "Girls Hostel 1 & 2 (Block 16 & 17)",
+      "type": "Girls",
+      "locationId": "block-16-17",
+      "nearestBlocks": "Block 14 MSB (1 min), Uni Mall (3 mins), Block 30 (4 mins)",
+      "warden": "+91 1824-444101",
+      "curfew": "08:30 PM",
+      "feeRange": "₹72,000 - ₹1,15,000 / yr",
+      "mess": "GH-1 Central Girls Mess",
+      "facilities": [
+        "Right inside Central Academic Zone",
+        "3-Tier Biometric Security",
+        "In-House Salon & Tuck Shop",
+        "Fitness Studio"
+      ]
+    },
+    {
+      "id": "gh3",
+      "name": "Girls Hostel 3, 4, 5 & 6 (Block 18 to 21)",
+      "type": "Girls",
+      "locationId": "block-20-21",
+      "nearestBlocks": "Block 36 Law (2 mins), Block 37 Library (4 mins), Block 32 CSE (5 mins)",
+      "warden": "+91 1824-444105",
+      "curfew": "08:30 PM",
+      "feeRange": "₹75,000 - ₹1,20,000 / yr",
+      "mess": "GH-4 Executive Dining Hall",
+      "facilities": [
+        "AC Study Lounge",
+        "24x7 Female Medical Assist",
+        "Bakery & Cafe Kiosk",
+        "Near Law Gate & Library"
+      ]
+    }
+  ],
+  "campusEssentials": [
+    {
+      "id": "ess-unimall-fc",
+      "name": "Uni Mall Central Food Court (Domino's, Subway, CCD)",
+      "category": "Food & Cafes",
+      "locationId": "uni-mall",
+      "blockCode": "Uni Mall (GF & 1F)",
+      "timings": "09:00 AM – 09:30 PM",
+      "priceRange": "₹60 – ₹250",
+      "highlights": [
+        "Domino's Pizza & Subway",
+        "Cafe Coffee Day & Belgian Waffle",
+        "South Indian, Chaat & Shake Counters"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/uni-mall.webp"
+    },
+    {
+      "id": "ess-unipolis-kiosks",
+      "name": "Unipolis Open-Air Food Kiosks & Oven Express",
+      "category": "Food & Cafes",
+      "locationId": "unipolis",
+      "blockCode": "Unipolis Plaza",
+      "timings": "08:30 AM – 08:30 PM",
+      "priceRange": "₹30 – ₹150",
+      "highlights": [
+        "Oven Express Bakery & Burgers",
+        "Fresh Fruit Juice & Shake Bar",
+        "Momos, Rolls & Cold Coffee"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/lovely-sweets.webp"
+    },
+    {
+      "id": "ess-nescafe-32",
+      "name": "Block 32 & Block 34 Tech Food Kiosks (Nescafe & Maggi Point)",
+      "category": "Food & Cafes",
+      "locationId": "block-32",
+      "blockCode": "Near Block 32 & 34",
+      "timings": "08:00 AM – 07:00 PM",
+      "priceRange": "₹20 – ₹100",
+      "highlights": [
+        "Hot Coffee, Iced Tea & Maggi",
+        "Grilled Sandwiches & Patties",
+        "Quick Break Spot Between CSE Classes"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/lpuccd.webp"
+    },
+    {
+      "id": "ess-bh3-night",
+      "name": "BH-3 & BH-4 Midnight Food Court (Open Late Night)",
+      "category": "Night Canteens",
+      "locationId": "block-43-bh3",
+      "blockCode": "Block 43 & 44 (BH-3/4)",
+      "timings": "06:00 PM – 01:30 AM",
+      "priceRange": "₹40 – ₹140",
+      "highlights": [
+        "Hot Parathas, Rolls & Manchurian till 1:30 AM",
+        "Cold Coffee, Oreo Shakes & Burgers",
+        "Exam Night Study Fuel for Hostelers"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/hostel-mess.webp"
+    },
+    {
+      "id": "ess-bh5-night",
+      "name": "North Zone Night Tuck Shop (BH-5 to BH-8 Plaza)",
+      "category": "Night Canteens",
+      "locationId": "block-47-48-bh5-6",
+      "blockCode": "Block 47 (BH-5 Courtyard)",
+      "timings": "05:30 PM – 01:00 AM",
+      "priceRange": "₹30 – ₹120",
+      "highlights": [
+        "Tandoori Snacks, Kulcha & Pav Bhaji",
+        "Bakery Items, Milk & Instant Noodles",
+        "Right Inside North Boys Hostel Zone"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/lovely-sweets.webp"
+    },
+    {
+      "id": "ess-gh-tuck",
+      "name": "GH-1 to GH-6 Evening Cafe & Bakery Lounge",
+      "category": "Night Canteens",
+      "locationId": "block-18-19",
+      "blockCode": "Girls Hostel Enclave",
+      "timings": "04:00 PM – 11:30 PM",
+      "priceRange": "₹30 – ₹130",
+      "highlights": [
+        "Pasta, Pizza, Momos & Fresh Pastries",
+        "Fruit Bowls, Juices & Hot Chocolate",
+        "Exclusively Inside Girls Hostel Security Zone"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/lpuccd.webp"
+    },
+    {
+      "id": "ess-atm-gate1",
+      "name": "Main Gate 1 Multi-Bank ATM Hub (SBI, PNB, ICICI, HDFC)",
+      "category": "ATMs & Banks",
+      "locationId": "gate-1",
+      "blockCode": "Main Gate 1",
+      "timings": "24x7 Open",
+      "priceRange": "Cash Withdrawal & Deposit",
+      "highlights": [
+        "4+ 24x7 ATMs with Cash Deposit Machine",
+        "High Security Guarded Booths",
+        "Right at Main Campus Entrance"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/banking-services.webp"
+    },
+    {
+      "id": "ess-banks-unimall",
+      "name": "Campus Bank Branches & ATMs (SBI, PNB, Karur Vysya, ICICI)",
+      "category": "ATMs & Banks",
+      "locationId": "uni-mall",
+      "blockCode": "Uni Mall & Block 30",
+      "timings": "10:00 AM – 04:00 PM (ATMs 24x7)",
+      "priceRange": "Full Banking & Education Loans",
+      "highlights": [
+        "New Student Bank Account Opening",
+        "Education Loan & Demand Draft Counter",
+        "24x7 ATMs Outside Uni Mall & BH-3"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/banking-services.webp"
+    },
+    {
+      "id": "ess-print-32",
+      "name": "Block 32 & Central Library Printout, Binding & Stationery Hub",
+      "category": "Printout & Stationery",
+      "locationId": "block-37",
+      "blockCode": "Block 37 & Block 32 GF",
+      "timings": "08:30 AM – 08:00 PM",
+      "priceRange": "₹2/page Print • Lab Manuals",
+      "highlights": [
+        "Instant Color/B&W Printout & Spiral Binding",
+        "Lab Manuals, Practical Files & Engineering Drawing Sheets",
+        "Calculators, Pens, Notebooks & USB Drives"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/utility-center.webp"
+    },
+    {
+      "id": "ess-whsmith",
+      "name": "Uni Mall Bookstore, WHSmith & Supermarket",
+      "category": "Printout & Stationery",
+      "locationId": "uni-mall",
+      "blockCode": "Uni Mall Ground Floor",
+      "timings": "09:00 AM – 09:00 PM",
+      "priceRange": "MRP • Student Discounts",
+      "highlights": [
+        "Textbooks, Reference Books & Competitive Guides",
+        "Daily Groceries, Toiletries, Mattresses & Buckets",
+        "Laptop Accessories, Earphones & Chargers"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/uni-mall.webp"
+    },
+    {
+      "id": "ess-courier-pickup",
+      "name": "Amazon, Flipkart & Myntra Student Parcel Pickup Zone",
+      "category": "Courier & Daily Services",
+      "locationId": "gate-1",
+      "blockCode": "Near Gate 1 & Law Gate",
+      "timings": "10:00 AM – 06:30 PM",
+      "priceRange": "Online Delivery & Speed Post",
+      "highlights": [
+        "Dedicated E-Commerce Delivery Collection Point",
+        "India Post Office & BlueDart / Delhivery Desk",
+        "Keep OTP Ready Before Reaching Gate"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/utility-center.webp"
+    },
+    {
+      "id": "ess-laundry-salon",
+      "name": "Campus Automated Laundry, Salon & Optical Stores",
+      "category": "Courier & Daily Services",
+      "locationId": "uni-mall",
+      "blockCode": "Inside All Hostels & Uni Mall",
+      "timings": "09:00 AM – 08:00 PM",
+      "priceRange": "Package / Per-Wash Rates",
+      "highlights": [
+        "In-Hostel Automated Washing & Steam Ironing",
+        "Men's Barber Shop in BH-1/BH-4 & Ladies Salon in GH/Uni Mall",
+        "Mobile & Laptop Repair Desk at Uni Mall"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/laundry-service.webp"
+    }
+  ],
+  "campusHelplines": [
+    {
+      "id": "help-hospital",
+      "title": "24x7 Uni Hospital & Emergency Ambulance",
+      "category": "Medical & Emergency",
+      "phone": "01824-501227",
+      "altPhone": "01824-444079",
+      "officeBlock": "Uni Hospital (Block 28B - Ground Floor)",
+      "locationId": "uni-hospital",
+      "availability": "24x7 Emergency • Free OPD",
+      "description": "Call immediately for campus ambulance, medical emergency, doctor consultation, or 24-hour pharmacy."
+    },
+    {
+      "id": "help-security",
+      "title": "Chief Security Officer & Main Gate Control Room",
+      "category": "Medical & Emergency",
+      "phone": "01824-444050",
+      "altPhone": "01824-404404",
+      "officeBlock": "Main Gate 1 Security Complex",
+      "locationId": "gate-1",
+      "availability": "24x7 On-Campus Patrol",
+      "description": "24-hour campus security control room, night assistance, emergency escort, and gate entry queries."
+    },
+    {
+      "id": "help-antiragging",
+      "title": "Anti-Ragging & Student Safety Helpline",
+      "category": "Medical & Emergency",
+      "phone": "01824-444234",
+      "altPhone": "1800-180-5522",
+      "officeBlock": "Block 13 (DSW) & Block 30",
+      "locationId": "block-13",
+      "availability": "24x7 Confidential Support",
+      "description": "Zero-tolerance anti-ragging squad and confidential student safety cell."
+    },
+    {
+      "id": "help-dsw",
+      "title": "Division of Student Welfare (Outpass, Clubs & Lost/Found)",
+      "category": "Academic & Admin",
+      "phone": "01824-444090",
+      "altPhone": "dsw@lpu.co.in",
+      "officeBlock": "Block 13 (Ground & 1st Floor)",
+      "locationId": "block-13",
+      "availability": "09:00 AM – 05:30 PM",
+      "description": "Contact for hostel leave/outpass escalations, lost & found items, Duty Leave, and student club events."
+    },
+    {
+      "id": "help-exam-ums",
+      "title": "Examination Cell, ID Card & UMS Technical Helpdesk",
+      "category": "Academic & Admin",
+      "phone": "01824-444500",
+      "altPhone": "ums.support@lpu.co.in",
+      "officeBlock": "Block 29 (Ground & 1st Floor)",
+      "locationId": "block-29",
+      "availability": "09:00 AM – 05:30 PM",
+      "description": "Visit or call for UMS password reset, duplicate Student ID card, exam seating, and transcript requests."
+    },
+    {
+      "id": "help-admissions",
+      "title": "Admissions, Fee Counter & Scholarship Helpdesk",
+      "category": "Academic & Admin",
+      "phone": "01824-517000",
+      "altPhone": "admissions@lpu.co.in",
+      "officeBlock": "Block 30 (Ground & 1st Floor)",
+      "locationId": "block-30",
+      "availability": "09:00 AM – 06:00 PM",
+      "description": "Central desk for tuition/hostel fee receipts, education loan documents, and LPUNEST scholarships."
+    },
+    {
+      "id": "help-bh-warden",
+      "title": "Boys Hostels Chief Warden Control Desk (BH-1 to BH-8)",
+      "category": "Hostel Wardens",
+      "phone": "01824-444001",
+      "altPhone": "01824-444004",
+      "officeBlock": "Block 41 (BH-1) & Block 44 (BH-4)",
+      "locationId": "block-41-bh1",
+      "availability": "24x7 Hostel Support",
+      "description": "Contact for room maintenance (electrician/plumber/Wi-Fi), biometric attendance, and night medical transit."
+    },
+    {
+      "id": "help-gh-warden",
+      "title": "Girls Hostels Chief Warden Control Desk (GH-1 to GH-6)",
+      "category": "Hostel Wardens",
+      "phone": "01824-444101",
+      "altPhone": "01824-444105",
+      "officeBlock": "Block 16 (GH-1) & Block 19 (GH-4)",
+      "locationId": "block-16-17",
+      "availability": "24x7 Female Warden Support",
+      "description": "Dedicated 24x7 helpline for Girls Hostel residents, outpass approval, room repairs, and female security."
+    },
+    {
+      "id": "help-placements",
+      "title": "Division of Career Services (Placements & Internships)",
+      "category": "Academic & Admin",
+      "phone": "01824-444310",
+      "altPhone": "placements@lpu.co.in",
+      "officeBlock": "Block 34 (1st & 2nd Floor)",
+      "locationId": "block-34",
+      "availability": "09:00 AM – 05:30 PM",
+      "description": "Campus placement drives, internship NOC letters, PEP classes, and corporate interview coordination."
+    }
+  ]
+}

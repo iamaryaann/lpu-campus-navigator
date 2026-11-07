@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="emerald">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LPU Campus Navigator — Block Finder (1–58), Route Guide, Food, Hostels & Mess</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- TOP NAVIGATION BAR WITH SEPARATE TABS -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand" onclick="openTab('navigator')">
+        <div class="brand-logo">LPU</div>
+        <div>
+          <span class="brand-title">LPU Campus Navigator</span>
+          <span class="brand-sub">All 58 Blocks • Routes • Food & ATMs • Hostels • Mess</span>
+        </div>
+      </div>
+
+      <!-- SEPARATE TABS -->
+      <nav class="nav-tabs" id="mainNavTabs">
+        <button class="tab-btn active" data-tab="navigator" onclick="openTab('navigator')">
+          🧭 Map & Route Finder
+        </button>
+        <button class="tab-btn" data-tab="blocks" onclick="openTab('blocks')">
+          🏛️ All Blocks (1–58)
+        </button>
+        <button class="tab-btn" data-tab="essentials" onclick="openTab('essentials')">
+          🍕 Food, ATMs & Shops
+        </button>
+        <button class="tab-btn" data-tab="hostels" onclick="openTab('hostels')">
+          🏢 Hostels & Rooms
+        </button>
+        <button class="tab-btn" data-tab="mess" onclick="openTab('mess')">
+          🍽️ Mess Menu
+        </button>
+        <button class="tab-btn" data-tab="helplines" onclick="openTab('helplines')">
+          📞 Helplines
+        </button>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeToggleBtn" title="Switch White/Emerald or Dark Theme">
+          <span id="themeIcon">🌙</span>
+          <span id="themeLabel">Dark Mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- ===================================================================
+         TAB 1 (PRIORITY #1): CAMPUS NAVIGATOR, BLOCK FINDER & ROUTE GUIDE
+         =================================================================== -->
+    <section id="page-navigator" class="tab-page active">
+      <div class="container">
+
+        <!-- HERO ROUTE FINDER & SMART SEARCH CARD -->
+        <div class="navigator-hero-card">
+          <div class="navigator-hero-top">
+            <div>
+              <span class="eyebrow">LOVELY PROFESSIONAL UNIVERSITY • CAMPUS DIRECTORY</span>
+              <h1>Campus Map & Block Navigation</h1>
+              <p>Locate all 58 academic blocks, decode room numbers (e.g. <code>32-405</code>), and calculate walking or E-Rickshaw routes across LPU.</p>
+            </div>
+            <!-- Instant Search Input + Room Decoder -->
+            <div class="instant-search-box">
+              <label for="quickMapSearch">🔍 Search Block, Office or Room Code (e.g. 32-405)</label>
+              <input
+                type="text"
+                id="quickMapSearch"
+                placeholder="Type '32-405', '14-202', 'Block 32', 'CSE', 'Admission', 'Hospital'..."
+                oninput="handleQuickMapSearch(this.value)"
+              />
+              <div id="quickSearchDropdown" class="search-dropdown hidden"></div>
+            </div>
+          </div>
+
+          <!-- POINT-TO-POINT ROUTE CALCULATOR (FROM -> TO) -->
+          <div class="route-planner-bar">
+            <div class="route-field">
+              <label>📍 Starting Point</label>
+              <select id="routeFromSelect" onchange="calculateCampusRoute()">
+                <!-- Populated by JS -->
+              </select>
+            </div>
+
+            <button class="swap-route-btn" onclick="swapRoutePoints()" title="Swap From & To">⇄</button>
+
+            <div class="route-field">
+              <label>🎯 Destination Block / Zone</label>
+              <select id="routeToSelect" onchange="calculateCampusRoute()">
+                <!-- Populated by JS -->
+              </select>
+            </div>
+
+            <button class="btn-primary route-go-btn" onclick="calculateCampusRoute()">
+              Show Route & Landmarks →
+            </button>
+          </div>
+
+          <!-- QUICK STUDENT SHORTCUT PILLS -->
+          <div class="quick-help-strip">
+            <span class="quick-help-label">⚡ Common Student Destinations:</span>
+            <div class="quick-help-pills" id="quickHelpPills">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- LIVE ROUTE SUMMARY BANNER -->
+        <div class="route-result-banner" id="routeResultBanner">
+          <!-- Populated dynamically by JS -->
+        </div>
+
+        <!-- INTERACTIVE MAP + SELECTED BLOCK INSPECTOR -->
+        <div class="navigator-workspace">
+          <!-- Left: Interactive GPS Map with Labeled Block Pins -->
+          <div class="map-column">
+            <div class="map-toolbar">
+              <div class="map-cat-pills" id="mapCategoryPills">
+                <button class="cat-pill active" onclick="filterMapMarkers('all', this)">All Campus (49)</button>
+                <button class="cat-pill" onclick="filterMapMarkers('Academic', this)">🎓 Academic Blocks</button>
+                <button class="cat-pill" onclick="filterMapMarkers('Admin & Support', this)">🏢 Admin & Hospital</button>
+                <button class="cat-pill" onclick="filterMapMarkers('Facilities & Mall', this)">🛍️ Library & Mall</button>
+                <button class="cat-pill" onclick="filterMapMarkers('Hostels', this)">🛏️ Hostels (BH/GH)</button>
+                <button class="cat-pill" onclick="filterMapMarkers('Gates & Transit', this)">🚧 Gates</button>
+              </div>
+              <div class="map-layer-switch">
+                <button class="layer-btn active" id="btnStreet" onclick="setMapLayer('street')">Street Map</button>
+                <button class="layer-btn" id="btnSat" onclick="setMapLayer('sat')">Satellite View</button>
+              </div>
+            </div>
+
+            <div id="campusMap" class="campus-map-canvas"></div>
+          </div>
+
+          <!-- Right: Selected Block Detailed Guide -->
+          <div class="inspector-column">
+            <div class="selected-block-card" id="selectedBlockCard">
+              <!-- Populated by JS -->
+            </div>
+
+            <div class="sidebar-list-card">
+              <div class="sidebar-list-header">
+                <h4>All Campus Blocks & Zones (1–58)</h4>
+                <span id="mapListCount">49 Pins</span>
+              </div>
+              <div class="map-locations-list" id="mapLocationsList">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         TAB 2: COMPLETE BLOCK & DEPARTMENT DIRECTORY (ALL BLOCKS 1–58)
+         =================================================================== -->
+    <section id="page-blocks" class="tab-page">
+      <div class="container">
+        <div class="page-header">
+          <div>
+            <span class="eyebrow">ACADEMIC & ADMINISTRATIVE INFRASTRUCTURE (BLOCK 1 TO 58)</span>
+            <h1>Academic Blocks & Departmental Directory</h1>
+            <p>Floor-wise directory, nearby landmarks, walking distances, and E-Rickshaw stops for all university buildings.</p>
+          </div>
+          <div class="header-controls">
+            <input
+              type="text"
+              id="blockDirectorySearch"
+              class="search-input"
+              placeholder="Search 'Block 32', '32-405', 'CSE', 'Pharmacy', 'Law', 'Mechanical'..."
+              oninput="renderBlocksDirectory()"
+            />
+          </div>
+        </div>
+
+        <div class="filter-tabs-row" id="blockCategoryBar">
+          <button class="pill-btn active" onclick="setBlockDirCategory('all', this)">All Locations (49)</button>
+          <button class="pill-btn" onclick="setBlockDirCategory('Academic', this)">🎓 Academic Blocks</button>
+          <button class="pill-btn" onclick="setBlockDirCategory('Admin & Support', this)">🏢 Admissions, Exam & Hospital</button>
+          <button class="pill-btn" onclick="setBlockDirCategory('Facilities & Mall', this)">📚 Library, Mall & Sports</button>
+          <button class="pill-btn" onclick="setBlockDirCategory('Hostels', this)">🛏️ Hostel Blocks</button>
+          <button class="pill-btn" onclick="setBlockDirCategory('Gates & Transit', this)">🚧 Campus Gates</button>
+        </div>
+
+        <div class="blocks-directory-grid" id="blocksDirectoryGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         TAB 3: CAMPUS FOOD COURTS, NIGHT CANTEENS, ATMs, PRINTOUT & COURIER
+         =================================================================== -->
+    <section id="page-essentials" class="tab-page">
+      <div class="container">
+        <div class="page-header">
+          <div>
+            <span class="eyebrow">STUDENT DAILY NEEDS • FOOD, BANKING & SERVICES</span>
+            <h1>Food Courts, Night Canteens, ATMs & Printout Shops</h1>
+            <p>Find Domino's, Subway, Nescafe booths, late-night hostel canteens (open till 1:30 AM), 24x7 ATMs, printout shops, and Amazon parcel pickup points.</p>
+          </div>
+          <div class="header-controls">
+            <input
+              type="text"
+              id="essentialsSearchInput"
+              class="search-input"
+              placeholder="Search 'Domino', 'Night Canteen', 'ATM', 'Printout', 'Amazon'..."
+              oninput="renderEssentialsSection()"
+            />
+          </div>
+        </div>
+
+        <div class="filter-tabs-row" id="essentialsCategoryBar">
+          <button class="pill-btn active" onclick="setEssentialsCategory('all', this)">All Daily Needs</button>
+          <button class="pill-btn" onclick="setEssentialsCategory('Food & Cafes', this)">🍕 Food Courts & Cafes</button>
+          <button class="pill-btn" onclick="setEssentialsCategory('Night Canteens', this)">🌙 Night Canteens (Till 1:30 AM)</button>
+          <button class="pill-btn" onclick="setEssentialsCategory('ATMs & Banks', this)">🏧 24x7 ATMs & Banks</button>
+          <button class="pill-btn" onclick="setEssentialsCategory('Printout & Stationery', this)">🖨️ Printout, Books & Stationery</button>
+          <button class="pill-btn" onclick="setEssentialsCategory('Courier & Daily Services', this)">📦 Amazon Parcel, Laundry & Salon</button>
+        </div>
+
+        <div class="blocks-directory-grid" id="essentialsGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         TAB 4: HOSTELS, NEAREST BLOCKS & ROOM INTERIORS
+         =================================================================== -->
+    <section id="page-hostels" class="tab-page">
+      <div class="container">
+        <div class="page-header">
+          <div>
+            <span class="eyebrow">RESIDENTIAL ZONES & DISTANCE TO CLASSES</span>
+            <h1>LPU Hostels (BH & GH) & Room Guide</h1>
+            <p>Find out which hostel is closest to your academic block, check walking distances, warden contacts, and room interiors.</p>
+          </div>
+          <div class="header-controls">
+            <div class="pill-group" id="hostelFilterGroup">
+              <button class="pill-btn active" onclick="setHostelFilter('all', this)">All Hostels</button>
+              <button class="pill-btn" onclick="setHostelFilter('Boys', this)">Boys Hostels (BH 1–8 & Apt)</button>
+              <button class="pill-btn" onclick="setHostelFilter('Girls', this)">Girls Hostels (GH 1–6)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hostels-grid" id="hostelsGrid">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="subsection-block">
+          <div class="subsection-header">
+            <h2>Inside LPU Hostel Rooms</h2>
+            <p>Compare standard 4-seater, executive 2-seater AC, and studio apartment interiors.</p>
+          </div>
+          <div class="rooms-grid" id="roomsGrid">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         TAB 5: MESS & DAILY MENU
+         =================================================================== -->
+    <section id="page-mess" class="tab-page">
+      <div class="container">
+        <div class="page-header">
+          <div>
+            <span class="eyebrow">CAMPUS DINING & WEEKLY TIMETABLE</span>
+            <h1>Hostel Mess & Daily Menu</h1>
+            <p>Select your hostel mess and day of the week to check Breakfast, Lunch, Evening Snacks, and Dinner.</p>
+          </div>
+          <div class="header-controls">
+            <div class="pill-group" id="messSelectorPills"></div>
+          </div>
+        </div>
+
+        <div class="mess-summary-bar" id="messSummaryBar"></div>
+        <div class="day-tabs" id="dayTabs"></div>
+        <div class="meals-grid" id="mealsGrid"></div>
+
+        <div class="subsection-block">
+          <div class="subsection-header">
+            <h2>Top Rated Dishes at This Mess</h2>
+            <p>Student favorites served freshly in this dining hall.</p>
+          </div>
+          <div class="dishes-grid" id="dishesGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         TAB 6: 24x7 EMERGENCY & STUDENT HELPLINES DIRECTORY
+         =================================================================== -->
+    <section id="page-helplines" class="tab-page">
+      <div class="container">
+        <div class="page-header">
+          <div>
+            <span class="eyebrow">24x7 CAMPUS SAFETY, MEDICAL & ADMINISTRATIVE SUPPORT</span>
+            <h1>Emergency Contacts & Student Helplines</h1>
+            <p>Direct contact numbers and office locations for Uni Hospital Ambulance, Main Security, Chief Wardens, DSW, and Exam Helpdesk.</p>
+          </div>
+          <div class="header-controls">
+            <div class="pill-group" id="helplineFilterGroup">
+              <button class="pill-btn active" onclick="setHelplineFilter('all', this)">All Helplines</button>
+              <button class="pill-btn" onclick="setHelplineFilter('Medical & Emergency', this)">🚑 Emergency & Security</button>
+              <button class="pill-btn" onclick="setHelplineFilter('Hostel Wardens', this)">🛏️ Hostel Wardens</button>
+              <button class="pill-btn" onclick="setHelplineFilter('Academic & Admin', this)">🎓 DSW, Exam & Admissions</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hostels-grid" id="helplinesGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>LPU Campus Navigator & Student Guide</strong>
+        <p>Complete guide to all 58 LPU Blocks, Campus Routes, Food Courts, ATMs, Hostels, Mess Menu & Emergency Helplines.</p>
+      </div>
+      <div class="footer-links">
+        <button onclick="openTab('navigator')">Map & Route Finder</button>
+        <button onclick="openTab('blocks')">All Blocks (1–58)</button>
+        <button onclick="openTab('essentials')">Food & ATMs</button>
+        <button onclick="openTab('hostels')">Hostels</button>
+        <button onclick="openTab('mess')">Mess Menu</button>
+        <button onclick="openTab('helplines')">Helplines</button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
