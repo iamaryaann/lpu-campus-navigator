@@ -1,45 +1,45 @@
-# 🧭 LPU Campus Navigator & Student Guide (Blocks 1–58 GPS Directory)
+﻿# ðŸ§­ LPU Campus Navigator & Student Guide (Blocks 1â€“58 GPS Directory)
 
-[![Live Demo](https://img.shields.io/badge/Live_Website-lpu--campus--navigator--hub.netlify.app-059669?style=for-the-badge&logo=netlify&logoColor=white)](https://lpu-campus-navigator-hub.netlify.app)
+[![Live Demo](https://img.shields.io/badge/Live_Website-lpu--campus--navigator--hub.netlify.app-059669?style=for-the-badge&logo=netlify&logoColor=white)](https://iamaryaann.github.io/lpu-campus-navigator/)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-iamaryaann-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/iamaryaann)
 [![Tech Stack](https://img.shields.io/badge/Stack-Node.js_%7C_Express_%7C_Leaflet.js_%7C_ES6-2563EB?style=for-the-badge)](#technology-stack)
 [![University](https://img.shields.io/badge/Lovely_Professional_University-B.Tech_AI_%26_DS-F59E0B?style=for-the-badge)](#author)
 
-> **A full-stack interactive campus navigation system, timetable room-code decoder, and student utility platform built for Lovely Professional University (LPU), Phagwara — mapping all 58 Academic & Administrative Blocks across the 600+ acre campus.**
+> **A full-stack interactive campus navigation system, timetable room-code decoder, and student utility platform built for Lovely Professional University (LPU), Phagwara â€” mapping all 58 Academic & Administrative Blocks across the 600+ acre campus.**
 
-🌐 **Live Production Website:** [https://lpu-campus-navigator-hub.netlify.app](https://lpu-campus-navigator-hub.netlify.app)
+ðŸŒ **Live Production Website:** [https://iamaryaann.github.io/lpu-campus-navigator/](https://iamaryaann.github.io/lpu-campus-navigator/)
 
 ---
 
-## ✨ Key Engineering Features
+## âœ¨ Key Engineering Features
 
-### 1. 🧭 Interactive Campus GPS Map & Point-to-Point Route Calculator
-- **49 Precision GPS-Mapped Pins** covering **all 58 LPU Blocks (`Block 1` to `Block 58`)**, **Main Gate 1**, **Law Gate (Gate 2)**, **North Gate 3**, **Unipolis**, **Uni Mall**, **Uni Hospital**, **Shanti Devi Mittal Auditorium**, **Indoor Sports Complex**, **RoboPark**, and **Hostels (`BH 1–8`, `GH 1–6`)**.
-- **Haversine Geodesic Distance Engine:** Calculates exact straight-line and walking path distances in meters (`1.28x` campus walkway factor), estimated walking time (`80 m/min`), E-Rickshaw travel time (`230 m/min`, `₹10` student fare), and intermediate campus landmarks.
+### 1. ðŸ§­ Interactive Campus GPS Map & Point-to-Point Route Calculator
+- **49 Precision GPS-Mapped Pins** covering **all 58 LPU Blocks (`Block 1` to `Block 58`)**, **Main Gate 1**, **Law Gate (Gate 2)**, **North Gate 3**, **Unipolis**, **Uni Mall**, **Uni Hospital**, **Shanti Devi Mittal Auditorium**, **Indoor Sports Complex**, **RoboPark**, and **Hostels (`BH 1â€“8`, `GH 1â€“6`)**.
+- **Haversine Geodesic Distance Engine:** Calculates exact straight-line and walking path distances in meters (`1.28x` campus walkway factor), estimated walking time (`80 m/min`), E-Rickshaw travel time (`230 m/min`, `â‚¹10` student fare), and intermediate campus landmarks.
 
-### 2. 🔢 Smart LPU Timetable Room Code Decoder (`Block-Floor-Room`)
-- Instant regex-powered room parser (`/^(\d{1,2})\s*[-–]\s*(\d)(\d{2}[A-Za-z]?)$/`) built into the top search bar.
+### 2. ðŸ”¢ Smart LPU Timetable Room Code Decoder (`Block-Floor-Room`)
+- Instant regex-powered room parser (`/^(\d{1,2})\s*[-â€“]\s*(\d)(\d{2}[A-Za-z]?)$/`) built into the top search bar.
 - Typing any LPU timetable room code (e.g., **`32-405`** or **`14-202`**) automatically decodes:
-  - **Block Number & Department Name** (e.g., *Block 32 — School of Computer Science & Engineering*)
+  - **Block Number & Department Name** (e.g., *Block 32 â€” School of Computer Science & Engineering*)
   - **Exact Floor Level** (e.g., *4th Floor*)
   - **Room / Lab Number** (e.g., *Room 405*)
   - Automatically centers the GPS map and plots the walking route to that block.
 
-### 3. 🏛️ Complete Floor-Wise Directory (All 58 Blocks + Real Campus Photography)
+### 3. ðŸ›ï¸ Complete Floor-Wise Directory (All 58 Blocks + Real Campus Photography)
 - Verified official LPU infrastructure & school photography for every single block, entrance gate, auditorium, hospital, mall, and hostel.
 - Floor-by-floor breakdown (`Ground Floor` to `6th Floor`) of classrooms, computer labs, HOD cabins, dean offices, and admission cells.
 
-### 4. 🍕 Campus Essentials, 🏢 Hostels & 🍽️ 7-Day Mess Menu
-- **Campus Essentials (`12 Hubs`):** Food courts, Night Canteens (open till `1:30 AM`), 24×7 Bank ATMs (`SBI`, `PNB`, `ICICI`, `HDFC`), Stationery/Print shops, and Amazon/Flipkart courier gates.
-- **Hostel & Residential Directory:** `BH 1–8`, `GH 1–6`, and `Executive Studio Apartments` with nearest academic block walking times, warden contacts, curfews, and room configurations (`4-Seater AC/Non-AC`, `2-Seater AC`, `Studio Apartment`).
-- **Live Mess Menu & Crowd Status:** 7-day (`Monday–Sunday`) Breakfast, Lunch, Evening Snacks, and Dinner timetable with real-time student reviews and crowd occupancy tracking.
+### 4. ðŸ• Campus Essentials, ðŸ¢ Hostels & ðŸ½ï¸ 7-Day Mess Menu
+- **Campus Essentials (`12 Hubs`):** Food courts, Night Canteens (open till `1:30 AM`), 24Ã—7 Bank ATMs (`SBI`, `PNB`, `ICICI`, `HDFC`), Stationery/Print shops, and Amazon/Flipkart courier gates.
+- **Hostel & Residential Directory:** `BH 1â€“8`, `GH 1â€“6`, and `Executive Studio Apartments` with nearest academic block walking times, warden contacts, curfews, and room configurations (`4-Seater AC/Non-AC`, `2-Seater AC`, `Studio Apartment`).
+- **Live Mess Menu & Crowd Status:** 7-day (`Mondayâ€“Sunday`) Breakfast, Lunch, Evening Snacks, and Dinner timetable with real-time student reviews and crowd occupancy tracking.
 
-### 5. 📞 24×7 Emergency & Administrative Helplines
+### 5. ðŸ“ž 24Ã—7 Emergency & Administrative Helplines
 - Direct 1-click calling (`tel:`) and GPS office locator for **Uni Hospital Emergency & Ambulance**, **Campus Security Control Room**, **Fire Safety**, **Anti-Ragging Cell**, **DSW**, **RMS Support**, and **Examination Division**.
 
 ---
 
-## 🛠️ Technology Stack
+## ðŸ› ï¸ Technology Stack
 
 | Layer | Technologies Used |
 | :--- | :--- |
@@ -50,25 +50,25 @@
 
 ---
 
-## 📂 Project Architecture
+## ðŸ“‚ Project Architecture
 
 ```text
 lpu-campus-navigator-hub/
-├── public/
-│   ├── index.html          # 6-Tab Single-Page Application (SPA) Architecture
-│   ├── styles.css          # White & Emerald University Theme + Dark Mode CSS
-│   ├── app.js              # Leaflet GPS Map, Haversine Router & Room Decoder (32-405)
-│   └── data.js             # Complete 58-Blocks GPS Database, Photos, Hostels & Mess
-├── data/
-│   └── db.json             # Persistent JSON Datastore for Express REST API
-├── server.js               # Node.js + Express Backend API Server (Port 3000)
-├── package.json            # Dependencies & NPM Scripts
-└── README.md               # Project Documentation
+â”œâ”€â”€ public/
+â”‚   â”œâ”€â”€ index.html          # 6-Tab Single-Page Application (SPA) Architecture
+â”‚   â”œâ”€â”€ styles.css          # White & Emerald University Theme + Dark Mode CSS
+â”‚   â”œâ”€â”€ app.js              # Leaflet GPS Map, Haversine Router & Room Decoder (32-405)
+â”‚   â””â”€â”€ data.js             # Complete 58-Blocks GPS Database, Photos, Hostels & Mess
+â”œâ”€â”€ data/
+â”‚   â””â”€â”€ db.json             # Persistent JSON Datastore for Express REST API
+â”œâ”€â”€ server.js               # Node.js + Express Backend API Server (Port 3000)
+â”œâ”€â”€ package.json            # Dependencies & NPM Scripts
+â””â”€â”€ README.md               # Project Documentation
 ```
 
 ---
 
-## 🚀 Running Locally
+## ðŸš€ Running Locally
 
 ```bash
 # 1. Install dependencies
@@ -83,10 +83,11 @@ npm start
 
 ---
 
-## 👨‍💻 Author
+## ðŸ‘¨â€ðŸ’» Author
 
 **Aryan Khan** (`@iamaryaann`)  
-🎓 **B.Tech in Computer Science & Engineering (Artificial Intelligence & Data Science)** — *1st Semester*  
-🏛️ **Lovely Professional University (LPU), Punjab, India**  
-- 🌐 **GitHub:** [github.com/iamaryaann](https://github.com/iamaryaann)
-- 🚀 **Live App:** [lpu-campus-navigator-hub.netlify.app](https://lpu-campus-navigator-hub.netlify.app)
+ðŸŽ“ **B.Tech in Computer Science & Engineering (Artificial Intelligence & Data Science)** â€” *1st Semester*  
+ðŸ›ï¸ **Lovely Professional University (LPU), Punjab, India**  
+- ðŸŒ **GitHub:** [github.com/iamaryaann](https://github.com/iamaryaann)
+- ðŸš€ **Live App:** [lpu-campus-navigator-hub.netlify.app](https://iamaryaann.github.io/lpu-campus-navigator/)
+
