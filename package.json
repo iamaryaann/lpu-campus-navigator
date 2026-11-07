@@ -1,7 +1,8 @@
 {
-  "name": "lpu-campus-hub",
+  "name": "lpu-campus-navigator",
   "version": "1.0.0",
-  "description": "Full-stack LPU Mess, Hostel, and Campus Block Directory & Interactive Map",
+  "private": false,
+  "description": "Campus map and student guide for Lovely Professional University",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -11,3 +12,4 @@
     "express": "^4.21.2"
   }
 }
+
