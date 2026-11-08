@@ -1283,6 +1283,12 @@ body {
 /* ===================================================================
    UNIVERSITY PRESENTATION ENHANCEMENTS: AI ASSISTANT, VOICE/GPS & MODAL
    =================================================================== */
+.hidden,
+.ai-assistant-panel.hidden,
+.project-modal-backdrop.hidden {
+  display: none !important;
+}
+
 .ai-nav-btn {
   background: var(--primary);
   color: #ffffff;
