@@ -46,10 +46,28 @@ data/db.json                              Starter data for the API
 package.json                              Node.js scripts and dependencies
 ```
 
-## Author
+## Author & Social Handles
 
-Aryan Khan — first-semester B.Tech student in Artificial Intelligence and Data Science at Lovely Professional University.
+**Aryan Khan** (`@iamaryaann`) — First-semester B.Tech CSE student in Artificial Intelligence & Data Science at Lovely Professional University (LPU).
 
-- GitHub: [@iamaryaann](https://github.com/iamaryaann)
-- Live project: [LPU Campus Navigator](https://iamaryaann.github.io/lpu-campus-navigator/)
+<p align="left">
+  <a href="https://www.linkedin.com/in/iamaryaann" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-@iamaryaann-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+  </a>
+  <a href="https://www.instagram.com/iamaryaann" target="_blank">
+    <img src="https://img.shields.io/badge/Instagram-@iamaryaann-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" />
+  </a>
+  <a href="https://github.com/iamaryaann" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-@iamaryaann-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+  <a href="mailto:khanaryan1889@gmail.com">
+    <img src="https://img.shields.io/badge/Email-khanaryan1889%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+  </a>
+</p>
+
+- 💼 **LinkedIn:** [linkedin.com/in/iamaryaann](https://www.linkedin.com/in/iamaryaann)
+- 📸 **Instagram:** [instagram.com/iamaryaann](https://www.instagram.com/iamaryaann)
+- 💻 **GitHub:** [@iamaryaann](https://github.com/iamaryaann)
+- 📧 **Email:** [khanaryan1889@gmail.com](mailto:khanaryan1889@gmail.com)
+- 🌐 **Live Project:** [LPU Campus Navigator](https://iamaryaann.github.io/lpu-campus-navigator/)
 
