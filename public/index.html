@@ -50,7 +50,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <link rel="stylesheet" href="styles.css?v=6" />
 </head>
 <body>
 
@@ -202,6 +202,25 @@
                 <button class="layer-btn active" id="btnStreet" onclick="setMapLayer('street')">🗺️ Google Map</button>
                 <button class="layer-btn" id="btnSat" onclick="setMapLayer('sat')">🛰️ Satellite HD</button>
                 <button class="layer-btn" onclick="resetCampusMapView()" title="Fit Entire LPU Campus">🎯 Full Campus</button>
+              </div>
+            </div>
+
+            <!-- GOOGLE MAPS STYLE TURN-BY-TURN LIVE NAVIGATION BAR -->
+            <div class="gmap-nav-hud" id="gmapNavHud">
+              <div class="gmap-nav-left">
+                <div class="gmap-turn-icon" id="gmapTurnIcon">⬆️</div>
+                <div>
+                  <div class="gmap-nav-step" id="gmapNavStep">Head North along LPU Central Spine toward Block 32</div>
+                  <div class="gmap-nav-sub" id="gmapNavSub">Live Road Route • Calculating distance...</div>
+                </div>
+              </div>
+              <div class="gmap-nav-actions">
+                <button class="gmap-live-btn" id="liveWalkBtn" onclick="toggleLiveRouteSimulation()">
+                  ▶️ Start Live Walk
+                </button>
+                <button class="gmap-gps-btn" id="realGpsTrackBtn" onclick="toggleRealGpsTracking()" title="Track My Real Phone/Laptop GPS on Map">
+                  📡 Live GPS
+                </button>
               </div>
             </div>
 
@@ -512,7 +531,7 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="data.js?v=5"></script>
-  <script src="app.js?v=5"></script>
+  <script src="data.js?v=6"></script>
+  <script src="app.js?v=6"></script>
 </body>
 </html>

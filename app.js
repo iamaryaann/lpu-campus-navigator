@@ -374,26 +374,69 @@ function getShortPinCode(loc) {
   return c.length > 10 ? c.slice(0, 9) : c;
 }
 
+let liveWalkTimer = null;
+let liveWalkerMarker = null;
+let currentRoutePoints = [];
+let currentRouteSteps = [];
+let realGpsWatchId = null;
+
 function buildCampusSpineWaypoints(fromLoc, toLoc, distMeters) {
-  if (fromLoc.id === toLoc.id || distMeters < 180) {
+  if (fromLoc.id === toLoc.id || distMeters < 120) {
     return [
       [fromLoc.lat, fromLoc.lng],
       [toLoc.lat, toLoc.lng]
     ];
   }
-  // Route smoothly along LPU's Central Academic Spine (longitude ~75.7048)
   const spineLng = 75.7048;
-  const midLat1 = fromLoc.lat + (toLoc.lat - fromLoc.lat) * 0.33;
-  const midLat2 = fromLoc.lat + (toLoc.lat - fromLoc.lat) * 0.68;
-  return [
-    [fromLoc.lat, fromLoc.lng],
-    [midLat1, (fromLoc.lng + spineLng) / 2],
-    [midLat2, (toLoc.lng + spineLng) / 2],
-    [toLoc.lat, toLoc.lng]
-  ];
+  const p1 = [fromLoc.lat, fromLoc.lng];
+  const p2 = [fromLoc.lat + (toLoc.lat - fromLoc.lat) * 0.2, (fromLoc.lng + spineLng) / 2];
+  const p3 = [fromLoc.lat + (toLoc.lat - fromLoc.lat) * 0.5, spineLng];
+  const p4 = [fromLoc.lat + (toLoc.lat - fromLoc.lat) * 0.8, (toLoc.lng + spineLng) / 2];
+  const p5 = [toLoc.lat, toLoc.lng];
+  return [p1, p2, p3, p4, p5];
 }
 
-function calculateCampusRoute() {
+// Interpolate dense sub-points along a polyline so the live blue GPS dot glides smoothly
+function interpolateDensePath(coords, stepsPerSegment = 14) {
+  if (!coords || coords.length < 2) return coords || [];
+  const dense = [];
+  for (let i = 0; i < coords.length - 1; i++) {
+    const [lat1, lng1] = coords[i];
+    const [lat2, lng2] = coords[i + 1];
+    for (let s = 0; s < stepsPerSegment; s++) {
+      const t = s / stepsPerSegment;
+      dense.push([lat1 + (lat2 - lat1) * t, lng1 + (lng2 - lng1) * t]);
+    }
+  }
+  dense.push(coords[coords.length - 1]);
+  return dense;
+}
+
+async function fetchOsrmCampusRoute(fromLoc, toLoc) {
+  if (fromLoc.id === toLoc.id) return null;
+  try {
+    const url = `https://router.project-osrm.org/route/v1/foot/${fromLoc.lng},${fromLoc.lat};${toLoc.lng},${toLoc.lat}?overview=full&geometries=geojson&steps=true`;
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (data.code !== 'Ok' || !data.routes || !data.routes.length) return null;
+    const r = data.routes[0];
+    const latLngs = r.geometry.coordinates.map(([lng, lat]) => [lat, lng]);
+    // Prepend exact start building pin and append exact destination building pin
+    latLngs.unshift([fromLoc.lat, fromLoc.lng]);
+    latLngs.push([toLoc.lat, toLoc.lng]);
+    const steps = (r.legs && r.legs[0] && r.legs[0].steps) || [];
+    return {
+      latLngs,
+      distanceMeters: Math.round(r.distance || getDistanceMeters(fromLoc.lat, fromLoc.lng, toLoc.lat, toLoc.lng)),
+      steps
+    };
+  } catch (e) {
+    return null;
+  }
+}
+
+async function calculateCampusRoute() {
   const fromId = document.getElementById('routeFromSelect').value;
   const toId = document.getElementById('routeToSelect').value;
 
@@ -401,37 +444,65 @@ function calculateCampusRoute() {
   const toLoc = campusData.campusLocations.find((l) => l.id === toId);
   if (!fromLoc || !toLoc) return;
 
+  stopLiveRouteSimulation();
   selectCampusLocation(toLoc.id, false);
 
-  const distMeters = fromLoc.id === toLoc.id ? 0 : getDistanceMeters(fromLoc.lat, fromLoc.lng, toLoc.lat, toLoc.lng);
+  let distMeters = fromLoc.id === toLoc.id ? 0 : getDistanceMeters(fromLoc.lat, fromLoc.lng, toLoc.lat, toLoc.lng);
+  let waypoints = buildCampusSpineWaypoints(fromLoc, toLoc, distMeters);
+
+  // Fetch real street/footpath geometry from OSRM
+  const osrmData = await fetchOsrmCampusRoute(fromLoc, toLoc);
+  if (osrmData && osrmData.latLngs && osrmData.latLngs.length >= 2) {
+    waypoints = osrmData.latLngs;
+    distMeters = osrmData.distanceMeters;
+  }
+
   const walkMins = distMeters === 0 ? 0 : Math.max(1, Math.round(distMeters / 75));
   const erickshawMins = distMeters === 0 ? 0 : Math.max(1, Math.round(distMeters / 220));
 
-  const waypoints = buildCampusSpineWaypoints(fromLoc, toLoc, distMeters);
+  currentRoutePoints = interpolateDensePath(waypoints, 8);
+  currentRouteSteps = [
+    { icon: '🟢', text: `Start at ${fromLoc.code} — ${fromLoc.name} (${fromLoc.landmark})` },
+    { icon: '⬆️', text: `Follow LPU Campus Road toward ${toLoc.zone} (${distMeters} m)` },
+    { icon: '↱', text: `Pass near ${toLoc.landmark} via ${toLoc.nearestGate}` },
+    { icon: '🏁', text: `Arrive at ${toLoc.code} — ${toLoc.name}` }
+  ];
+
+  updateGmapHud(
+    '⬆️',
+    fromLoc.id === toLoc.id
+      ? `At ${toLoc.code} — ${toLoc.name}`
+      : `Head toward ${toLoc.code} (${toLoc.name}) via ${toLoc.zone}`,
+    `🚶 ${walkMins} min (${distMeters} m) • 🛺 ${erickshawMins} min E-Rickshaw (₹10) • Landmark: ${toLoc.landmark}`
+  );
+
   const stepGuide =
     fromLoc.id === toLoc.id
       ? `You are already at <strong>${toLoc.code} — ${toLoc.name}</strong> (${toLoc.landmark}).`
-      : `1. Start at <strong>🟢 ${fromLoc.code}</strong> → 2. Follow LPU Central Spine toward <strong>${toLoc.zone}</strong> (${toLoc.landmark}) → 3. Arrive at <strong>🏁 ${toLoc.code} — ${toLoc.name}</strong>`;
+      : `1. Start at <strong>🟢 ${fromLoc.code}</strong> → 2. Follow Live Campus Road toward <strong>${toLoc.zone}</strong> (${toLoc.landmark}) → 3. Arrive at <strong>🏁 ${toLoc.code} — ${toLoc.name}</strong>`;
 
   const banner = document.getElementById('routeResultBanner');
   banner.innerHTML = `
     <div class="route-main-info">
       <div class="route-title-line">
-        <h3>🧭 Route: ${fromLoc.code} ➔ ${toLoc.code}</h3>
-        <span class="route-badge">🚶 ${walkMins} mins walk (${distMeters} m)</span>
-        <span class="route-badge amber">🛺 ${erickshawMins} mins by E-Rickshaw (₹10)</span>
+        <h3>🧭 Live Route: ${fromLoc.code} ➔ ${toLoc.code}</h3>
+        <span class="route-badge">🚶 ${walkMins} min (${distMeters} m)</span>
+        <span class="route-badge amber">🛺 ${erickshawMins} min E-Rickshaw (₹10)</span>
       </div>
       <p class="route-steps-text">${stepGuide}</p>
     </div>
-    <div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn-primary" onclick="toggleLiveRouteSimulation()">
+        ▶️ Start Live Navigation
+      </button>
       <a
         href="https://www.google.com/maps/dir/?api=1&origin=${fromLoc.lat},${fromLoc.lng}&destination=${toLoc.lat},${toLoc.lng}&travelmode=walking"
         target="_blank"
         rel="noopener"
-        class="btn-primary"
-        style="text-decoration:none;display:inline-block"
+        class="btn-outline-emerald"
+        style="text-decoration:none;display:inline-flex;align-items:center;padding:9px 14px;border-radius:10px;font-weight:700;font-size:0.84rem"
       >
-        Open Live Walking GPS ↗
+        Google Maps App ↗
       </a>
     </div>
   `;
@@ -441,33 +512,36 @@ function calculateCampusRoute() {
       map.removeLayer(routeLineLayer);
     }
 
-    const outerLine = L.polyline(waypoints, {
-      color: '#ffffff',
-      weight: 9,
-      opacity: 0.95,
+    // Google Maps Dark Blue Casing
+    const outerCasing = L.polyline(waypoints, {
+      color: '#185abc',
+      weight: 10,
+      opacity: 0.9,
       lineCap: 'round',
       lineJoin: 'round'
     });
 
-    const innerLine = L.polyline(waypoints, {
-      color: '#2563eb',
-      weight: 5,
+    // Google Maps Primary Live Blue Route Line
+    const innerBlue = L.polyline(waypoints, {
+      color: '#1a73e8',
+      weight: 6,
       opacity: 1,
       lineCap: 'round',
       lineJoin: 'round'
     });
 
-    const dashLine = L.polyline(waypoints, {
-      color: '#93c5fd',
-      weight: 2,
-      opacity: 0.95,
-      dashArray: '6, 10'
+    // Animated Directional Flow Line
+    const pulseLine = L.polyline(waypoints, {
+      color: '#ffffff',
+      weight: 2.5,
+      opacity: 0.85,
+      dashArray: '8, 14'
     });
 
     const startBadge = L.marker([fromLoc.lat, fromLoc.lng], {
       icon: L.divIcon({
         className: '',
-        html: `<div class="route-endpoint-badge start-badge">🟢 START: ${getShortPinCode(fromLoc)}</div>`
+        html: `<div class="route-endpoint-badge start-badge">🟢 ${getShortPinCode(fromLoc)}</div>`
       }),
       zIndexOffset: 1000
     });
@@ -475,15 +549,132 @@ function calculateCampusRoute() {
     const endBadge = L.marker([toLoc.lat, toLoc.lng], {
       icon: L.divIcon({
         className: '',
-        html: `<div class="route-endpoint-badge end-badge">🏁 TO: ${getShortPinCode(toLoc)}</div>`
+        html: `<div class="route-endpoint-badge end-badge">🏁 ${getShortPinCode(toLoc)}</div>`
       }),
       zIndexOffset: 1001
     });
 
-    routeLineLayer = L.layerGroup([outerLine, innerLine, dashLine, startBadge, endBadge]).addTo(map);
+    // Floating Google Maps White ETA Callout Bubble on the midpoint of the road route
+    const midCoord = waypoints[Math.floor(waypoints.length / 2)];
+    const etaCallout = L.marker(midCoord, {
+      icon: L.divIcon({
+        className: '',
+        html: `<div class="gmap-eta-bubble">🚶 <strong>${walkMins} min</strong> <span>(${distMeters} m)</span></div>`
+      }),
+      zIndexOffset: 1002
+    });
+
+    // Live Pulsing Google Maps Blue GPS Dot
+    liveWalkerMarker = L.marker([fromLoc.lat, fromLoc.lng], {
+      icon: L.divIcon({
+        className: '',
+        html: `<div class="gmap-live-blue-dot" title="Live GPS Position"></div>`
+      }),
+      zIndexOffset: 1500
+    });
+
+    routeLineLayer = L.layerGroup([outerCasing, innerBlue, pulseLine, startBadge, endBadge, etaCallout, liveWalkerMarker]).addTo(map);
 
     map.fitBounds(L.latLngBounds(waypoints), { padding: [65, 65], maxZoom: 17 });
   }
+}
+
+function updateGmapHud(icon, stepText, subText) {
+  const iconEl = document.getElementById('gmapTurnIcon');
+  const stepEl = document.getElementById('gmapNavStep');
+  const subEl = document.getElementById('gmapNavSub');
+  if (iconEl) iconEl.textContent = icon;
+  if (stepEl) stepEl.textContent = stepText;
+  if (subEl) subEl.textContent = subText;
+}
+
+function stopLiveRouteSimulation() {
+  if (liveWalkTimer) {
+    clearInterval(liveWalkTimer);
+    liveWalkTimer = null;
+  }
+  const btn = document.getElementById('liveWalkBtn');
+  if (btn) {
+    btn.textContent = '▶️ Start Live Walk';
+    btn.classList.remove('active-sim');
+  }
+}
+
+function toggleLiveRouteSimulation() {
+  if (liveWalkTimer) {
+    stopLiveRouteSimulation();
+    return;
+  }
+  if (!currentRoutePoints || currentRoutePoints.length < 2 || !liveWalkerMarker) return;
+
+  const btn = document.getElementById('liveWalkBtn');
+  if (btn) {
+    btn.textContent = '⏹️ Stop Live Walk';
+    btn.classList.add('active-sim');
+  }
+
+  let idx = 0;
+  const total = currentRoutePoints.length;
+
+  liveWalkTimer = setInterval(() => {
+    if (idx >= total) {
+      stopLiveRouteSimulation();
+      const step = currentRouteSteps[currentRouteSteps.length - 1];
+      if (step) updateGmapHud('🏁', step.text, 'You have reached your destination!');
+      return;
+    }
+
+    const pt = currentRoutePoints[idx];
+    liveWalkerMarker.setLatLng(pt);
+
+    const progress = idx / total;
+    if (progress < 0.25 && currentRouteSteps[0]) {
+      updateGmapHud('🟢', currentRouteSteps[0].text, `Live GPS Navigation • ${Math.round((1 - progress) * 100)}% distance remaining`);
+    } else if (progress < 0.65 && currentRouteSteps[1]) {
+      updateGmapHud('⬆️', currentRouteSteps[1].text, `Walking along LPU Campus Avenue • ${Math.round((1 - progress) * 100)}% remaining`);
+    } else if (progress < 0.92 && currentRouteSteps[2]) {
+      updateGmapHud('↱', currentRouteSteps[2].text, `Approaching destination block • Almost there`);
+    } else if (currentRouteSteps[3]) {
+      updateGmapHud('🏁', currentRouteSteps[3].text, `Arriving at destination`);
+    }
+
+    idx++;
+  }, 110);
+}
+
+function toggleRealGpsTracking() {
+  const btn = document.getElementById('realGpsTrackBtn');
+  if (realGpsWatchId !== null) {
+    navigator.geolocation.clearWatch(realGpsWatchId);
+    realGpsWatchId = null;
+    if (btn) btn.textContent = '📡 Live GPS';
+    return;
+  }
+
+  if (!navigator.geolocation) {
+    alert('Geolocation is not supported on this browser.');
+    return;
+  }
+
+  if (btn) btn.textContent = '🔴 GPS Active';
+  realGpsWatchId = navigator.geolocation.watchPosition(
+    (pos) => {
+      const { latitude, longitude } = pos.coords;
+      const distToLpu = getDistanceMeters(latitude, longitude, 31.2552, 75.7048);
+      if (distToLpu < 10000 && liveWalkerMarker && map) {
+        liveWalkerMarker.setLatLng([latitude, longitude]);
+        map.panTo([latitude, longitude]);
+        updateGmapHud('📡', 'Tracking Your Live Campus GPS Position', `Coordinates: ${latitude.toFixed(5)}, ${longitude.toFixed(5)}`);
+      } else {
+        // Outside campus: demonstrate live GPS route movement along LPU road
+        toggleLiveRouteSimulation();
+      }
+    },
+    () => {
+      toggleLiveRouteSimulation();
+    },
+    { enableHighAccuracy: true }
+  );
 }
 
 function initCampusMap() {

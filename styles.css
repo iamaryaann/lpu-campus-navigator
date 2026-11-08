@@ -685,6 +685,130 @@ body {
   background: #dc2626;
 }
 
+/* Google Maps Style Turn-by-Turn Navigation Header */
+.gmap-nav-hud {
+  background: linear-gradient(135deg, #0d652d 0%, #137333 100%);
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 11px 14px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  box-shadow: 0 6px 18px rgba(13, 101, 45, 0.28);
+}
+
+.gmap-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 240px;
+}
+
+.gmap-turn-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.gmap-nav-step {
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.gmap-nav-sub {
+  font-size: 0.75rem;
+  color: #ceead6;
+  margin-top: 2px;
+  font-weight: 600;
+}
+
+.gmap-nav-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.gmap-live-btn,
+.gmap-gps-btn {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: #ffffff;
+  color: #0d652d;
+  font-family: inherit;
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.gmap-live-btn.active-sim {
+  background: #dc2626;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.gmap-gps-btn {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+/* Google Maps Floating White ETA Callout Bubble on Route Line */
+.gmap-eta-bubble {
+  background: #ffffff;
+  color: #1a73e8;
+  border: 2px solid #1a73e8;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+  transform: translate(-50%, -120%);
+}
+
+.gmap-eta-bubble span {
+  color: #475569;
+  font-weight: 700;
+}
+
+/* Google Maps Pulsing Live Blue GPS Dot */
+.gmap-live-blue-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #1a73e8;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 0 6px rgba(26, 115, 232, 0.32), 0 3px 8px rgba(0, 0, 0, 0.4);
+  transform: translate(-50%, -50%);
+  animation: gmapPulse 1.6s infinite ease-in-out;
+}
+
+@keyframes gmapPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(26, 115, 232, 0.55), 0 3px 8px rgba(0, 0, 0, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(26, 115, 232, 0), 0 3px 8px rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(26, 115, 232, 0), 0 3px 8px rgba(0, 0, 0, 0.4);
+  }
+}
+
 /* Rich Map Popup Card */
 .leaflet-popup-content-wrapper {
   padding: 0;
