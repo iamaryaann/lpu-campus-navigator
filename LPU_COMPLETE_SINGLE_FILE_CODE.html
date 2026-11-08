@@ -1,0 +1,5678 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="emerald">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LPU Campus Navigator & Student Guide (Blocks 1–58) | Created by Aryan Khan (@iamaryaann)</title>
+  <meta name="author" content="Aryan Khan (@iamaryaann) — B.Tech CSE (AI & Data Science), Lovely Professional University (LPU)" />
+  <meta name="creator" content="Aryan Khan" />
+  <meta name="publisher" content="Aryan Khan — Lovely Professional University (LPU)" />
+  <meta name="description" content="LPU Campus Navigator & Student Guide (All 58 Blocks GPS Map, Route Calculator, Timetable Room Decoder 32-405, Hostels, 7-Day Mess Menu & Helplines). Created and developed by Aryan Khan (@iamaryaann), B.Tech CSE (AI & Data Science) at Lovely Professional University (LPU)." />
+  <meta name="keywords" content="LPU Campus Navigator, Aryan Khan, iamaryaann, Aryan Khan LPU, Lovely Professional University Map, LPU Block Finder, LPU 58 Blocks, LPU Mess Menu, B.Tech AI and Data Science LPU" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="LPU Campus Navigator & Student Guide (Blocks 1–58) | Built by Aryan Khan" />
+  <meta property="og:description" content="Interactive GPS map of all 58 LPU blocks, walking & E-Rickshaw route finder, room decoder (32-405), hostels & mess guide. Created by Aryan Khan (@iamaryaann), B.Tech AI & DS @ LPU." />
+  <meta property="og:url" content="https://lpu-campus-navigator-hub.netlify.app/" />
+  <meta property="og:site_name" content="LPU Campus Navigator by Aryan Khan" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "LPU Campus Navigator & Student Guide",
+    "alternateName": "LPU Campus Navigator Hub",
+    "url": "https://lpu-campus-navigator-hub.netlify.app/",
+    "sameAs": [
+      "https://iamaryaann.github.io/lpu-campus-navigator/",
+      "https://github.com/iamaryaann/lpu-campus-navigator"
+    ],
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Web",
+    "description": "Interactive GPS navigation system mapping all 58 academic and administrative blocks of Lovely Professional University (LPU), featuring a Haversine route calculator, timetable room code decoder (32-405), hostel directory, and 7-day mess menu. Created and developed by Aryan Khan (@iamaryaann).",
+    "author": {
+      "@type": "Person",
+      "name": "Aryan Khan",
+      "alternateName": "iamaryaann",
+      "jobTitle": "B.Tech CSE (Artificial Intelligence & Data Science) Student & Full-Stack Developer",
+      "affiliation": {
+        "@type": "CollegeOrUniversity",
+        "name": "Lovely Professional University (LPU)"
+      },
+      "url": "https://github.com/iamaryaann"
+    },
+    "creator": {
+      "@type": "Person",
+      "name": "Aryan Khan",
+      "url": "https://github.com/iamaryaann"
+    }
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+/* === PART 1: COMPLETE CSS STYLESHEET (styles.css) === */
+:root,
+[data-theme="blue"],
+[data-theme="emerald"] {
+  --bg: #f1f5f9;
+  --surface: #ffffff;
+  --surface-alt: #f8fafc;
+  --emerald-tint: #eff6ff;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --text-light: #64748b;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-border: #bfdbfe;
+  --accent-amber: #ea580c;
+  --border: #e2e8f0;
+  --shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 12px 32px rgba(37, 99, 235, 0.12);
+  --radius: 14px;
+}
+
+[data-theme="orange"] {
+  --bg: #fffaf5;
+  --surface: #ffffff;
+  --surface-alt: #fff7ed;
+  --emerald-tint: #ffedd5;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --text-light: #64748b;
+  --primary: #ea580c;
+  --primary-hover: #c2410c;
+  --primary-border: #fed7aa;
+  --accent-amber: #2563eb;
+  --border: #fed7aa;
+  --shadow: 0 4px 20px rgba(234, 88, 12, 0.07);
+  --shadow-lg: 0 12px 32px rgba(234, 88, 12, 0.14);
+}
+
+[data-theme="green"] {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --emerald-tint: #ecfdf5;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --text-light: #64748b;
+  --primary: #059669;
+  --primary-hover: #047857;
+  --primary-border: #a7f3d0;
+  --accent-amber: #d97706;
+  --border: #e2e8f0;
+  --shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.09);
+}
+
+[data-theme="dark"] {
+  --bg: #0b1120;
+  --surface: #111827;
+  --surface-alt: #1e293b;
+  --emerald-tint: rgba(59, 130, 246, 0.15);
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-border: rgba(59, 130, 246, 0.35);
+  --accent-amber: #f59e0b;
+  --border: #1f2937;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===================================================================
+   TOP NAVBAR & 6 SEPARATE TABS
+   =================================================================== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.nav-inner {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.5px;
+}
+
+.brand-title {
+  display: block;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.brand-sub {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-alt);
+  padding: 5px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.tab-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 700;
+  padding: 9px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  color: var(--text);
+}
+
+.tab-btn.active {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.theme-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  color: var(--text);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.theme-btn:hover {
+  border-color: var(--primary);
+}
+
+/* ===================================================================
+   SEPARATE TAB PAGES
+   =================================================================== */
+.main-wrapper {
+  flex: 1;
+  padding: 26px 0 60px;
+}
+
+.tab-page {
+  display: none;
+  animation: fadeIn 0.2s ease;
+}
+
+.tab-page.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--emerald-tint);
+  padding: 4px 10px;
+  border-radius: 99px;
+  border: 1px solid var(--primary-border);
+  margin-bottom: 8px;
+}
+
+/* ===================================================================
+   TAB 1: CAMPUS NAVIGATOR HERO & ROUTE FINDER
+   =================================================================== */
+.navigator-hero-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow);
+}
+
+.navigator-hero-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.navigator-hero-top h1 {
+  font-size: 1.65rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+.navigator-hero-top p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  max-width: 620px;
+}
+
+.instant-search-box {
+  position: relative;
+  min-width: 340px;
+  flex: 1;
+  max-width: 440px;
+}
+
+.instant-search-box label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+
+.instant-search-box input {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 2px solid var(--primary-border);
+  background: var(--surface-alt);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  outline: none;
+}
+
+.instant-search-box input:focus {
+  border-color: var(--primary);
+  background: var(--surface);
+}
+
+.search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  z-index: 999;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.search-dropdown.hidden {
+  display: none;
+}
+
+.search-result-item {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.search-result-item:hover {
+  background: var(--emerald-tint);
+}
+
+.search-result-item strong {
+  font-size: 0.88rem;
+  color: var(--primary);
+}
+
+.search-result-item span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* ROUTE PLANNER BAR (FROM -> TO) */
+.route-planner-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto;
+  gap: 12px;
+  align-items: end;
+  padding-top: 16px;
+}
+
+.route-field label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+}
+
+.route-field select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+}
+
+.route-field select:focus {
+  border-color: var(--primary);
+}
+
+.swap-route-btn {
+  height: 40px;
+  width: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  color: var(--primary);
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.swap-route-btn:hover {
+  background: var(--emerald-tint);
+  border-color: var(--primary);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: background 0.18s ease;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+/* QUICK STUDENT TASK SHORTCUT PILLS */
+.quick-help-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border);
+}
+
+.quick-help-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--text-muted);
+}
+
+.quick-help-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.help-chip {
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.77rem;
+  font-weight: 600;
+  padding: 5px 11px;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.help-chip strong {
+  color: var(--primary);
+}
+
+.help-chip:hover {
+  border-color: var(--primary);
+  background: var(--emerald-tint);
+}
+
+/* LIVE ROUTE RESULT BANNER */
+.route-result-banner {
+  background: var(--emerald-tint);
+  border: 1px solid var(--primary-border);
+  border-left: 5px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.route-main-info {
+  flex: 1;
+  min-width: 280px;
+}
+
+.route-title-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.route-title-line h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.route-badge {
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 99px;
+}
+
+.route-badge.amber {
+  background: var(--accent-amber);
+}
+
+.route-steps-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.route-steps-text strong {
+  color: var(--text);
+}
+
+/* ===================================================================
+   MAP + INSPECTOR WORKSPACE
+   =================================================================== */
+.navigator-workspace {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.map-column {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+
+.map-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.map-cat-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.cat-pill {
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 6px 11px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cat-pill.active {
+  background: var(--primary-gradient);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 3px 10px rgba(234, 88, 12, 0.3);
+}
+
+.map-layer-switch {
+  display: flex;
+  gap: 4px;
+  background: var(--surface-alt);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.layer-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.layer-btn.active {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.campus-map-canvas {
+  width: 100%;
+  height: 575px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid var(--border);
+  z-index: 1;
+}
+
+/* Custom Compact Labeled Block Pin on Map */
+.lpu-map-pin {
+  position: relative;
+  background: #2563eb;
+  color: #ffffff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 3px 7px;
+  border-radius: 999px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.35);
+  white-space: nowrap;
+  text-align: center;
+  transform: translate(-50%, -100%);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.lpu-map-pin::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px 4px 0 4px;
+  border-style: solid;
+  border-color: #ffffff transparent transparent transparent;
+}
+
+.lpu-map-pin:hover,
+.lpu-map-pin.active-pin {
+  background: #0f172a !important;
+  border-color: #f59e0b;
+  transform: translate(-50%, -105%) scale(1.18);
+  z-index: 999 !important;
+}
+
+.lpu-map-pin.cat-Hostels {
+  background: #7c3aed;
+}
+
+.lpu-map-pin.cat-Admin {
+  background: #059669;
+}
+
+.lpu-map-pin.cat-Mall {
+  background: #ea580c;
+}
+
+.lpu-map-pin.cat-Gates {
+  background: #e11d48;
+}
+
+.route-endpoint-badge {
+  background: #0f172a;
+  color: #ffffff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+  transform: translate(-50%, -135%);
+}
+
+.route-endpoint-badge.start-badge {
+  background: #059669;
+}
+
+.route-endpoint-badge.end-badge {
+  background: #dc2626;
+}
+
+/* Google Maps Style Turn-by-Turn Navigation Header */
+.gmap-nav-hud {
+  background: linear-gradient(135deg, #0d652d 0%, #137333 100%);
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 11px 14px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  box-shadow: 0 6px 18px rgba(13, 101, 45, 0.28);
+}
+
+.gmap-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 240px;
+}
+
+.gmap-turn-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.gmap-nav-step {
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.gmap-nav-sub {
+  font-size: 0.75rem;
+  color: #ceead6;
+  margin-top: 2px;
+  font-weight: 600;
+}
+
+.gmap-nav-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.gmap-live-btn,
+.gmap-gps-btn {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: #ffffff;
+  color: #0d652d;
+  font-family: inherit;
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.gmap-live-btn.active-sim {
+  background: #dc2626;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.gmap-gps-btn {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+/* Google Maps Floating White ETA Callout Bubble on Route Line */
+.gmap-eta-bubble {
+  background: #ffffff;
+  color: #1a73e8;
+  border: 2px solid #1a73e8;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+  transform: translate(-50%, -120%);
+}
+
+.gmap-eta-bubble span {
+  color: #475569;
+  font-weight: 700;
+}
+
+/* Google Maps Pulsing Live Blue GPS Dot */
+.gmap-live-blue-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #1a73e8;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 0 6px rgba(26, 115, 232, 0.32), 0 3px 8px rgba(0, 0, 0, 0.4);
+  transform: translate(-50%, -50%);
+  animation: gmapPulse 1.6s infinite ease-in-out;
+}
+
+@keyframes gmapPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(26, 115, 232, 0.55), 0 3px 8px rgba(0, 0, 0, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(26, 115, 232, 0), 0 3px 8px rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(26, 115, 232, 0), 0 3px 8px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Rich Map Popup Card */
+.leaflet-popup-content-wrapper {
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  width: 220px !important;
+}
+
+.lpu-popup-card img {
+  width: 100%;
+  height: 95px;
+  object-fit: cover;
+  display: block;
+}
+
+.lpu-popup-body {
+  padding: 10px 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.lpu-popup-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 2px 7px;
+  border-radius: 99px;
+  margin-bottom: 4px;
+}
+
+.lpu-popup-body strong {
+  display: block;
+  font-size: 12.5px;
+  color: #0f172a;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.lpu-popup-body p {
+  font-size: 11px;
+  color: #475569;
+  margin: 0 0 8px 0 !important;
+}
+
+.lpu-popup-body button {
+  width: 100%;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* RIGHT COLUMN: SELECTED BLOCK INSPECTOR & SCROLL LIST */
+.inspector-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.selected-block-card {
+  background: var(--surface);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.selected-block-banner {
+  position: relative;
+  height: 150px;
+  overflow: hidden;
+}
+
+.selected-block-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.selected-block-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.15));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 14px 16px;
+  color: #ffffff;
+}
+
+.selected-block-code {
+  display: inline-block;
+  align-self: flex-start;
+  background: #10b981;
+  color: #ffffff;
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 6px;
+  margin-bottom: 4px;
+}
+
+.selected-block-overlay h3 {
+  font-size: 1.08rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.selected-block-body {
+  padding: 16px;
+}
+
+.nav-quick-facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.82rem;
+}
+
+.fact-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.fact-row strong {
+  color: var(--text);
+  min-width: 95px;
+}
+
+.fact-row span {
+  color: var(--text-muted);
+}
+
+.inside-floors-box h4 {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+
+.inside-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.inside-list li {
+  font-size: 0.81rem;
+  color: var(--text-muted);
+  background: var(--surface-alt);
+  padding: 6px 10px;
+  border-radius: 7px;
+  border-left: 3px solid var(--primary);
+}
+
+.inspector-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.inspector-actions a,
+.inspector-actions button {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-outline-emerald {
+  border: 1px solid var(--primary);
+  background: var(--emerald-tint);
+  color: var(--primary);
+  font-family: inherit;
+}
+
+.btn-outline-emerald:hover {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+/* Scrollable Quick List */
+.sidebar-list-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+
+.sidebar-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.sidebar-list-header h4 {
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.sidebar-list-header span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--emerald-tint);
+  padding: 3px 8px;
+  border-radius: 99px;
+}
+
+.map-locations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 235px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.map-loc-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 11px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.map-loc-item:hover,
+.map-loc-item.active {
+  border-color: var(--primary);
+  background: var(--emerald-tint);
+}
+
+.map-loc-item strong {
+  display: block;
+  font-size: 0.84rem;
+  color: var(--text);
+}
+
+.map-loc-item small {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.loc-code-pill {
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+/* ===================================================================
+   TAB 2: COMPLETE BLOCK & DEPARTMENT DIRECTORY
+   =================================================================== */
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-header h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.page-header p {
+  color: var(--text-muted);
+  font-size: 0.94rem;
+}
+
+.search-input {
+  padding: 11px 16px;
+  border-radius: 10px;
+  border: 2px solid var(--primary-border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  min-width: 320px;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: var(--primary);
+}
+
+.filter-tabs-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  background: var(--surface);
+  padding: 5px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.pill-btn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.83rem;
+  padding: 8px 14px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.pill-btn.active {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+.blocks-directory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.dir-block-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.dir-block-img {
+  position: relative;
+  height: 165px;
+}
+
+.dir-block-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dir-code-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 7px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+.dir-zone-tag {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(15, 23, 42, 0.85);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 6px;
+}
+
+.dir-block-body {
+  padding: 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.dir-block-body h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.dir-landmark {
+  font-size: 0.82rem;
+  color: var(--primary);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.dir-walk {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.dir-floors {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+  flex: 1;
+}
+
+.dir-floors li {
+  font-size: 0.79rem;
+  color: var(--text-muted);
+  background: var(--surface-alt);
+  padding: 6px 9px;
+  border-radius: 6px;
+  border-left: 3px solid var(--primary);
+}
+
+.dir-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.dir-card-actions button {
+  flex: 1;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ===================================================================
+   TAB 3 & TAB 4: HOSTELS, ROOMS & MESS MENU
+   =================================================================== */
+.hostels-grid,
+.rooms-grid,
+.dishes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.hostel-card,
+.room-card,
+.dish-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.hostel-card {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hostel-badge {
+  display: inline-block;
+  font-size: 0.73rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: var(--emerald-tint);
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.hostel-card h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.hostel-meta-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 14px;
+  font-size: 0.84rem;
+}
+
+.hostel-meta-rows div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px dashed var(--border);
+  padding-bottom: 5px;
+}
+
+.hostel-meta-rows span {
+  color: var(--text-muted);
+}
+
+.hostel-meta-rows strong {
+  text-align: right;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.tag-chip {
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 4px 9px;
+  border-radius: 6px;
+  background: var(--surface-alt);
+  color: var(--text-muted);
+}
+
+.subsection-block {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+.subsection-header {
+  margin-bottom: 18px;
+}
+
+.subsection-header h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.subsection-header p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.room-card img,
+.dish-card img {
+  width: 100%;
+  height: 185px;
+  object-fit: cover;
+}
+
+.room-body,
+.dish-body {
+  padding: 18px;
+}
+
+.room-price {
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+
+/* MESS styles */
+.mess-summary-bar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.day-tabs {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.day-tab {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.day-tab.active {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+.meals-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.meal-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+
+.meal-time {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--emerald-tint);
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.meal-card h3 {
+  font-size: 1.02rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.meal-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 24px 0;
+  margin-top: auto;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-inner p {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+}
+
+.footer-links {
+  display: flex;
+  gap: 14px;
+}
+
+.footer-links button {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 1080px) {
+  .navigator-workspace {
+    grid-template-columns: 1fr;
+  }
+  .route-planner-bar {
+    grid-template-columns: 1fr;
+  }
+  .swap-route-btn {
+    display: none;
+  }
+  .blocks-directory-grid,
+  .hostels-grid,
+  .rooms-grid,
+  .dishes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .meals-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .blocks-directory-grid,
+  .hostels-grid,
+  .rooms-grid,
+  .dishes-grid,
+  .meals-grid {
+    grid-template-columns: 1fr;
+  }
+  .day-tabs {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ===================================================================
+   UNIVERSITY PRESENTATION ENHANCEMENTS: AI ASSISTANT, VOICE/GPS & MODAL
+   =================================================================== */
+.hidden,
+.ai-assistant-panel.hidden,
+.project-modal-backdrop.hidden {
+  display: none !important;
+}
+
+.ai-nav-btn {
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.ai-nav-btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.94;
+}
+
+.hero-stats-ribbon {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.stat-pill strong {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.stat-pill-ai {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+}
+
+.search-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.search-label-row label {
+  margin-bottom: 0 !important;
+}
+
+.search-tool-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.mini-tool-btn {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--primary);
+  font-family: inherit;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.mini-tool-btn:hover,
+.mini-tool-btn.listening {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+/* Floating AI Button */
+.floating-ai-fab {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 1200;
+  background: var(--primary);
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(5, 150, 105, 0.38);
+  transition: transform 0.18s ease;
+}
+
+.floating-ai-fab:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* AI Assistant Floating Panel */
+.ai-assistant-panel {
+  position: fixed;
+  right: 22px;
+  bottom: 80px;
+  width: 390px;
+  max-width: calc(100vw - 32px);
+  background: var(--surface);
+  border: 2px solid var(--primary);
+  border-radius: 16px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.28);
+  z-index: 1300;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ai-panel-header {
+  background: var(--primary);
+  color: #ffffff;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ai-panel-header strong {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.ai-panel-header span {
+  font-size: 0.72rem;
+  opacity: 0.9;
+}
+
+.ai-close-btn {
+  background: rgba(255, 255, 255, 0.18);
+  color: inherit;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.ai-quick-prompts {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 10px 12px;
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--border);
+}
+
+.ai-quick-prompts button {
+  white-space: nowrap;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.73rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.ai-quick-prompts button:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.ai-messages-box {
+  height: 270px;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ai-msg {
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.ai-msg-bot {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  align-self: flex-start;
+}
+
+.ai-msg-user {
+  background: var(--primary);
+  color: #ffffff;
+  align-self: flex-end;
+  font-weight: 600;
+}
+
+.ai-input-row {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.ai-input-row input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-alt);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.82rem;
+}
+
+/* Official Project Modal */
+.project-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 1400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.project-modal-card {
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 2px solid var(--primary);
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.project-modal-header {
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-modal-body {
+  padding: 20px 22px;
+}
+
+.dev-profile-banner {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 18px;
+}
+
+.dev-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dev-social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.dev-social-links a {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.modal-sec-title {
+  font-size: 0.92rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: var(--primary);
+}
+
+.algo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.algo-box {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.algo-box strong {
+  display: block;
+  font-size: 0.84rem;
+  margin-bottom: 4px;
+}
+
+.algo-box p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 680px) {
+  .algo-grid {
+    grid-template-columns: 1fr;
+  }
+  .dev-profile-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+</style>
+</head>
+<body>
+
+  <!-- TOP NAVIGATION BAR WITH SEPARATE TABS -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand" onclick="openTab('navigator')">
+        <div class="brand-logo">LPU</div>
+        <div>
+          <span class="brand-title">LPU Campus Navigator</span>
+          <span class="brand-sub">All 58 Blocks • Routes • Food & ATMs • Hostels • Mess</span>
+        </div>
+      </div>
+
+      <!-- SEPARATE TABS -->
+      <nav class="nav-tabs" id="mainNavTabs">
+        <button class="tab-btn active" data-tab="navigator" onclick="openTab('navigator')">
+          🧭 Map & Route Finder
+        </button>
+        <button class="tab-btn" data-tab="blocks" onclick="openTab('blocks')">
+          🏛️ All Blocks (1–58)
+        </button>
+        <button class="tab-btn" data-tab="essentials" onclick="openTab('essentials')">
+          🍕 Food, ATMs & Shops
+        </button>
+        <button class="tab-btn" data-tab="hostels" onclick="openTab('hostels')">
+          🏢 Hostels & Rooms
+        </button>
+        <button class="tab-btn" data-tab="mess" onclick="openTab('mess')">
+          🍽️ Mess Menu
+        </button>
+        <button class="tab-btn" data-tab="helplines" onclick="openTab('helplines')">
+          📞 Helplines
+        </button>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="ai-nav-btn" onclick="toggleAiAssistant()" title="Open LPU AI Campus Assistant">
+          🤖 Ask LPU AI
+        </button>
+        <button class="theme-btn" onclick="toggleProjectModal()" title="View Project Architecture & Developer Info">
+          👨‍💻 About Project
+        </button>
+        <button class="theme-btn" id="themeToggleBtn" title="Switch White/Emerald or Dark Theme">
+          <span id="themeIcon">🌙</span>
+          <span id="themeLabel">Dark Mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- ===================================================================
+         TAB 1 (PRIORITY #1): CAMPUS NAVIGATOR, BLOCK FINDER & ROUTE GUIDE
+         =================================================================== -->
+    <section id="page-navigator" class="tab-page active">
+      <div class="container">
+
+        <!-- HERO ROUTE FINDER & SMART SEARCH CARD -->
+        <div class="navigator-hero-card">
+          <div class="navigator-hero-top">
+            <div>
+              <span class="eyebrow">LOVELY PROFESSIONAL UNIVERSITY • 600+ ACRE GIS DIRECTORY</span>
+              <h1>Campus Map & Block Navigation</h1>
+              <p>Locate all 58 academic blocks, decode room numbers (e.g. <code>32-405</code>), and calculate walking or E-Rickshaw routes across LPU.</p>
+              <div class="hero-stats-ribbon">
+                <span class="stat-pill">🏛️ <strong>58</strong> Blocks Mapped</span>
+                <span class="stat-pill">📐 <strong>Haversine</strong> GPS Routing</span>
+                <span class="stat-pill">🔢 <strong>32-405</strong> Room Decoder</span>
+                <span class="stat-pill">🏢 <strong>14</strong> Hostels &amp; Mess</span>
+                <button class="stat-pill stat-pill-ai" onclick="toggleAiAssistant()">🤖 Ask LPU AI Assistant →</button>
+              </div>
+            </div>
+            <!-- Instant Search Input + Room Decoder + Voice & GPS -->
+            <div class="instant-search-box">
+              <div class="search-label-row">
+                <label for="quickMapSearch">🔍 Search Block, Office or Room Code (e.g. 32-405)</label>
+                <div class="search-tool-btns">
+                  <button type="button" class="mini-tool-btn" id="voiceSearchBtn" onclick="startVoiceCampusSearch()" title="Speak Block or Room Code (e.g. '32-405' or 'Block 32')">
+                    🎤 Voice
+                  </button>
+                  <button type="button" class="mini-tool-btn" onclick="locateNearestCampusBlock()" title="Find Nearest LPU Block using GPS">
+                    📡 My GPS
+                  </button>
+                </div>
+              </div>
+              <input
+                type="text"
+                id="quickMapSearch"
+                placeholder="Type or speak '32-405', '14-202', 'Block 32', 'CSE', 'Hospital'..."
+                oninput="handleQuickMapSearch(this.value)"
+              />
+              <div id="quickSearchDropdown" class="search-dropdown hidden"></div>
+            </div>
+          </div>
+
+          <!-- POINT-TO-POINT ROUTE CALCULATOR (FROM -> TO) -->
+          <div class="route-planner-bar">
+            <div class="route-field">
+              <label>📍 Starting Point</label>
+              <select id="routeFromSelect" onchange="calculateCampusRoute()">
+                <!-- Populated by JS -->
+              </select>
+            </div>
+
+            <button class="swap-route-btn" onclick="swapRoutePoints()" title="Swap From & To">⇄</button>
+
+            <div class="route-field">
+              <label>🎯 Destination Block / Zone</label>
+              <select id="routeToSelect" onchange="calculateCampusRoute()">
+                <!-- Populated by JS -->
+              </select>
+            </div>
+
+            <button class="btn-primary route-go-btn" onclick="calculateCampusRoute()">
+              Show Route & Landmarks →
+            </button>
+          </div>
+
+          <!-- QUICK STUDENT SHORTCUT PILLS -->
+          <div class="quick-help-strip">
+            <span class="quick-help-label">⚡ Common Student Destinations:</span>
+            <div class="quick-help-pills" id="quickHelpPills">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- LIVE ROUTE SUMMARY BANNER -->
+        <div class="route-result-banner" id="routeResultBanner">
+          <!-- Populated dynamically by JS -->
+        </div>
+
+        <!-- INTERACTIVE MAP + SELECTED BLOCK INSPECTOR -->
+        <div class="navigator-workspace">
+          <!-- Left: Interactive GPS Map with Labeled Block Pins -->
+          <div class="map-column">
+            <div class="map-toolbar">
+              <div class="map-cat-pills" id="mapCategoryPills">
+                <button class="cat-pill active" onclick="filterMapMarkers('all', this)">All Campus (49)</button>
+                <button class="cat-pill" onclick="filterMapMarkers('Academic', this)">🎓 Academic Blocks</button>
+                <button class="cat-pill" onclick="filterMapMarkers('Admin & Support', this)">🏢 Admin & Hospital</button>
+                <button class="cat-pill" onclick="filterMapMarkers('Facilities & Mall', this)">🛍️ Library & Mall</button>
+                <button class="cat-pill" onclick="filterMapMarkers('Hostels', this)">🛏️ Hostels (BH/GH)</button>
+                <button class="cat-pill" onclick="filterMapMarkers('Gates & Transit', this)">🚧 Gates</button>
+              </div>
+              <div class="map-layer-switch">
+                <button class="layer-btn active" id="btnStreet" onclick="setMapLayer('street')">🗺️ Google Map</button>
+                <button class="layer-btn" id="btnSat" onclick="setMapLayer('sat')">🛰️ Satellite HD</button>
+                <button class="layer-btn" onclick="resetCampusMapView()" title="Fit Entire LPU Campus">🎯 Full Campus</button>
+              </div>
+            </div>
+
+            <!-- GOOGLE MAPS STYLE TURN-BY-TURN LIVE NAVIGATION BAR -->
+            <div class="gmap-nav-hud" id="gmapNavHud">
+              <div class="gmap-nav-left">
+                <div class="gmap-turn-icon" id="gmapTurnIcon">⬆️</div>
+                <div>
+                  <div class="gmap-nav-step" id="gmapNavStep">Head North along LPU Central Spine toward Block 32</div>
+                  <div class="gmap-nav-sub" id="gmapNavSub">Live Road Route • Calculating distance...</div>
+                </div>
+              </div>
+              <div class="gmap-nav-actions">
+                <button class="gmap-live-btn" id="liveWalkBtn" onclick="toggleLiveRouteSimulation()">
+                  ▶️ Start Live Walk
+                </button>
+                <button class="gmap-gps-btn" id="realGpsTrackBtn" onclick="toggleRealGpsTracking()" title="Track My Real Phone/Laptop GPS on Map">
+                  📡 Live GPS
+                </button>
+              </div>
+            </div>
+
+            <div id="campusMap" class="campus-map-canvas"></div>
+          </div>
+
+          <!-- Right: Selected Block Detailed Guide -->
+          <div class="inspector-column">
+            <div class="selected-block-card" id="selectedBlockCard">
+              <!-- Populated by JS -->
+            </div>
+
+            <div class="sidebar-list-card">
+              <div class="sidebar-list-header">
+                <h4>All Campus Blocks & Zones (1–58)</h4>
+                <span id="mapListCount">49 Pins</span>
+              </div>
+              <div class="map-locations-list" id="mapLocationsList">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         TAB 2: COMPLETE BLOCK & DEPARTMENT DIRECTORY (ALL BLOCKS 1–58)
+         =================================================================== -->
+    <section id="page-blocks" class="tab-page">
+      <div class="container">
+        <div class="page-header">
+          <div>
+            <span class="eyebrow">ACADEMIC & ADMINISTRATIVE INFRASTRUCTURE (BLOCK 1 TO 58)</span>
+            <h1>Academic Blocks & Departmental Directory</h1>
+            <p>Floor-wise directory, nearby landmarks, walking distances, and E-Rickshaw stops for all university buildings.</p>
+          </div>
+          <div class="header-controls">
+            <input
+              type="text"
+              id="blockDirectorySearch"
+              class="search-input"
+              placeholder="Search 'Block 32', '32-405', 'CSE', 'Pharmacy', 'Law', 'Mechanical'..."
+              oninput="renderBlocksDirectory()"
+            />
+          </div>
+        </div>
+
+        <div class="filter-tabs-row" id="blockCategoryBar">
+          <button class="pill-btn active" onclick="setBlockDirCategory('all', this)">All Locations (49)</button>
+          <button class="pill-btn" onclick="setBlockDirCategory('Academic', this)">🎓 Academic Blocks</button>
+          <button class="pill-btn" onclick="setBlockDirCategory('Admin & Support', this)">🏢 Admissions, Exam & Hospital</button>
+          <button class="pill-btn" onclick="setBlockDirCategory('Facilities & Mall', this)">📚 Library, Mall & Sports</button>
+          <button class="pill-btn" onclick="setBlockDirCategory('Hostels', this)">🛏️ Hostel Blocks</button>
+          <button class="pill-btn" onclick="setBlockDirCategory('Gates & Transit', this)">🚧 Campus Gates</button>
+        </div>
+
+        <div class="blocks-directory-grid" id="blocksDirectoryGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         TAB 3: CAMPUS FOOD COURTS, NIGHT CANTEENS, ATMs, PRINTOUT & COURIER
+         =================================================================== -->
+    <section id="page-essentials" class="tab-page">
+      <div class="container">
+        <div class="page-header">
+          <div>
+            <span class="eyebrow">STUDENT DAILY NEEDS • FOOD, BANKING & SERVICES</span>
+            <h1>Food Courts, Night Canteens, ATMs & Printout Shops</h1>
+            <p>Find Domino's, Subway, Nescafe booths, late-night hostel canteens (open till 1:30 AM), 24x7 ATMs, printout shops, and Amazon parcel pickup points.</p>
+          </div>
+          <div class="header-controls">
+            <input
+              type="text"
+              id="essentialsSearchInput"
+              class="search-input"
+              placeholder="Search 'Domino', 'Night Canteen', 'ATM', 'Printout', 'Amazon'..."
+              oninput="renderEssentialsSection()"
+            />
+          </div>
+        </div>
+
+        <div class="filter-tabs-row" id="essentialsCategoryBar">
+          <button class="pill-btn active" onclick="setEssentialsCategory('all', this)">All Daily Needs</button>
+          <button class="pill-btn" onclick="setEssentialsCategory('Food & Cafes', this)">🍕 Food Courts & Cafes</button>
+          <button class="pill-btn" onclick="setEssentialsCategory('Night Canteens', this)">🌙 Night Canteens (Till 1:30 AM)</button>
+          <button class="pill-btn" onclick="setEssentialsCategory('ATMs & Banks', this)">🏧 24x7 ATMs & Banks</button>
+          <button class="pill-btn" onclick="setEssentialsCategory('Printout & Stationery', this)">🖨️ Printout, Books & Stationery</button>
+          <button class="pill-btn" onclick="setEssentialsCategory('Courier & Daily Services', this)">📦 Amazon Parcel, Laundry & Salon</button>
+        </div>
+
+        <div class="blocks-directory-grid" id="essentialsGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         TAB 4: HOSTELS, NEAREST BLOCKS & ROOM INTERIORS
+         =================================================================== -->
+    <section id="page-hostels" class="tab-page">
+      <div class="container">
+        <div class="page-header">
+          <div>
+            <span class="eyebrow">RESIDENTIAL ZONES & DISTANCE TO CLASSES</span>
+            <h1>LPU Hostels (BH & GH) & Room Guide</h1>
+            <p>Find out which hostel is closest to your academic block, check walking distances, warden contacts, and room interiors.</p>
+          </div>
+          <div class="header-controls">
+            <div class="pill-group" id="hostelFilterGroup">
+              <button class="pill-btn active" onclick="setHostelFilter('all', this)">All Hostels</button>
+              <button class="pill-btn" onclick="setHostelFilter('Boys', this)">Boys Hostels (BH 1–8 & Apt)</button>
+              <button class="pill-btn" onclick="setHostelFilter('Girls', this)">Girls Hostels (GH 1–6)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hostels-grid" id="hostelsGrid">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="subsection-block">
+          <div class="subsection-header">
+            <h2>Inside LPU Hostel Rooms</h2>
+            <p>Compare standard 4-seater, executive 2-seater AC, and studio apartment interiors.</p>
+          </div>
+          <div class="rooms-grid" id="roomsGrid">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         TAB 5: MESS & DAILY MENU
+         =================================================================== -->
+    <section id="page-mess" class="tab-page">
+      <div class="container">
+        <div class="page-header">
+          <div>
+            <span class="eyebrow">CAMPUS DINING & WEEKLY TIMETABLE</span>
+            <h1>Hostel Mess & Daily Menu</h1>
+            <p>Select your hostel mess and day of the week to check Breakfast, Lunch, Evening Snacks, and Dinner.</p>
+          </div>
+          <div class="header-controls">
+            <div class="pill-group" id="messSelectorPills"></div>
+          </div>
+        </div>
+
+        <div class="mess-summary-bar" id="messSummaryBar"></div>
+        <div class="day-tabs" id="dayTabs"></div>
+        <div class="meals-grid" id="mealsGrid"></div>
+
+        <div class="subsection-block">
+          <div class="subsection-header">
+            <h2>Top Rated Dishes at This Mess</h2>
+            <p>Student favorites served freshly in this dining hall.</p>
+          </div>
+          <div class="dishes-grid" id="dishesGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         TAB 6: 24x7 EMERGENCY & STUDENT HELPLINES DIRECTORY
+         =================================================================== -->
+    <section id="page-helplines" class="tab-page">
+      <div class="container">
+        <div class="page-header">
+          <div>
+            <span class="eyebrow">24x7 CAMPUS SAFETY, MEDICAL & ADMINISTRATIVE SUPPORT</span>
+            <h1>Emergency Contacts & Student Helplines</h1>
+            <p>Direct contact numbers and office locations for Uni Hospital Ambulance, Main Security, Chief Wardens, DSW, and Exam Helpdesk.</p>
+          </div>
+          <div class="header-controls">
+            <div class="pill-group" id="helplineFilterGroup">
+              <button class="pill-btn active" onclick="setHelplineFilter('all', this)">All Helplines</button>
+              <button class="pill-btn" onclick="setHelplineFilter('Medical & Emergency', this)">🚑 Emergency & Security</button>
+              <button class="pill-btn" onclick="setHelplineFilter('Hostel Wardens', this)">🛏️ Hostel Wardens</button>
+              <button class="pill-btn" onclick="setHelplineFilter('Academic & Admin', this)">🎓 DSW, Exam & Admissions</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hostels-grid" id="helplinesGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>LPU Campus Navigator & Student Guide (Blocks 1–58)</strong>
+        <p>Complete guide to all 58 LPU Blocks, Campus Routes, Food Courts, ATMs, Hostels, Mess Menu & Emergency Helplines.</p>
+        <p style="margin-top: 6px; font-weight: 600; color: var(--emerald);">
+          👨‍💻 Created &amp; Engineered by <a href="https://github.com/iamaryaann" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Aryan Khan (@iamaryaann)</a> — B.Tech CSE (AI &amp; Data Science), Lovely Professional University (LPU)
+        </p>
+        <p style="margin-top: 4px; font-size: 12.5px;">
+          🔗 Connect:
+          <a href="https://www.linkedin.com/in/iamaryaann" target="_blank" rel="noopener noreferrer" style="color: var(--emerald); font-weight: 600; margin-left: 6px;">LinkedIn</a> •
+          <a href="https://www.instagram.com/iamaryaannn3" target="_blank" rel="noopener noreferrer" style="color: var(--emerald); font-weight: 600; margin-left: 4px;">Instagram (@iamaryaannn3)</a> •
+          <a href="https://github.com/iamaryaann" target="_blank" rel="noopener noreferrer" style="color: var(--emerald); font-weight: 600; margin-left: 4px;">GitHub</a> •
+          <a href="mailto:khanaryan1889@gmail.com" style="color: var(--emerald); font-weight: 600; margin-left: 4px;">Email</a>
+        </p>
+      </div>
+      <div class="footer-links">
+        <button onclick="openTab('navigator')">Map & Route Finder</button>
+        <button onclick="openTab('blocks')">All Blocks (1–58)</button>
+        <button onclick="openTab('essentials')">Food & ATMs</button>
+        <button onclick="openTab('hostels')">Hostels</button>
+        <button onclick="openTab('mess')">Mess Menu</button>
+        <button onclick="openTab('helplines')">Helplines</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING LPU AI CAMPUS ASSISTANT -->
+  <button class="floating-ai-fab" onclick="toggleAiAssistant()" title="Ask LPU AI Campus Assistant">
+    <span>🤖</span>
+    <span>Ask LPU AI</span>
+  </button>
+
+  <div class="ai-assistant-panel hidden" id="aiAssistantPanel">
+    <div class="ai-panel-header">
+      <div>
+        <strong>🤖 LPU AI Campus Assistant</strong>
+        <span>Powered by LPU 58-Blocks GIS &amp; Room Decoder Engine</span>
+      </div>
+      <button class="ai-close-btn" onclick="toggleAiAssistant()">✕</button>
+    </div>
+    <div class="ai-quick-prompts">
+      <button onclick="askLpuAi('Where is room 32-405 and how far from Main Gate?')">🔢 Room 32-405</button>
+      <button onclick="askLpuAi('Which blocks have CSE and AI & Data Science labs?')">💻 CSE / AI Blocks</button>
+      <button onclick="askLpuAi('Emergency route to Uni Hospital')">🚑 Uni Hospital</button>
+      <button onclick="askLpuAi('Where can I eat food at night after 11 PM?')">🌙 Night Canteens</button>
+      <button onclick="askLpuAi('What is today hostel mess menu?')">🍽️ Today Mess Menu</button>
+    </div>
+    <div class="ai-messages-box" id="aiMessagesBox">
+      <div class="ai-msg ai-msg-bot">
+        👋 Welcome to <strong>LPU AI Campus Assistant</strong>! Ask me about any LPU Block (<code>1–58</code>), timetable room code (e.g. <code>32-405</code> or <code>14-202</code>), walking distances, hostels, night canteens, mess menus, or emergency helplines.
+      </div>
+    </div>
+    <form class="ai-input-row" onsubmit="handleAiFormSubmit(event)">
+      <input
+        type="text"
+        id="aiQueryInput"
+        placeholder="Ask e.g. 'Where is 32-405?' or 'CSE blocks'..."
+        autocomplete="off"
+      />
+      <button type="submit" class="btn-primary">Ask →</button>
+    </form>
+  </div>
+
+  <!-- OFFICIAL UNIVERSITY PROJECT ARCHITECTURE & DEVELOPER MODAL -->
+  <div class="project-modal-backdrop hidden" id="projectModalBackdrop" onclick="if(event.target===this)toggleProjectModal()">
+    <div class="project-modal-card">
+      <div class="project-modal-header">
+        <div>
+          <span class="eyebrow">LOVELY PROFESSIONAL UNIVERSITY • STUDENT INNOVATION SHOWCASE</span>
+          <h2>LPU Campus Navigator &amp; Student Guide (v2.0)</h2>
+        </div>
+        <button class="ai-close-btn" onclick="toggleProjectModal()">✕</button>
+      </div>
+      <div class="project-modal-body">
+        <div class="dev-profile-banner">
+          <div class="dev-avatar">AK</div>
+          <div>
+            <h3>Aryan Khan (<code>@iamaryaann</code>)</h3>
+            <p><strong>B.Tech in Computer Science &amp; Engineering (Artificial Intelligence &amp; Data Science)</strong> — 1st Semester</p>
+            <p>Lovely Professional University (LPU), Phagwara, Punjab</p>
+            <div class="dev-social-links">
+              <a href="https://github.com/iamaryaann" target="_blank" rel="noopener noreferrer">💻 GitHub (@iamaryaann)</a>
+              <a href="https://www.linkedin.com/in/iamaryaann" target="_blank" rel="noopener noreferrer">💼 LinkedIn</a>
+              <a href="https://www.instagram.com/iamaryaannn3" target="_blank" rel="noopener noreferrer">📸 Instagram (@iamaryaannn3)</a>
+              <a href="mailto:khanaryan1889@gmail.com">📧 Email</a>
+            </div>
+          </div>
+        </div>
+
+        <h4 class="modal-sec-title">⚙️ Core Engineering &amp; Algorithms Implemented</h4>
+        <div class="algo-grid">
+          <div class="algo-box">
+            <strong>1. Haversine Geodesic Routing Engine</strong>
+            <p>Calculates real-time spherical distance in meters, campus walkway distance (<code>1.28×</code> factor), walking minutes (<code>80 m/min</code>), and E-Rickshaw travel time across 600+ acres.</p>
+          </div>
+          <div class="algo-box">
+            <strong>2. Regex Timetable Room-Code Decoder</strong>
+            <p>Parses LPU timetable codes (e.g. <code>32-405</code> or <code>14-202</code>) into exact Block Number, Department Name, Floor Level, and Room Number with instant GPS map pinning.</p>
+          </div>
+          <div class="algo-box">
+            <strong>3. LPU Domain NLP AI Assistant &amp; Voice Recognition</strong>
+            <p>Natural-language campus query engine + Web Speech API voice search answering queries across all 58 blocks, hostels, night canteens, mess menus, and helplines.</p>
+          </div>
+          <div class="algo-box">
+            <strong>4. Full-Stack Node.js + Express + Leaflet GIS</strong>
+            <p>49 GPS-verified campus markers covering Blocks 1–58, 3 Entry Gates, Unipolis, Uni Mall, Uni Hospital, Hostels (BH 1–8, GH 1–6), and REST API endpoints.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+/* === PART 2: COMPLETE LPU 58-BLOCKS & CAMPUS DATABASE (data.js) === */
+window.PERMANENT_CAMPUS_DATA = {
+  "campusLocations": [
+    {
+      "id": "gate-1",
+      "code": "Main Gate 1",
+      "name": "LPU Main Entrance Gate 1A & 1B (NH-44)",
+      "category": "Gates & Transit",
+      "zone": "Main Entrance Zone",
+      "lat": 31.252,
+      "lng": 75.7032,
+      "walkFromGate": "0 mins (Starting Point)",
+      "landmark": "On Jalandhar-Delhi GT Road (NH-44), opposite Haveli side",
+      "erickshaw": "Main E-Rickshaw Terminal right inside Gate 1 (₹10 per seat)",
+      "inside": [
+        "Main Security Control Room & Visitor Pass Counter",
+        "Campus E-Rickshaw & Bus Shuttle Starting Point",
+        "24x7 ATM Booths (SBI, PNB, ICICI, HDFC)"
+      ],
+      "description": "Primary entry gate for students, parents, and visitors arriving from Phagwara or Jalandhar.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/campus.webp"
+    },
+    {
+      "id": "law-gate",
+      "code": "Law Gate (Gate 2)",
+      "name": "LPU Law Gate / Green Valley West Entrance",
+      "category": "Gates & Transit",
+      "zone": "West & Law Gate Zone",
+      "lat": 31.2562,
+      "lng": 75.7008,
+      "walkFromGate": "10 mins from Gate 1 (0 mins from Law Gate Market)",
+      "landmark": "Adjacent to Block 36 (Law) & Law Gate PG Hub",
+      "erickshaw": "Auto & Campus E-Rickshaw stand right at Law Gate",
+      "inside": [
+        "Biometric Turnstile Entry for Day Scholars & PG Students",
+        "Direct Entry to Block 36 (Law), Block 38 & Block 14",
+        "Food Street, Cafes, Printout & Stationery Hub outside gate"
+      ],
+      "description": "Main western pedestrian and transit gate connecting LPU to Law Gate PG area and Green Valley.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/infrastructure.webp"
+    },
+    {
+      "id": "gate-3",
+      "code": "North Gate 3",
+      "name": "LPU Gate 3 (North Service & Hostel Transit Gate)",
+      "category": "Gates & Transit",
+      "zone": "North Campus Zone",
+      "lat": 31.2602,
+      "lng": 75.705,
+      "walkFromGate": "15 mins from Gate 1 (Near BH-5 to BH-8 & Polyhouse)",
+      "landmark": "North end of campus near Block 56 & BH-6",
+      "erickshaw": "North Zone E-Rickshaw Terminal",
+      "inside": [
+        "North Campus Security Post & Logistics Entry",
+        "Transit Point for North Boys Hostels & Agriculture Farms"
+      ],
+      "description": "Northern boundary gate serving the agriculture research fields and North Hostel towers.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/green-campus.webp"
+    },
+    {
+      "id": "block-1-2",
+      "code": "Block 1 & 2",
+      "name": "Directorate of Distance & Online Education (ODL)",
+      "category": "Admin & Support",
+      "zone": "West Entrance Wing",
+      "lat": 31.2522,
+      "lng": 75.7024,
+      "walkFromGate": "2 mins walk from Main Gate 1 (Left lane)",
+      "landmark": "Immediately left after entering Main Gate 1",
+      "erickshaw": "2 mins from Gate 1 Stand",
+      "inside": [
+        "Block 1: LPU Online & Distance Education Student Support Cell",
+        "Block 2: ODL Study Material Distribution, Counseling & Exam Wing"
+      ],
+      "description": "Dedicated administrative and academic blocks for LPU Distance Education and LPU Online programs.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/infrastructure.webp"
+    },
+    {
+      "id": "block-3",
+      "code": "Block 3",
+      "name": "School of Education & Physical Education",
+      "category": "Academic",
+      "zone": "West Entrance Wing",
+      "lat": 31.2524,
+      "lng": 75.702,
+      "walkFromGate": "3 mins walk from Main Gate 1",
+      "landmark": "Between Block 2 and Block 4 Pharmacy",
+      "erickshaw": "Drop at Block 4 / West Wing Stop",
+      "inside": [
+        "Ground Floor: Curriculum Pedagogy Labs & Psychology Testing Lab",
+        "1st - 3rd Floor: B.Ed., M.Ed., B.A. B.Ed. & B.P.Ed. Lecture Halls"
+      ],
+      "description": "Houses teacher training, educational research, and physical education academic departments.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/classroom.webp"
+    },
+    {
+      "id": "block-4-5",
+      "code": "Block 4 & 5",
+      "name": "School of Pharmaceutical Sciences (Pharmacy)",
+      "category": "Academic",
+      "zone": "West Entrance Wing",
+      "lat": 31.2527,
+      "lng": 75.7017,
+      "walkFromGate": "3 mins walk from Main Gate 1",
+      "landmark": "West Academic Lane before Block 14 (MSB)",
+      "erickshaw": "2 mins from Gate 1 Stand",
+      "inside": [
+        "Block 4: Pharmaceutics, Pharmacology, Medicinal Chemistry & Machine Room",
+        "Block 5: B.Pharm, M.Pharm Classrooms, Herbal Garden & Drug Formulation Labs"
+      ],
+      "description": "PCI-approved School of Pharmaceutical Sciences with advanced drug discovery and clinical laboratories.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/pharmaceutical-sciences/pharmaceutical-sciences-bg.webp"
+    },
+    {
+      "id": "block-6",
+      "code": "Block 6",
+      "name": "School of Physiotherapy & Paramedical Sciences",
+      "category": "Academic",
+      "zone": "West Entrance Wing",
+      "lat": 31.253,
+      "lng": 75.7014,
+      "walkFromGate": "4 mins walk from Main Gate 1",
+      "landmark": "Adjacent to Block 5 (Pharmacy) & Ayurvedic Clinic",
+      "erickshaw": "Drop at Block 5 / Block 6 Stop",
+      "inside": [
+        "Ground Floor: Orthopaedic & Neuro Physiotherapy OPD Clinic, Electrotherapy Lab",
+        "1st - 4th Floor: BPT, MPT, Medical Lab Technology (MLT), Radiology & Optometry Labs"
+      ],
+      "description": "Features live physiotherapy rehabilitation clinics and clinical pathology laboratories.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/pharmaceutical-sciences/beyondclass/anatomy-and-physiology-lab.webp"
+    },
+    {
+      "id": "block-7-8",
+      "code": "Block 7 & 8",
+      "name": "Lovely Polytechnic (Diploma Engineering) & Applied Medical",
+      "category": "Academic",
+      "zone": "West Entrance Wing",
+      "lat": 31.2533,
+      "lng": 75.7012,
+      "walkFromGate": "4 mins walk from Main Gate 1",
+      "landmark": "West Wing behind Block 6, near Block 9",
+      "erickshaw": "Drop at Block 7 / Block 14 Turn",
+      "inside": [
+        "Block 7: Diploma in CSE, Civil, Mechanical & Electrical Classrooms",
+        "Block 8: Polytechnic Basic Engineering Workshops, Drawing Halls & Labs"
+      ],
+      "description": "Dedicated campus wing for 3-year Engineering Diploma (Polytechnic) students and foundational labs.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/practical-applications.webp"
+    },
+    {
+      "id": "block-9-10",
+      "code": "Block 9 & 10",
+      "name": "School of Architecture, Interior & Product Design",
+      "category": "Academic",
+      "zone": "West & Central Zone",
+      "lat": 31.2535,
+      "lng": 75.7015,
+      "walkFromGate": "5 mins walk from Main Gate 1",
+      "landmark": "Right next to Block 14 (Mittal School of Business)",
+      "erickshaw": "Drop at Block 14 / Block 10 Plaza",
+      "inside": [
+        "Block 9: B.Arch Drafting Studios, Model Making Workshop, Climatology Lab",
+        "Block 10: Interior Design, Furniture Design, Multimedia & Gaming Studios"
+      ],
+      "description": "Creative hub approved by Council of Architecture (COA) with model-making and 3D prototyping studios.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/architectural-marvels.webp"
+    },
+    {
+      "id": "block-11-12",
+      "code": "Block 11 & 12",
+      "name": "School of Fashion Design, Journalism, Film & Performing Arts",
+      "category": "Academic",
+      "zone": "Central Academic Zone",
+      "lat": 31.2537,
+      "lng": 75.7021,
+      "walkFromGate": "5 mins walk from Main Gate 1",
+      "landmark": "Between Block 14 (MSB) and Block 13 (DSW)",
+      "erickshaw": "Drop at Unipolis / Block 13 Stand",
+      "inside": [
+        "Block 11: Fashion Designing Pattern Labs, Garment Construction & Ramp Studio",
+        "Block 12: TV Newsroom Studio, Green Screen Floor, Audio Recording & Radio Room"
+      ],
+      "description": "Houses LPU's live TV broadcast studio, sound engineering suites, and fashion runway labs.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/tv-news-studio.webp"
+    },
+    {
+      "id": "block-13",
+      "code": "Block 13",
+      "name": "Division of Student Welfare (DSW) & Cultural Hub",
+      "category": "Admin & Support",
+      "zone": "Central Academic Zone",
+      "lat": 31.2542,
+      "lng": 75.7024,
+      "walkFromGate": "5 mins walk from Main Gate 1",
+      "landmark": "Right beside Baldev Raj Mittal Unipolis & Block 14",
+      "erickshaw": "Drop at Unipolis / Block 13 Stand",
+      "inside": [
+        "Ground Floor: DSW Helpdesk, Student Outpass / Leave Queries, Lost & Found",
+        "1st Floor: Student Organizations, Clubs, Hackathon & Event Approvals",
+        "2nd Floor: Music, Dance, Theatre & Fine Arts Practice Studios"
+      ],
+      "description": "Central student welfare office for joining clubs, cultural fests, duty leaves, and counselling.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/music-percussion-lab.webp"
+    },
+    {
+      "id": "block-14",
+      "code": "Block 14",
+      "name": "Mittal School of Business (MSB - MBA / BBA / Commerce)",
+      "category": "Academic",
+      "zone": "Central Academic Zone",
+      "lat": 31.2539,
+      "lng": 75.7018,
+      "walkFromGate": "5 mins walk from Main Gate 1",
+      "landmark": "Near Girls Hostel Zone (GH-1/GH-2) & Unipolis",
+      "erickshaw": "Direct E-Rickshaw from Gate 1 to Block 14 (₹10)",
+      "inside": [
+        "Ground Floor: Executive Seminar Halls & Bloomberg Financial Markets Lab",
+        "1st - 4th Floor: MBA, BBA & B.Com (Hons.) Amphitheater Lecture Rooms",
+        "5th & 6th Floor: Economics Wing, HOD Cabins & Corporate Relations Cell"
+      ],
+      "description": "ACBSP-accredited business school housing management, commerce, banking, and economics programs.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/business/business-bg.webp"
+    },
+    {
+      "id": "block-15",
+      "code": "Block 15",
+      "name": "School of Social Sciences, Languages & Liberal Arts",
+      "category": "Academic",
+      "zone": "Central Academic Zone",
+      "lat": 31.2544,
+      "lng": 75.702,
+      "walkFromGate": "6 mins walk from Main Gate 1",
+      "landmark": "Behind Block 14 (MSB) & near GH-1 Gate",
+      "erickshaw": "Drop at Block 14 / Unipolis Stop",
+      "inside": [
+        "Ground Floor: Psychology Counselling Labs & Foreign Language Labs",
+        "1st - 4th Floor: B.A. (Hons.), M.A. English, Political Science, History, Sociology & Geography"
+      ],
+      "description": "Dedicated to Humanities, Liberal Arts, Clinical Psychology, Civil Services prep, and Foreign Languages.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/business/beyondclass/classroom1.webp"
+    },
+    {
+      "id": "block-16-17",
+      "code": "Block 16 & 17 (GH-1 & GH-2)",
+      "name": "Girls Hostel 1 & Girls Hostel 2 (GH-1 / GH-2)",
+      "category": "Hostels",
+      "zone": "Girls Residential Zone",
+      "lat": 31.2546,
+      "lng": 75.7014,
+      "walkFromGate": "5 mins walk from Main Gate 1",
+      "landmark": "Right next to Block 14 (MSB) & Block 15",
+      "erickshaw": "Drop at GH Main Security Gate (Near Block 14)",
+      "inside": [
+        "Block 16 (GH-1): AC/Non-AC Rooms, GH-1 Central Girls Mess & Warden Office",
+        "Block 17 (GH-2): Girls Residential Wing, Tuck Shop, Salon & Laundry"
+      ],
+      "description": "Closest girls hostels to Block 14, Block 30 Admin, and Uni Mall with 3-tier biometric security.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/girls-hostel.webp"
+    },
+    {
+      "id": "block-18-19",
+      "code": "Block 18 & 19 (GH-3 & GH-4)",
+      "name": "Girls Hostel 3 & Girls Hostel 4 (GH-3 / GH-4)",
+      "category": "Hostels",
+      "zone": "Girls Residential Zone",
+      "lat": 31.255,
+      "lng": 75.7012,
+      "walkFromGate": "6 mins walk from Main Gate 1",
+      "landmark": "Inside Girls Hostel Enclave behind Block 15",
+      "erickshaw": "Drop at GH Main Security Gate",
+      "inside": [
+        "Block 18 (GH-3): 2/3/4 Seater Rooms, Indoor Badminton Court & Study Room",
+        "Block 19 (GH-4): GH-4 Executive Dining Hall, Night Canteen & Gym"
+      ],
+      "description": "Centrally located girls hostel towers with in-house dining hall, medical room, and study lounges.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/girls-hostel.webp"
+    },
+    {
+      "id": "block-20-21",
+      "code": "Block 20 & 21 (GH-5 & GH-6)",
+      "name": "Girls Hostel 5 & Girls Hostel 6 (GH-5 / GH-6)",
+      "category": "Hostels",
+      "zone": "Girls Residential Zone",
+      "lat": 31.2555,
+      "lng": 75.701,
+      "walkFromGate": "7 mins walk from Gate 1 (2 mins from Law Gate)",
+      "landmark": "Between GH-4 and Block 36 (Law Block)",
+      "erickshaw": "Drop at GH Gate / Block 36 Turn",
+      "inside": [
+        "Block 20 (GH-5): High-Rise Girls Hostel with AC Rooms & Mess",
+        "Block 21 (GH-6): Modern Residential Wing, Bakery Kiosk & Departmental Store"
+      ],
+      "description": "High-rise girls hostels located just 3 minutes away from Central Library (Block 37) and Block 32 CSE.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/girls-hostel.webp"
+    },
+    {
+      "id": "block-22-24",
+      "code": "Block 22, 23 & 24",
+      "name": "Faculty Residences, Staff Quarters & University Guest House",
+      "category": "Admin & Support",
+      "zone": "East Residential Zone",
+      "lat": 31.2528,
+      "lng": 75.7055,
+      "walkFromGate": "4 mins walk from Main Gate 1 (East Wing)",
+      "landmark": "East of Block 30 Admin & near Uni Hospital",
+      "erickshaw": "Drop at Uni Hospital / Staff Colony Lane",
+      "inside": [
+        "Block 22 & 23: Senior Faculty & Warden Residential Apartments",
+        "Block 24: University VIP Guest House & Parent Stay Suites"
+      ],
+      "description": "On-campus residential quarters for faculty members, wardens, and visiting guests.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/environment-first-campus.webp"
+    },
+    {
+      "id": "block-25",
+      "code": "Block 25",
+      "name": "School of Chemical Engineering & Physical Sciences",
+      "category": "Academic",
+      "zone": "Central Academic Zone",
+      "lat": 31.2539,
+      "lng": 75.7056,
+      "walkFromGate": "5 mins walk from Main Gate 1 (Right lane past Admin)",
+      "landmark": "Behind Block 29/30 & next to Block 26",
+      "erickshaw": "Drop at Block 26 / Uni Hospital Turn",
+      "inside": [
+        "Ground Floor: Chemical Process Technology, Fluid Mechanics & Heat Transfer Labs",
+        "1st - 4th Floor: B.Sc. / M.Sc. Physics, Chemistry, Mathematics & Statistics Classrooms"
+      ],
+      "description": "Houses Chemical Engineering pilot plants along with Physics, Chemistry, and Mathematics departments.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/pharmaceutical-sciences/beyondclass/pharmaceutical-chemistry-lab.webp"
+    },
+    {
+      "id": "block-26",
+      "code": "Block 26",
+      "name": "School of Electronics & Communication Engineering (ECE)",
+      "category": "Academic",
+      "zone": "Central Academic Zone",
+      "lat": 31.2543,
+      "lng": 75.7058,
+      "walkFromGate": "6 mins walk from Main Gate 1",
+      "landmark": "East of Uni Mall, between Block 25 and Block 27",
+      "erickshaw": "Drop at Block 26 / Uni Mall East Stop",
+      "inside": [
+        "Ground Floor: VLSI Design, PCB Fabrication, Microwave & Optical Fiber Labs",
+        "1st - 5th Floor: B.Tech ECE Lecture Halls, IoT & Embedded Systems Studios"
+      ],
+      "description": "Core Electronics & Communication Engineering block featuring semiconductor, VLSI, and IoT labs.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/digital-electronic.webp"
+    },
+    {
+      "id": "block-27",
+      "code": "Block 27",
+      "name": "School of Electrical, Robotics & Biomedical Engineering (EEE)",
+      "category": "Academic",
+      "zone": "Central Academic Zone",
+      "lat": 31.2547,
+      "lng": 75.706,
+      "walkFromGate": "6 mins walk from Main Gate 1",
+      "landmark": "Adjacent to Block 26 & behind Uni Mall",
+      "erickshaw": "Drop at Uni Mall / Block 27 Stop",
+      "inside": [
+        "Ground Floor: High-Voltage Electrical Machines, Power Systems & Transformer Bay",
+        "1st - 4th Floor: B.Tech EEE, Robotics, Automation & Biomedical Engineering Labs",
+        "5th Floor: Solar Power & Smart Grid Research Center"
+      ],
+      "description": "Equipped with heavy electrical machinery bays, industrial robotics arms, and power electronics labs.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/advance-manufacturing-lab.webp"
+    },
+    {
+      "id": "block-28",
+      "code": "Block 28",
+      "name": "School of Bioengineering & Biosciences (Biotech & Forensic)",
+      "category": "Academic",
+      "zone": "Central Academic Zone",
+      "lat": 31.2537,
+      "lng": 75.705,
+      "walkFromGate": "4 mins walk from Main Gate 1",
+      "landmark": "Right next to Uni Hospital & Block 29",
+      "erickshaw": "Drop at Block 28 / Uni Hospital Stop",
+      "inside": [
+        "Ground Floor: Molecular Biology, Genetic Engineering & Fermentation Labs",
+        "1st - 4th Floor: B.Tech/B.Sc. Biotechnology, Microbiology, Biochemistry & Forensic Science",
+        "5th Floor: Food Technology & Bioprocess Research Wing"
+      ],
+      "description": "Life sciences hub housing Biotechnology, Forensic Science, Microbiology, and Food Technology.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/bioengineering-and-biosciences/bioengineering-and-biosciences-bg.webp"
+    },
+    {
+      "id": "uni-hospital",
+      "code": "Uni Hospital",
+      "name": "24x7 Uni Hospital, Emergency & Pharmacy (Block 28B)",
+      "category": "Admin & Support",
+      "zone": "Central Academic Zone",
+      "lat": 31.2534,
+      "lng": 75.7053,
+      "walkFromGate": "4 mins walk from Main Gate 1 (Right turn from Block 30)",
+      "landmark": "Adjacent to Block 28 & Block 30 Admin",
+      "erickshaw": "Priority Ambulance & E-Rickshaw drop at Emergency Gate",
+      "inside": [
+        "Ground Floor: 24x7 Emergency Casualty Ward, Ambulance Bay & 24hr Medicine Pharmacy",
+        "1st Floor: Doctor OPD (General, Dental, Eye, Skin, Gynae) & Physiotherapy",
+        "2nd Floor: Pathology Blood Test Lab, X-Ray, ECG & Student Inpatient Wards"
+      ],
+      "description": "24x7 on-campus hospital with free doctor OPD consultation for LPU students and emergency ambulances (01824-501227).",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/unihospital.webp"
+    },
+    {
+      "id": "block-29",
+      "code": "Block 29",
+      "name": "Division of Examination, ID Card & Academic Operations",
+      "category": "Admin & Support",
+      "zone": "Main Entrance Zone",
+      "lat": 31.253,
+      "lng": 75.7037,
+      "walkFromGate": "2 mins walk from Main Gate 1",
+      "landmark": "Connected adjacent to Block 30 (Admin Block)",
+      "erickshaw": "Drop at Block 30 Roundabout",
+      "inside": [
+        "Ground Floor: Student ID Card Printing, Biometric Registration & Vehicle Pass Desk",
+        "1st Floor: Controller of Examinations, Re-appear / Backlog & Result Queries",
+        "2nd Floor: UMS Technical Helpdesk, Section Allotment & Transcripts"
+      ],
+      "description": "Visit Block 29 for new/duplicate Student ID cards, UMS login issues, exam seating, and official degree transcripts.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/e-cell-logic-room.webp"
+    },
+    {
+      "id": "block-30",
+      "code": "Block 30",
+      "name": "Main Administrative & Admissions Block (Chancellery)",
+      "category": "Admin & Support",
+      "zone": "Main Entrance Zone",
+      "lat": 31.2532,
+      "lng": 75.7042,
+      "walkFromGate": "2 mins walk straight from Main Gate 1",
+      "landmark": "First iconic glass building straight ahead from Main Gate 1",
+      "erickshaw": "Drop at Block 30 Roundabout (2 mins from Gate 1)",
+      "inside": [
+        "Ground Floor: New Admissions Hall, Document Verification & Parent Counseling",
+        "1st Floor: Accounts & Fee Counter, LPUNEST Scholarship & Education Loan Desk",
+        "2nd & 3rd Floor: Chancellor Office, Vice-Chancellor & Registrar Secretariat"
+      ],
+      "description": "Main administrative headquarters of LPU for admissions, fee payment, scholarships, and registrar services.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/architectural-marvels.webp"
+    },
+    {
+      "id": "block-31",
+      "code": "Block 31",
+      "name": "Division of International Affairs, Ph.D. Research & HRDC",
+      "category": "Admin & Support",
+      "zone": "Main Entrance Zone",
+      "lat": 31.2535,
+      "lng": 75.7045,
+      "walkFromGate": "3 mins walk from Main Gate 1",
+      "landmark": "Just behind Block 30 Admin toward Uni Mall",
+      "erickshaw": "Drop at Block 30 / Block 31 Plaza",
+      "inside": [
+        "Ground Floor: International Student Visa, FRRO & Exchange Program Helpdesk",
+        "1st Floor: Semester Exchange / Credit Transfer & Study Abroad Cell",
+        "2nd Floor: Division of Research & Development (Ph.D. Scholars) & HRDC"
+      ],
+      "description": "Dedicated block for international students (50+ countries), study-abroad programs, and Ph.D. research scholars.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/business/beyondclass/amphitheatre.webp"
+    },
+    {
+      "id": "unipolis",
+      "code": "Unipolis",
+      "name": "Baldev Raj Mittal Unipolis (Open Amphitheater)",
+      "category": "Facilities & Mall",
+      "zone": "Central Academic Zone",
+      "lat": 31.2544,
+      "lng": 75.703,
+      "walkFromGate": "5 mins walk straight from Main Gate 1",
+      "landmark": "Central open-air amphitheater between Block 13 and Uni Mall",
+      "erickshaw": "Central Campus E-Rickshaw Junction",
+      "inside": [
+        "Open-Air Concert Stage & YouthVibe / One India / One World Fest Arena",
+        "Surrounding Food Kiosks, Shake Bars & Amphitheater Steps"
+      ],
+      "description": "Iconic open-air amphitheater hosting celebrity concerts, cultural fests, and convocation ceremonies.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/uni-polis.webp"
+    },
+    {
+      "id": "uni-mall",
+      "code": "Uni Mall",
+      "name": "LPU Uni Mall, Food Court, Banks & Uni Hotel",
+      "category": "Facilities & Mall",
+      "zone": "Central Academic Zone",
+      "lat": 31.2548,
+      "lng": 75.7045,
+      "walkFromGate": "6 mins walk straight along Main Avenue",
+      "landmark": "Opposite Block 34 Auditorium, heart of the campus",
+      "erickshaw": "Every campus E-Rickshaw stops at Uni Mall Junction",
+      "inside": [
+        "Ground Floor: Domino's, Subway, Cafe Coffee Day, Supermarket, Bookstore & Bank Branches",
+        "1st Floor: Multi-Cuisine Food Court, WHSmith, Salon, Optical & Apparel Stores",
+        "Upper Floors: Uni Hotel, Bowling Alley & Student Startup Offices"
+      ],
+      "description": "8-story campus shopping mall with food courts, grocery supermarket, stationery, banks, and student hangout spots.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/uni-mall.webp"
+    },
+    {
+      "id": "block-32",
+      "code": "Block 32",
+      "name": "School of Computer Science & Engineering (Main CSE Hub)",
+      "category": "Academic",
+      "zone": "CSE & Tech Zone",
+      "lat": 31.2558,
+      "lng": 75.7056,
+      "walkFromGate": "8 mins walk straight past Block 34 Auditorium",
+      "landmark": "Right after Block 34 Auditorium & opposite Block 33",
+      "erickshaw": "Direct E-Rickshaw from Gate 1 or BH-1 to Block 32 (₹10)",
+      "inside": [
+        "Ground Floor: Apple iMac Lab, Google Cloud Lab, BYOD Coding Labs & CSE Helpdesk",
+        "1st - 4th Floor: B.Tech CSE Lecture Halls (Rooms 32-101 to 32-415)",
+        "5th & 6th Floor: AI/ML Research Labs, HOD Cabins & Faculty Cubicles"
+      ],
+      "description": "The largest and busiest academic block at LPU, housing B.Tech CSE, AI/ML, Data Science, and Software Engineering.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/computer-science-engineering/computer-science-engineering-bg.webp"
+    },
+    {
+      "id": "block-33",
+      "code": "Block 33",
+      "name": "School of Computer Applications & IT (BCA / MCA / B.Sc IT)",
+      "category": "Academic",
+      "zone": "CSE & Tech Zone",
+      "lat": 31.2555,
+      "lng": 75.7062,
+      "walkFromGate": "8 mins walk from Main Gate 1",
+      "landmark": "Directly connected/adjacent to Block 32 (CSE)",
+      "erickshaw": "Drop at Block 32 / Block 33 Stop",
+      "inside": [
+        "Ground Floor: Full-Stack Web Dev Labs, Cisco Networking Lab & Server Room",
+        "1st - 5th Floor: BCA, MCA, B.Sc. IT Classrooms & Cyber Security Labs"
+      ],
+      "description": "Adjacent to Block 32, hosting Computer Applications (BCA/MCA), Cloud Computing, and Networking labs.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/i-mac-lab-1.webp"
+    },
+    {
+      "id": "block-34",
+      "code": "Block 34",
+      "name": "Shanti Devi Mittal Auditorium & Placement Cell (Career Services)",
+      "category": "Academic",
+      "zone": "CSE & Tech Zone",
+      "lat": 31.2552,
+      "lng": 75.7052,
+      "walkFromGate": "7 mins walk straight from Gate 1",
+      "landmark": "Directly opposite Uni Mall, before Block 32",
+      "erickshaw": "Drop at Uni Mall / Block 34 Stop",
+      "inside": [
+        "Ground Floor: 2,500-Seater Shanti Devi Mittal Main Auditorium",
+        "1st & 2nd Floor: Division of Career Services (Campus Placements, GD/Interview Rooms)",
+        "3rd - 6th Floor: CSE Honors, PEP Classes & Online Assessment Labs"
+      ],
+      "description": "Houses the main university auditorium as well as LPU's central Placement & Career Services cell.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/shanti-devi-auditorium.webp"
+    },
+    {
+      "id": "block-35",
+      "code": "Block 35",
+      "name": "Innovation Studio, Startup School & Entrepreneurship Cell",
+      "category": "Academic",
+      "zone": "CSE & Tech Zone",
+      "lat": 31.2561,
+      "lng": 75.7059,
+      "walkFromGate": "8 mins walk from Gate 1",
+      "landmark": "Just behind Block 32 & Block 33",
+      "erickshaw": "Drop at Block 32 Stop",
+      "inside": [
+        "Ground Floor: 24x7 Hackathon Arena, 3D Printing & IoT Maker Space",
+        "1st - 4th Floor: Student Startup Incubator, Patent Filing Cell & Industry Tie-up Labs (Bosch, Intel)"
+      ],
+      "description": "Dedicated innovation and startup incubation building where students build funded startups, patents, and hackathon projects.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/innovation-studio.webp"
+    },
+    {
+      "id": "block-36",
+      "code": "Block 36",
+      "name": "School of Law (BA LLB / BBA LLB / LLM & Moot Court)",
+      "category": "Academic",
+      "zone": "CSE & Tech Zone",
+      "lat": 31.2566,
+      "lng": 75.7038,
+      "walkFromGate": "9 mins walk from Gate 1 (2 mins from Law Gate)",
+      "landmark": "Between Central Library (Block 37) and Law Gate (Gate 2)",
+      "erickshaw": "Drop at Block 37 Library or Law Gate Stop",
+      "inside": [
+        "Ground Floor: National Moot Court Hall & Free Legal Aid Clinic",
+        "1st - 4th Floor: BCI-Approved BA LLB, BBA LLB, LLB & LLM Lecture Halls",
+        "5th Floor: Law Library Reference Section & Faculty Chambers"
+      ],
+      "description": "Bar Council of India (BCI) approved Law School located right near Law Gate (Gate 2) and Central Library.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/classroom.webp"
+    },
+    {
+      "id": "block-37",
+      "code": "Block 37",
+      "name": "Dr. B.R. Ambedkar Central Library (9-Story Knowledge Center)",
+      "category": "Facilities & Mall",
+      "zone": "CSE & Tech Zone",
+      "lat": 31.2564,
+      "lng": 75.7049,
+      "walkFromGate": "9 mins walk straight down Main Avenue",
+      "landmark": "Just ahead of Block 32 & opposite Block 36",
+      "erickshaw": "Drop right in front of Central Library (Block 37)",
+      "inside": [
+        "Basement & Ground Floor: 24x7 Reading Room, Automated RFID Book Issue/Return",
+        "1st - 3rd Floor: Engineering, Computer Science, Management & Law Book Stacks",
+        "4th - 8th Floor: Digital Library (300+ iMacs/PCs), Silent AC Study Floors & Research Carrels"
+      ],
+      "description": "Iconic 9-story central library with 20+ lakh books, digital terminals, and silent AC study zones open till midnight.",
+      "photo": "https://www.lpu.in/lpu-assets/images/libraries/lpu-libraries.webp"
+    },
+    {
+      "id": "block-38",
+      "code": "Block 38",
+      "name": "School of Hotel Management, Airlines & Tourism",
+      "category": "Academic",
+      "zone": "CSE & Tech Zone",
+      "lat": 31.2569,
+      "lng": 75.7044,
+      "walkFromGate": "10 mins walk from Gate 1",
+      "landmark": "Adjacent to Central Library (Block 37) & Block 36",
+      "erickshaw": "Drop at Central Library (Block 37) Stop",
+      "inside": [
+        "Ground Floor: 5-Star Training Kitchens, Bakery & Confectionery Lab, Mock Training Restaurant",
+        "1st & 2nd Floor: Mock Aircraft Cabin (Airlines & Hospitality Lab), Front Office & Housekeeping Suites",
+        "3rd & 4th Floor: BHMCT, B.Sc. Airlines, Tourism & Culinary Arts Classrooms"
+      ],
+      "description": "Features a real mock aircraft fuselage for aviation training, commercial culinary kitchens, and hospitality suites.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/lovely-sweets.webp"
+    },
+    {
+      "id": "block-39-40",
+      "code": "Block 39 & 40",
+      "name": "Central Instrumentation Facility (CIF) & Computing Annex",
+      "category": "Academic",
+      "zone": "CSE & Tech Zone",
+      "lat": 31.2567,
+      "lng": 75.7055,
+      "walkFromGate": "9 mins walk from Gate 1",
+      "landmark": "Between Block 32/35 and Boys Hostel BH-1",
+      "erickshaw": "Drop at Block 37 / BH-1 Turn",
+      "inside": [
+        "Block 39: Scanning Electron Microscopy (SEM), XRD, NMR & Nanotechnology Research Labs",
+        "Block 40: Online Examination Center (Computer Based Test Labs 1 to 12)"
+      ],
+      "description": "Houses high-end scientific research equipment and large-scale computer test centers.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/cif.webp"
+    },
+    {
+      "id": "block-41-bh1",
+      "code": "Block 41 (BH-1)",
+      "name": "Boys Hostel 1 (BH-1) & BH-1 Central Mess",
+      "category": "Hostels",
+      "zone": "Boys Hostel Zone 1",
+      "lat": 31.2574,
+      "lng": 75.706,
+      "walkFromGate": "10 mins from Gate 1 (Only 2 mins from Block 32 CSE & Library)",
+      "landmark": "Immediately north of Block 32 CSE & Block 37 Library",
+      "erickshaw": "Drop right outside BH-1 Main Gate",
+      "inside": [
+        "Ground Floor: BH-1 Central Pure Veg Mess, Warden Office, Barber & Stationery Shop",
+        "1st - 8th Floor: Boys Residential Rooms (1/2/3/4 Seater AC & Non-AC)",
+        "Courtyard: Outdoor Badminton Courts & Evening Snack Kiosks"
+      ],
+      "description": "The most sought-after boys hostel for CSE/IT students because it is just a 2-minute walk from Block 32 and Central Library.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel.webp"
+    },
+    {
+      "id": "block-42-bh2",
+      "code": "Block 42 (BH-2)",
+      "name": "Boys Hostel 2 (BH-2)",
+      "category": "Hostels",
+      "zone": "Boys Hostel Zone 1",
+      "lat": 31.2577,
+      "lng": 75.7065,
+      "walkFromGate": "11 mins from Gate 1 (3 mins from Block 32 CSE)",
+      "landmark": "Adjacent to Boys Hostel 1 (BH-1)",
+      "erickshaw": "Drop at BH-1 / BH-2 Chowk",
+      "inside": [
+        "Ground Floor: Dining Hall, Laundry Drop Point, Tuck Shop & Medical First-Aid",
+        "Upper Floors: 2/3/4 Seater Rooms & Common Study Hall"
+      ],
+      "description": "Connected closely with BH-1, offering quick walking access to Central Library and CSE blocks.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel.webp"
+    },
+    {
+      "id": "block-43-bh3",
+      "code": "Block 43 (BH-3)",
+      "name": "Boys Hostel 3 (BH-3) & Night Food Plaza",
+      "category": "Hostels",
+      "zone": "Boys Hostel Zone 1",
+      "lat": 31.2581,
+      "lng": 75.7068,
+      "walkFromGate": "12 mins from Gate 1 (4 mins from Block 32 CSE)",
+      "landmark": "Between BH-2 and BH-4 along the hostel avenue",
+      "erickshaw": "Drop at BH-3 / BH-4 Plaza",
+      "inside": [
+        "Ground Floor: BH-3 Mess, Midnight Food Court (Open till 1 AM), ATM & Grocery Store",
+        "Upper Floors: Boys Hostel Residential Wings & Reading Lounge"
+      ],
+      "description": "Popular boys hostel featuring lively evening food stalls, juice bars, and sports grounds nearby.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel.webp"
+    },
+    {
+      "id": "block-44-bh4",
+      "code": "Block 44 (BH-4)",
+      "name": "Boys Hostel 4 (BH-4) & Mega Dining Hall",
+      "category": "Hostels",
+      "zone": "Boys Hostel Zone 1",
+      "lat": 31.2585,
+      "lng": 75.7072,
+      "walkFromGate": "13 mins from Gate 1 (4 mins by E-Rickshaw)",
+      "landmark": "Opposite Cricket Ground & before Block 55",
+      "erickshaw": "Major E-Rickshaw Stand right outside BH-4 Gate",
+      "inside": [
+        "Ground Floor: 2,400-Capacity BH-4 Mega Mess (North, South & Continental Counters)",
+        "In-House Gym, Automated Laundry, Salon, Bakery & Stationery Store"
+      ],
+      "description": "One of LPU's largest boys hostels with a massive multi-cuisine dining hall and adjacent cricket stadium.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel.webp"
+    },
+    {
+      "id": "block-45-46-apt",
+      "code": "Block 45 & 46 (Apartments)",
+      "name": "LPU Executive Studio Apartments (Residential Suites)",
+      "category": "Hostels",
+      "zone": "North Sports & Hostel Zone",
+      "lat": 31.2575,
+      "lng": 75.7038,
+      "walkFromGate": "10 mins from Gate 1 (Next to Indoor Sports Complex)",
+      "landmark": "Between Central Library (Block 37) and Indoor Stadium (Block 51)",
+      "erickshaw": "Drop at Apartment / Indoor Stadium Chowk",
+      "inside": [
+        "1-Seater, 2-Seater & 3-Seater Fully Air-Conditioned Studio Suites",
+        "Attached Private Washroom, Pantry Area, Wooden Wardrobe & Housekeeping",
+        "Dedicated Executive Dining Lounge"
+      ],
+      "description": "Premium hotel-style AC studio apartments located right next to the Olympic Indoor Sports Complex.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel-room.webp"
+    },
+    {
+      "id": "block-47-48-bh5-6",
+      "code": "Block 47 & 48 (BH-5 & BH-6)",
+      "name": "Boys Hostel 5 & Boys Hostel 6 (BH-5 / BH-6)",
+      "category": "Hostels",
+      "zone": "North Hostel Zone 2",
+      "lat": 31.2594,
+      "lng": 75.7078,
+      "walkFromGate": "15 mins walk from Gate 1 (4 mins by E-Rickshaw)",
+      "landmark": "North of BH-4 & near Block 55/56",
+      "erickshaw": "Continuous E-Rickshaws from BH-5/6 Stand to Block 32 & Uni Mall",
+      "inside": [
+        "Block 47 (BH-5): 10-Story Hostel Tower, North Mess & Night Canteen",
+        "Block 48 (BH-6): Modern Rooms, Basketball Courts, Supermarket & Gym"
+      ],
+      "description": "High-rise boys hostel complex in North Campus, just 2 minutes from Mechanical (Block 55) and Agriculture (Block 56).",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel.webp"
+    },
+    {
+      "id": "block-49-50-bh7-8",
+      "code": "Block 49 & 50 (BH-7 & BH-8)",
+      "name": "Boys Hostel 7 & Boys Hostel 8 (BH-7 / BH-8 Towers)",
+      "category": "Hostels",
+      "zone": "North Hostel Zone 2",
+      "lat": 31.26,
+      "lng": 75.7084,
+      "walkFromGate": "16 mins walk from Gate 1 (5 mins by E-Rickshaw)",
+      "landmark": "Northernmost high-rise hostel towers near Gate 3",
+      "erickshaw": "Dedicated E-Rickshaw Terminal at BH-7/8 Gate",
+      "inside": [
+        "High-Speed Elevators, Spacious Balconies & Central Dining Hall",
+        "24x7 Tuck Shop, Laundry, Table Tennis & Outdoor Volleyball Courts"
+      ],
+      "description": "Newest high-rise boys hostel towers with open green views and direct shuttle connectivity.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel.webp"
+    },
+    {
+      "id": "block-51-sports",
+      "code": "Block 51 (Sports Arena)",
+      "name": "Shanti Devi Mittal Indoor Sports Complex & Olympic Pool",
+      "category": "Facilities & Mall",
+      "zone": "North Sports & Hostel Zone",
+      "lat": 31.2573,
+      "lng": 75.7026,
+      "walkFromGate": "11 mins from Gate 1 (Near Apartments & BH-1)",
+      "landmark": "North-West of Central Library (Block 37)",
+      "erickshaw": "Drop at Indoor Sports Complex Chowk",
+      "inside": [
+        "Olympic-Size All-Weather Heated Swimming Pool & Diving Pool",
+        "12 Badminton Courts, Squash Courts, Indoor Basketball, Wrestling & Boxing Ring",
+        "10-Meter Shooting Range, Roller Skating Rink & Pro Fitness Gym"
+      ],
+      "description": "World-class indoor sports arena where LPU's Olympic and Asian Games medalists train daily.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/indoor-sports-complex.webp"
+    },
+    {
+      "id": "block-52-robopark",
+      "code": "Block 52 (RoboPark)",
+      "name": "LPU RoboPark, Automobile Garage & Drone Innovation Center",
+      "category": "Academic",
+      "zone": "North Engineering Zone",
+      "lat": 31.2584,
+      "lng": 75.7052,
+      "walkFromGate": "12 mins from Gate 1",
+      "landmark": "Between BH-1/BH-3 and Block 55 Mechanical",
+      "erickshaw": "Drop at Block 52 / Block 55 Junction",
+      "inside": [
+        "Formula Bharat / Go-Kart / Solar Car Student Fabrication Bays",
+        "UAV / Drone Testing Cage & Autonomous Robotics Arena",
+        "Welding, Foundry, Sheet Metal & Central Carpentry Workshops"
+      ],
+      "description": "Hands-on engineering fabrication hub where student teams build solar cars, F1-style buggies, and drones.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/solar-bus.webp"
+    },
+    {
+      "id": "block-53-54",
+      "code": "Block 53 & 54",
+      "name": "School of Civil Engineering & Aerospace / Mechatronics",
+      "category": "Academic",
+      "zone": "North Engineering Zone",
+      "lat": 31.2588,
+      "lng": 75.706,
+      "walkFromGate": "13 mins from Gate 1 (4 mins by E-Rickshaw)",
+      "landmark": "Just before Block 55 Mechanical & opposite BH-4",
+      "erickshaw": "Drop at BH-4 / Block 54 Stop",
+      "inside": [
+        "Block 53: Concrete Technology, Structural Testing, Geotechnical & Surveying Labs",
+        "Block 54: Subsonic Wind Tunnel, Jet Engine Bay, Avionics & Mechatronics Labs"
+      ],
+      "description": "Houses Civil Engineering structural labs and Aerospace Engineering wind-tunnel & aircraft propulsion labs.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/civil-engineering/civil-engineering-bg.webp"
+    },
+    {
+      "id": "block-55",
+      "code": "Block 55",
+      "name": "School of Mechanical Engineering (CAD/CAM, Thermal & CNC)",
+      "category": "Academic",
+      "zone": "North Engineering Zone",
+      "lat": 31.2591,
+      "lng": 75.7068,
+      "walkFromGate": "14 mins from Gate 1 (4 mins by E-Rickshaw)",
+      "landmark": "Adjacent to BH-4 & Block 56 Agriculture",
+      "erickshaw": "Drop right at Block 55 / BH-4 Stop",
+      "inside": [
+        "Ground Floor: CNC Machining Center, IC Engines, Thermodynamics & Fluid Machinery Labs",
+        "1st - 4th Floor: B.Tech Mechanical, Automobile & Robotics Lecture Halls, CAD/CAM Studios"
+      ],
+      "description": "Core Mechanical and Automobile Engineering building equipped with industrial CNC machines and thermal labs.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/mechanical-engineering/mechanical-engineering-bg.webp"
+    },
+    {
+      "id": "block-56",
+      "code": "Block 56",
+      "name": "School of Agriculture (ICAR-Accredited Agriculture Sciences)",
+      "category": "Academic",
+      "zone": "North Agriculture Zone",
+      "lat": 31.2595,
+      "lng": 75.7072,
+      "walkFromGate": "15 mins from Gate 1 (5 mins by E-Rickshaw)",
+      "landmark": "Next to Block 55 & Boys Hostel BH-5",
+      "erickshaw": "Direct North Campus E-Rickshaw from Gate 1 / Uni Mall (₹10)",
+      "inside": [
+        "Ground Floor: Soil Science, Agronomy, Entomology & Plant Pathology Labs",
+        "1st - 4th Floor: B.Sc. (Hons.) Agriculture & M.Sc. Genetics / Horticulture Classrooms"
+      ],
+      "description": "ICAR-accredited School of Agriculture located right beside LPU's experimental research farms.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/agriculture/agriculture-bg.webp"
+    },
+    {
+      "id": "block-57-58",
+      "code": "Block 57 & 58",
+      "name": "Agricultural Polyhouse Farms, Dairy & Horticulture Research",
+      "category": "Academic",
+      "zone": "North Agriculture Zone",
+      "lat": 31.2601,
+      "lng": 75.7064,
+      "walkFromGate": "16 mins from Gate 1 (5 mins by E-Rickshaw)",
+      "landmark": "Northern green belt behind Block 56 & Sports Stadium",
+      "erickshaw": "Drop at Block 56 / Polyhouse Gate",
+      "inside": [
+        "Block 57: Automated Climate-Controlled Polyhouses, Hydroponics & Mushroom Farming Units",
+        "Block 58: Organic Research Fields, Floriculture, Apiculture & Farm Machinery Yard"
+      ],
+      "description": "Live agricultural research fields and smart polyhouses where B.Sc./M.Sc. Agriculture students conduct field trials.",
+      "photo": "https://www.lpu.in/schools/common-assets/images/agriculture/beyondclass/hi-tech-polyhouse1.webp"
+    },
+    {
+      "id": "outdoor-stadium",
+      "code": "Main Stadium & Helipad",
+      "name": "LPU Outdoor Cricket/Football Stadium, Athletics Track & Helipad",
+      "category": "Facilities & Mall",
+      "zone": "North Sports & Hostel Zone",
+      "lat": 31.2586,
+      "lng": 75.7036,
+      "walkFromGate": "12 mins from Gate 1",
+      "landmark": "Between Block 51 Indoor Stadium and Boys Hostels BH-3/BH-4",
+      "erickshaw": "Drop at Stadium / BH-3 Chowk",
+      "inside": [
+        "400m Standard Athletics Track, Football Turf & Floodlit Cricket Ground",
+        "University Helipad & Open Parade Ground"
+      ],
+      "description": "Massive outdoor sports complex hosting inter-university tournaments, cricket leagues, and athletic meets.",
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/football-field.webp"
+    }
+  ],
+  "quickHelpFinder": [
+    {
+      "task": "New Admission / Scholarship / Fee Payment",
+      "blockCode": "Block 30",
+      "locationId": "block-30",
+      "floor": "Ground & 1st Floor"
+    },
+    {
+      "task": "Student ID Card / UMS Password / Exam Issue",
+      "blockCode": "Block 29",
+      "locationId": "block-29",
+      "floor": "Ground & 1st Floor"
+    },
+    {
+      "task": "B.Tech CSE / AI-ML / Cyber Security Classes",
+      "blockCode": "Block 32",
+      "locationId": "block-32",
+      "floor": "1st to 6th Floor"
+    },
+    {
+      "task": "Campus Placements & Internship Cell",
+      "blockCode": "Block 34",
+      "locationId": "block-34",
+      "floor": "1st & 2nd Floor"
+    },
+    {
+      "task": "MBA / BBA / Commerce Classes",
+      "blockCode": "Block 14",
+      "locationId": "block-14",
+      "floor": "1st to 4th Floor"
+    },
+    {
+      "task": "Student Clubs / Duty Leave / Lost & Found (DSW)",
+      "blockCode": "Block 13",
+      "locationId": "block-13",
+      "floor": "Ground & 1st Floor"
+    },
+    {
+      "task": "Central Library & 24x7 Reading Room",
+      "blockCode": "Block 37",
+      "locationId": "block-37",
+      "floor": "Ground to 4th Floor"
+    },
+    {
+      "task": "Medical Emergency / Doctor / Pharmacy",
+      "blockCode": "Uni Hospital",
+      "locationId": "uni-hospital",
+      "floor": "Ground Floor (24x7)"
+    },
+    {
+      "task": "Food Court, Domino's, Books & Grocery",
+      "blockCode": "Uni Mall",
+      "locationId": "uni-mall",
+      "floor": "Ground & 1st Floor"
+    }
+  ],
+  "messes": [
+    {
+      "id": "mess-bh1",
+      "name": "BH-1 & BH-2 Central Mess",
+      "zone": "Near Block 32 & Central Library",
+      "type": "Pure Veg • North & South Indian",
+      "capacity": 1800,
+      "crowdStatus": "Low",
+      "crowdPercent": 32,
+      "rating": 4.6,
+      "timings": {
+        "breakfast": "07:30 AM - 09:30 AM",
+        "lunch": "12:15 PM - 02:30 PM",
+        "snacks": "04:45 PM - 05:45 PM",
+        "dinner": "07:30 PM - 09:30 PM"
+      },
+      "signatureDishes": [
+        {
+          "id": "dish-1",
+          "name": "Amritsari Aloo Paratha & Curd",
+          "meal": "Breakfast",
+          "calories": "420 kcal",
+          "votes": 342,
+          "image": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=600&q=80"
+        },
+        {
+          "id": "dish-2",
+          "name": "Paneer Butter Masala & Garlic Naan",
+          "meal": "Dinner",
+          "calories": "610 kcal",
+          "votes": 518,
+          "image": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80"
+        },
+        {
+          "id": "dish-3",
+          "name": "Rajma Chawal Bowl with Boondi Raita",
+          "meal": "Lunch",
+          "calories": "540 kcal",
+          "votes": 410,
+          "image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80"
+        }
+      ],
+      "weeklyMenu": {
+        "Monday": {
+          "breakfast": "Aloo Pyaz Paratha, Fresh Curd, Pickle, Sweet Corn, Masala Tea & Milk",
+          "lunch": "Rajma Masala, Jeera Rice, Aloo Gobhi, Tawa Roti, Boondi Raita, Green Salad",
+          "snacks": "Crispy Samosa (2 pcs), Tamarind Chutney, Ginger Tea & Cold Coffee",
+          "dinner": "Paneer Butter Masala, Dal Makhani, Steamed Rice, Roti, Hot Gulab Jamun"
+        },
+        "Tuesday": {
+          "breakfast": "Masala Dosa, Coconut Chutney, Sambar, Boiled Chickpeas, Coffee & Milk",
+          "lunch": "Kadhi Pakora, Plain Rice, Bhindi Masala, Chapati, Papad, Fresh Salad",
+          "snacks": "Veg Hakka Noodles, Tomato Ketchup, Hot Masala Tea",
+          "dinner": "Aloo Matar, Yellow Dal Tadka, Jeera Pulao, Roti, Kheer"
+        },
+        "Wednesday": {
+          "breakfast": "Poha with Sev & Peanuts, Jalebi, Banana, Masala Tea & Milk",
+          "lunch": "Chole Masala, Jeera Rice, Mix Veg Dry, Roti, Cucumber Raita, Salad",
+          "snacks": "Grilled Veg Sandwich, Mint Chutney, Cold Drink / Tea",
+          "dinner": "Kadhai Paneer, Dal Fry, Peas Pulao, Butter Roti, Ice Cream Cup"
+        },
+        "Thursday": {
+          "breakfast": "Gobhi Paratha, Butter, Curd, Mixed Pickle, Tea & Milk",
+          "lunch": "Dal Panchmel, Steamed Rice, Aloo Jeera, Chapati, Curd, Salad",
+          "snacks": "Pav Bhaji with Butter Pav, Chopped Onions, Lemon Tea",
+          "dinner": "Malai Kofta, Chana Dal, Rice, Tawa Roti, Moong Dal Halwa"
+        },
+        "Friday": {
+          "breakfast": "Idli Vada Combo, Sambar, Coconut Chutney, Sprouts, Coffee & Milk",
+          "lunch": "Punjabi Chole, Bhature / Roti, Pulao, Boondi Raita, Onion Salad",
+          "snacks": "Aloo Tikki Chaat with Curd & Chutney, Masala Tea",
+          "dinner": "Shahi Paneer, Dal Makhani, Veg Biryani, Raita, Rasgulla"
+        },
+        "Saturday": {
+          "breakfast": "Puri Bhaji, Suji Halwa, Pickle, Masala Tea & Milk",
+          "lunch": "Black Dal, Rice, Seasonal Veg, Chapati, Mix Raita, Salad",
+          "snacks": "Red Sauce Pasta, Iced Tea / Hot Coffee",
+          "dinner": "Veg Manchurian, Fried Rice, Dal Tadka, Roti, Custard"
+        },
+        "Sunday": {
+          "breakfast": "Amritsari Kulcha, Chana, Butter, Lassi & Masala Tea",
+          "lunch": "Special Veg Dum Biryani, Mirchi Salan, Pineapple Raita, Papad",
+          "snacks": "Bhel Puri, Sev, Lemon, Hot Ginger Tea",
+          "dinner": "Matar Paneer, Dal Fry, Jeera Rice, Butter Naan, Chocolate Brownie"
+        }
+      }
+    },
+    {
+      "id": "mess-bh4",
+      "name": "BH-3 & BH-4 Mega Dining Hall",
+      "zone": "North Hostel Zone",
+      "type": "North, South & Continental Counters",
+      "capacity": 2400,
+      "crowdStatus": "Moderate",
+      "crowdPercent": 58,
+      "rating": 4.5,
+      "timings": {
+        "breakfast": "07:30 AM - 09:30 AM",
+        "lunch": "12:15 PM - 02:30 PM",
+        "snacks": "04:45 PM - 05:45 PM",
+        "dinner": "07:30 PM - 09:30 PM"
+      },
+      "signatureDishes": [
+        {
+          "id": "dish-4",
+          "name": "Mysore Masala Dosa Platter",
+          "meal": "Breakfast",
+          "calories": "390 kcal",
+          "votes": 295,
+          "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80"
+        },
+        {
+          "id": "dish-5",
+          "name": "Hyderabadi Veg Dum Biryani",
+          "meal": "Lunch",
+          "calories": "580 kcal",
+          "votes": 460,
+          "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80"
+        }
+      ],
+      "weeklyMenu": {
+        "Monday": {
+          "breakfast": "Paneer Paratha, Curd, Butter, Sprouts, Tea & Coffee",
+          "lunch": "Dal Makhani, Jeera Rice, Mix Veg, Roti, Raita, Salad",
+          "snacks": "Bread Pakora, Green Chutney, Ginger Tea",
+          "dinner": "Kadhai Paneer, Yellow Dal, Steamed Rice, Roti, Gulab Jamun"
+        },
+        "Tuesday": {
+          "breakfast": "Uttapam, Sambar, Tomato Chutney, Boiled Corn, Coffee",
+          "lunch": "Rajma Chawal, Aloo Methi, Chapati, Boondi Raita, Salad",
+          "snacks": "Veg Chowmein, Chili Sauce, Hot Tea",
+          "dinner": "Matar Mushroom, Dal Fry, Rice, Roti, Fruit Custard"
+        },
+        "Wednesday": {
+          "breakfast": "Aloo Paratha, Curd, Pickle, Banana, Tea & Milk",
+          "lunch": "Chole Bhature, Jeera Rice, Sweet Lassi, Onion Rings",
+          "snacks": "Patties, Ketchup, Cold Coffee",
+          "dinner": "Paneer Lababdar, Dal Tadka, Pulao, Roti, Ice Cream"
+        },
+        "Thursday": {
+          "breakfast": "Poha, Jalebi, Peanuts, Sprouts, Tea & Milk",
+          "lunch": "Kadhi Pakora, Steamed Rice, Jeera Aloo, Roti, Papad",
+          "snacks": "Macaroni Pasta, Masala Tea",
+          "dinner": "Soya Chaap Masala, Chana Dal, Rice, Roti, Sewaiyan Kheer"
+        },
+        "Friday": {
+          "breakfast": "Masala Dosa, Sambar, Coconut Chutney, Tea & Coffee",
+          "lunch": "Black Chana Curry, Rice, Gobhi Masala, Roti, Curd",
+          "snacks": "Samosa Chaat, Tamarind Sauce, Tea",
+          "dinner": "Paneer Tikka Masala, Dal Makhani, Naan, Rice, Rasmalai"
+        },
+        "Saturday": {
+          "breakfast": "Bedmi Puri, Aloo Sabzi, Halwa, Tea & Milk",
+          "lunch": "Dal Fry, Veg Pulao, Bhindi Do Pyaza, Roti, Raita",
+          "snacks": "Burger with Coleslaw, Cold Drink / Tea",
+          "dinner": "Chilli Paneer, Fried Rice, Dal, Roti, Hot Brownie"
+        },
+        "Sunday": {
+          "breakfast": "Chole Kulche, Butter, Sweet Lassi, Tea",
+          "lunch": "Veg Dum Biryani, Mirchi Ka Salan, Boondi Raita, Salad",
+          "snacks": "Dhokla, Green Chutney, Ginger Tea",
+          "dinner": "Shahi Paneer, Dal Makhani, Jeera Rice, Tandoori Roti, Jalebi"
+        }
+      }
+    },
+    {
+      "id": "mess-gh1",
+      "name": "GH-1 & GH-2 Central Girls Mess",
+      "zone": "Near Block 14 (MSB)",
+      "type": "Hygienic Veg + Salad & Juice Bar",
+      "capacity": 1600,
+      "crowdStatus": "Low",
+      "crowdPercent": 28,
+      "rating": 4.8,
+      "timings": {
+        "breakfast": "07:30 AM - 09:30 AM",
+        "lunch": "12:15 PM - 02:30 PM",
+        "snacks": "04:45 PM - 05:45 PM",
+        "dinner": "07:30 PM - 09:30 PM"
+      },
+      "signatureDishes": [
+        {
+          "id": "dish-7",
+          "name": "Mumbai Style Butter Pav Bhaji",
+          "meal": "Snacks",
+          "calories": "450 kcal",
+          "votes": 489,
+          "image": "https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=600&q=80"
+        },
+        {
+          "id": "dish-8",
+          "name": "White Sauce Penne Pasta & Garlic Bread",
+          "meal": "Snacks",
+          "calories": "470 kcal",
+          "votes": 412,
+          "image": "https://images.unsplash.com/photo-1621996346565-e3d5d6281298?auto=format&fit=crop&w=600&q=80"
+        }
+      ],
+      "weeklyMenu": {
+        "Monday": {
+          "breakfast": "Multigrain Paratha, Curd, Fruit Bowl, Green Tea & Milk",
+          "lunch": "Rajma Chawal, Cabbage Peas, Phulka, Fresh Sprouts Salad, Raita",
+          "snacks": "Mumbai Pav Bhaji, Chopped Onions, Lemon Iced Tea",
+          "dinner": "Paneer Bhurji, Dal Tadka, Brown/White Rice, Roti, Gulab Jamun"
+        },
+        "Tuesday": {
+          "breakfast": "Rava Idli, Sambar, Coconut Chutney, Corn Salad, Coffee",
+          "lunch": "Chole, Jeera Rice, Aloo Baingan, Phulka, Mint Raita, Salad",
+          "snacks": "White Sauce Penne Pasta, Garlic Bread, Hot Coffee",
+          "dinner": "Palak Paneer, Dal Makhani, Rice, Roti, Fruit Custard"
+        },
+        "Wednesday": {
+          "breakfast": "Indori Poha, Sev, Jalebi, Boiled Eggless Protein Sprouts, Tea",
+          "lunch": "Kadhi Pakora, Steamed Rice, Bhindi Fry, Roti, Papad, Salad",
+          "snacks": "Paneer Grilled Sandwich, Ketchup, Masala Tea",
+          "dinner": "Kadhai Paneer, Arhar Dal, Pulao, Roti, Chocolate Ice Cream"
+        },
+        "Thursday": {
+          "breakfast": "Aloo Methi Paratha, Curd, Pickle, Banana, Tea & Milk",
+          "lunch": "Black Dal, Rice, Mix Veg, Phulka, Cucumber Raita, Salad",
+          "snacks": "Dahi Bhalla Papdi Chaat, Ginger Tea",
+          "dinner": "Mushroom Matar, Chana Dal, Rice, Roti, Moong Dal Halwa"
+        },
+        "Friday": {
+          "breakfast": "Crispy Masala Dosa, Sambar, Chutney, Sprouts, Filter Coffee",
+          "lunch": "Punjabi Chole, Bhature / Phulka, Rice, Boondi Raita, Salad",
+          "snacks": "Spring Rolls, Schezwan Dip, Lemon Tea",
+          "dinner": "Shahi Paneer, Dal Fry, Veg Biryani, Raita, Rasgulla"
+        },
+        "Saturday": {
+          "breakfast": "Ajwain Puri, Aloo Tamatar Sabzi, Sooji Halwa, Tea",
+          "lunch": "Lobhiya Masala, Rice, Gajar Matar, Roti, Curd, Salad",
+          "snacks": "Veg Hakka Noodles, Hot Tea / Cold Coffee",
+          "dinner": "Veg Manchurian Gravy, Fried Rice, Dal, Roti, Kheer"
+        },
+        "Sunday": {
+          "breakfast": "Stuffed Kulcha, Chana Masala, Sweet Lassi, Tea",
+          "lunch": "Subz Dum Biryani, Mirchi Salan, Pineapple Raita, Papad",
+          "snacks": "Sweet Corn Chaat, Masala Tea",
+          "dinner": "Paneer Butter Masala, Dal Makhani, Garlic Naan, Rice, Brownie"
+        }
+      }
+    }
+  ],
+  "roomTemplates": [
+    {
+      "id": "room-4s",
+      "title": "Standard 4-Seater Room (AC / Non-AC)",
+      "price": "₹70,000 – ₹85,000 / year",
+      "size": "320 sq. ft.",
+      "image": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel-room.webp",
+      "features": [
+        "4 Individual Beds",
+        "4 Study Desks & Chairs",
+        "4 Steel Almirahs",
+        "Attached Balcony & 2 Washrooms"
+      ]
+    },
+    {
+      "id": "room-2s",
+      "title": "Executive 2-Seater AC Room",
+      "price": "₹1,05,000 – ₹1,20,000 / year",
+      "size": "260 sq. ft.",
+      "image": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/girls-hostel-room.webp",
+      "features": [
+        "Split AC & Geyser",
+        "2 Study Workstations",
+        "Attached Modern Washroom",
+        "High-Speed Wi-Fi Router"
+      ]
+    },
+    {
+      "id": "room-apt",
+      "title": "1-Seater / 2-Seater Studio Apartment",
+      "price": "₹1,40,000 – ₹1,75,000 / year",
+      "size": "240 sq. ft. Private Suite",
+      "image": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/boys-hostel-room.webp",
+      "features": [
+        "Private AC Bedroom",
+        "Wooden Wardrobe & Pantry",
+        "Attached En-Suite Bath",
+        "Housekeeping Included"
+      ]
+    }
+  ],
+  "hostels": [
+    {
+      "id": "bh1",
+      "name": "Boys Hostel 1 & 2 (Block 41 & 42)",
+      "type": "Boys",
+      "locationId": "block-41-bh1",
+      "nearestBlocks": "Block 32 CSE (2 mins), Block 37 Library (2 mins)",
+      "warden": "+91 1824-444001",
+      "curfew": "10:00 PM",
+      "feeRange": "₹70,000 - ₹1,10,000 / yr",
+      "mess": "BH-1 Central Mess (Ground Floor)",
+      "facilities": [
+        "Closest to Block 32 CSE",
+        "24x7 Reading Room",
+        "Barber & Stationery Shop",
+        "Badminton Courts"
+      ]
+    },
+    {
+      "id": "bh3",
+      "name": "Boys Hostel 3 & 4 (Block 43 & 44)",
+      "type": "Boys",
+      "locationId": "block-44-bh4",
+      "nearestBlocks": "Block 32 CSE (4 mins), Block 53–55 Mech/Civil (3 mins)",
+      "warden": "+91 1824-444004",
+      "curfew": "10:00 PM",
+      "feeRange": "₹70,000 - ₹1,15,000 / yr",
+      "mess": "BH-4 Mega Dining Hall",
+      "facilities": [
+        "Night Food Court till 1 AM",
+        "In-House Gym",
+        "Cricket Stadium Adjacent",
+        "Automated Laundry"
+      ]
+    },
+    {
+      "id": "bh5",
+      "name": "Boys Hostel 5, 6, 7 & 8 (Block 47 to 50)",
+      "type": "Boys",
+      "locationId": "block-47-48-bh5-6",
+      "nearestBlocks": "Block 55 & 56 (2 mins), E-Rickshaw to Block 32 (4 mins)",
+      "warden": "+91 1824-444006",
+      "curfew": "10:00 PM",
+      "feeRange": "₹68,000 - ₹1,05,000 / yr",
+      "mess": "North Zone Multi-Counter Mess",
+      "facilities": [
+        "Dedicated E-Rickshaw Stand at Gate",
+        "Departmental Store",
+        "Basketball Court",
+        "High-Speed Lifts"
+      ]
+    },
+    {
+      "id": "apt",
+      "name": "Executive Studio Apartments (Block 45 & 46)",
+      "type": "Boys",
+      "locationId": "block-45-46-apt",
+      "nearestBlocks": "Block 51 Sports Complex (1 min), Block 37 Library (3 mins)",
+      "warden": "+91 1824-444020",
+      "curfew": "10:30 PM",
+      "feeRange": "₹1,40,000 - ₹1,75,000 / yr",
+      "mess": "Apartment Executive Dining Lounge",
+      "facilities": [
+        "1/2-Seater AC Private Suite",
+        "Attached Pantry & Bath",
+        "Housekeeping Included",
+        "Next to Olympic Pool"
+      ]
+    },
+    {
+      "id": "gh1",
+      "name": "Girls Hostel 1 & 2 (Block 16 & 17)",
+      "type": "Girls",
+      "locationId": "block-16-17",
+      "nearestBlocks": "Block 14 MSB (1 min), Uni Mall (3 mins), Block 30 (4 mins)",
+      "warden": "+91 1824-444101",
+      "curfew": "08:30 PM",
+      "feeRange": "₹72,000 - ₹1,15,000 / yr",
+      "mess": "GH-1 Central Girls Mess",
+      "facilities": [
+        "Right inside Central Academic Zone",
+        "3-Tier Biometric Security",
+        "In-House Salon & Tuck Shop",
+        "Fitness Studio"
+      ]
+    },
+    {
+      "id": "gh3",
+      "name": "Girls Hostel 3, 4, 5 & 6 (Block 18 to 21)",
+      "type": "Girls",
+      "locationId": "block-20-21",
+      "nearestBlocks": "Block 36 Law (2 mins), Block 37 Library (4 mins), Block 32 CSE (5 mins)",
+      "warden": "+91 1824-444105",
+      "curfew": "08:30 PM",
+      "feeRange": "₹75,000 - ₹1,20,000 / yr",
+      "mess": "GH-4 Executive Dining Hall",
+      "facilities": [
+        "AC Study Lounge",
+        "24x7 Female Medical Assist",
+        "Bakery & Cafe Kiosk",
+        "Near Law Gate & Library"
+      ]
+    }
+  ],
+  "campusEssentials": [
+    {
+      "id": "ess-unimall-fc",
+      "name": "Uni Mall Central Food Court (Domino's, Subway, CCD)",
+      "category": "Food & Cafes",
+      "locationId": "uni-mall",
+      "blockCode": "Uni Mall (GF & 1F)",
+      "timings": "09:00 AM – 09:30 PM",
+      "priceRange": "₹60 – ₹250",
+      "highlights": [
+        "Domino's Pizza & Subway",
+        "Cafe Coffee Day & Belgian Waffle",
+        "South Indian, Chaat & Shake Counters"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/uni-mall.webp"
+    },
+    {
+      "id": "ess-unipolis-kiosks",
+      "name": "Unipolis Open-Air Food Kiosks & Oven Express",
+      "category": "Food & Cafes",
+      "locationId": "unipolis",
+      "blockCode": "Unipolis Plaza",
+      "timings": "08:30 AM – 08:30 PM",
+      "priceRange": "₹30 – ₹150",
+      "highlights": [
+        "Oven Express Bakery & Burgers",
+        "Fresh Fruit Juice & Shake Bar",
+        "Momos, Rolls & Cold Coffee"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/lovely-sweets.webp"
+    },
+    {
+      "id": "ess-nescafe-32",
+      "name": "Block 32 & Block 34 Tech Food Kiosks (Nescafe & Maggi Point)",
+      "category": "Food & Cafes",
+      "locationId": "block-32",
+      "blockCode": "Near Block 32 & 34",
+      "timings": "08:00 AM – 07:00 PM",
+      "priceRange": "₹20 – ₹100",
+      "highlights": [
+        "Hot Coffee, Iced Tea & Maggi",
+        "Grilled Sandwiches & Patties",
+        "Quick Break Spot Between CSE Classes"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/lpuccd.webp"
+    },
+    {
+      "id": "ess-bh3-night",
+      "name": "BH-3 & BH-4 Midnight Food Court (Open Late Night)",
+      "category": "Night Canteens",
+      "locationId": "block-43-bh3",
+      "blockCode": "Block 43 & 44 (BH-3/4)",
+      "timings": "06:00 PM – 01:30 AM",
+      "priceRange": "₹40 – ₹140",
+      "highlights": [
+        "Hot Parathas, Rolls & Manchurian till 1:30 AM",
+        "Cold Coffee, Oreo Shakes & Burgers",
+        "Exam Night Study Fuel for Hostelers"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/hostel-mess.webp"
+    },
+    {
+      "id": "ess-bh5-night",
+      "name": "North Zone Night Tuck Shop (BH-5 to BH-8 Plaza)",
+      "category": "Night Canteens",
+      "locationId": "block-47-48-bh5-6",
+      "blockCode": "Block 47 (BH-5 Courtyard)",
+      "timings": "05:30 PM – 01:00 AM",
+      "priceRange": "₹30 – ₹120",
+      "highlights": [
+        "Tandoori Snacks, Kulcha & Pav Bhaji",
+        "Bakery Items, Milk & Instant Noodles",
+        "Right Inside North Boys Hostel Zone"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/lovely-sweets.webp"
+    },
+    {
+      "id": "ess-gh-tuck",
+      "name": "GH-1 to GH-6 Evening Cafe & Bakery Lounge",
+      "category": "Night Canteens",
+      "locationId": "block-18-19",
+      "blockCode": "Girls Hostel Enclave",
+      "timings": "04:00 PM – 11:30 PM",
+      "priceRange": "₹30 – ₹130",
+      "highlights": [
+        "Pasta, Pizza, Momos & Fresh Pastries",
+        "Fruit Bowls, Juices & Hot Chocolate",
+        "Exclusively Inside Girls Hostel Security Zone"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/lpuccd.webp"
+    },
+    {
+      "id": "ess-atm-gate1",
+      "name": "Main Gate 1 Multi-Bank ATM Hub (SBI, PNB, ICICI, HDFC)",
+      "category": "ATMs & Banks",
+      "locationId": "gate-1",
+      "blockCode": "Main Gate 1",
+      "timings": "24x7 Open",
+      "priceRange": "Cash Withdrawal & Deposit",
+      "highlights": [
+        "4+ 24x7 ATMs with Cash Deposit Machine",
+        "High Security Guarded Booths",
+        "Right at Main Campus Entrance"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/banking-services.webp"
+    },
+    {
+      "id": "ess-banks-unimall",
+      "name": "Campus Bank Branches & ATMs (SBI, PNB, Karur Vysya, ICICI)",
+      "category": "ATMs & Banks",
+      "locationId": "uni-mall",
+      "blockCode": "Uni Mall & Block 30",
+      "timings": "10:00 AM – 04:00 PM (ATMs 24x7)",
+      "priceRange": "Full Banking & Education Loans",
+      "highlights": [
+        "New Student Bank Account Opening",
+        "Education Loan & Demand Draft Counter",
+        "24x7 ATMs Outside Uni Mall & BH-3"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/banking-services.webp"
+    },
+    {
+      "id": "ess-print-32",
+      "name": "Block 32 & Central Library Printout, Binding & Stationery Hub",
+      "category": "Printout & Stationery",
+      "locationId": "block-37",
+      "blockCode": "Block 37 & Block 32 GF",
+      "timings": "08:30 AM – 08:00 PM",
+      "priceRange": "₹2/page Print • Lab Manuals",
+      "highlights": [
+        "Instant Color/B&W Printout & Spiral Binding",
+        "Lab Manuals, Practical Files & Engineering Drawing Sheets",
+        "Calculators, Pens, Notebooks & USB Drives"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/utility-center.webp"
+    },
+    {
+      "id": "ess-whsmith",
+      "name": "Uni Mall Bookstore, WHSmith & Supermarket",
+      "category": "Printout & Stationery",
+      "locationId": "uni-mall",
+      "blockCode": "Uni Mall Ground Floor",
+      "timings": "09:00 AM – 09:00 PM",
+      "priceRange": "MRP • Student Discounts",
+      "highlights": [
+        "Textbooks, Reference Books & Competitive Guides",
+        "Daily Groceries, Toiletries, Mattresses & Buckets",
+        "Laptop Accessories, Earphones & Chargers"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/uni-mall.webp"
+    },
+    {
+      "id": "ess-courier-pickup",
+      "name": "Amazon, Flipkart & Myntra Student Parcel Pickup Zone",
+      "category": "Courier & Daily Services",
+      "locationId": "gate-1",
+      "blockCode": "Near Gate 1 & Law Gate",
+      "timings": "10:00 AM – 06:30 PM",
+      "priceRange": "Online Delivery & Speed Post",
+      "highlights": [
+        "Dedicated E-Commerce Delivery Collection Point",
+        "India Post Office & BlueDart / Delhivery Desk",
+        "Keep OTP Ready Before Reaching Gate"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/utility-center.webp"
+    },
+    {
+      "id": "ess-laundry-salon",
+      "name": "Campus Automated Laundry, Salon & Optical Stores",
+      "category": "Courier & Daily Services",
+      "locationId": "uni-mall",
+      "blockCode": "Inside All Hostels & Uni Mall",
+      "timings": "09:00 AM – 08:00 PM",
+      "priceRange": "Package / Per-Wash Rates",
+      "highlights": [
+        "In-Hostel Automated Washing & Steam Ironing",
+        "Men's Barber Shop in BH-1/BH-4 & Ladies Salon in GH/Uni Mall",
+        "Mobile & Laptop Repair Desk at Uni Mall"
+      ],
+      "photo": "https://www.lpu.in/lpu-assets/images/about-lpu/infrastructure/large/laundry-service.webp"
+    }
+  ],
+  "campusHelplines": [
+    {
+      "id": "help-hospital",
+      "title": "24x7 Uni Hospital & Emergency Ambulance",
+      "category": "Medical & Emergency",
+      "phone": "01824-501227",
+      "altPhone": "01824-444079",
+      "officeBlock": "Uni Hospital (Block 28B - Ground Floor)",
+      "locationId": "uni-hospital",
+      "availability": "24x7 Emergency • Free OPD",
+      "description": "Call immediately for campus ambulance, medical emergency, doctor consultation, or 24-hour pharmacy."
+    },
+    {
+      "id": "help-security",
+      "title": "Chief Security Officer & Main Gate Control Room",
+      "category": "Medical & Emergency",
+      "phone": "01824-444050",
+      "altPhone": "01824-404404",
+      "officeBlock": "Main Gate 1 Security Complex",
+      "locationId": "gate-1",
+      "availability": "24x7 On-Campus Patrol",
+      "description": "24-hour campus security control room, night assistance, emergency escort, and gate entry queries."
+    },
+    {
+      "id": "help-antiragging",
+      "title": "Anti-Ragging & Student Safety Helpline",
+      "category": "Medical & Emergency",
+      "phone": "01824-444234",
+      "altPhone": "1800-180-5522",
+      "officeBlock": "Block 13 (DSW) & Block 30",
+      "locationId": "block-13",
+      "availability": "24x7 Confidential Support",
+      "description": "Zero-tolerance anti-ragging squad and confidential student safety cell."
+    },
+    {
+      "id": "help-dsw",
+      "title": "Division of Student Welfare (Outpass, Clubs & Lost/Found)",
+      "category": "Academic & Admin",
+      "phone": "01824-444090",
+      "altPhone": "dsw@lpu.co.in",
+      "officeBlock": "Block 13 (Ground & 1st Floor)",
+      "locationId": "block-13",
+      "availability": "09:00 AM – 05:30 PM",
+      "description": "Contact for hostel leave/outpass escalations, lost & found items, Duty Leave, and student club events."
+    },
+    {
+      "id": "help-exam-ums",
+      "title": "Examination Cell, ID Card & UMS Technical Helpdesk",
+      "category": "Academic & Admin",
+      "phone": "01824-444500",
+      "altPhone": "ums.support@lpu.co.in",
+      "officeBlock": "Block 29 (Ground & 1st Floor)",
+      "locationId": "block-29",
+      "availability": "09:00 AM – 05:30 PM",
+      "description": "Visit or call for UMS password reset, duplicate Student ID card, exam seating, and transcript requests."
+    },
+    {
+      "id": "help-admissions",
+      "title": "Admissions, Fee Counter & Scholarship Helpdesk",
+      "category": "Academic & Admin",
+      "phone": "01824-517000",
+      "altPhone": "admissions@lpu.co.in",
+      "officeBlock": "Block 30 (Ground & 1st Floor)",
+      "locationId": "block-30",
+      "availability": "09:00 AM – 06:00 PM",
+      "description": "Central desk for tuition/hostel fee receipts, education loan documents, and LPUNEST scholarships."
+    },
+    {
+      "id": "help-bh-warden",
+      "title": "Boys Hostels Chief Warden Control Desk (BH-1 to BH-8)",
+      "category": "Hostel Wardens",
+      "phone": "01824-444001",
+      "altPhone": "01824-444004",
+      "officeBlock": "Block 41 (BH-1) & Block 44 (BH-4)",
+      "locationId": "block-41-bh1",
+      "availability": "24x7 Hostel Support",
+      "description": "Contact for room maintenance (electrician/plumber/Wi-Fi), biometric attendance, and night medical transit."
+    },
+    {
+      "id": "help-gh-warden",
+      "title": "Girls Hostels Chief Warden Control Desk (GH-1 to GH-6)",
+      "category": "Hostel Wardens",
+      "phone": "01824-444101",
+      "altPhone": "01824-444105",
+      "officeBlock": "Block 16 (GH-1) & Block 19 (GH-4)",
+      "locationId": "block-16-17",
+      "availability": "24x7 Female Warden Support",
+      "description": "Dedicated 24x7 helpline for Girls Hostel residents, outpass approval, room repairs, and female security."
+    },
+    {
+      "id": "help-placements",
+      "title": "Division of Career Services (Placements & Internships)",
+      "category": "Academic & Admin",
+      "phone": "01824-444310",
+      "altPhone": "placements@lpu.co.in",
+      "officeBlock": "Block 34 (1st & 2nd Floor)",
+      "locationId": "block-34",
+      "availability": "09:00 AM – 05:30 PM",
+      "description": "Campus placement drives, internship NOC letters, PEP classes, and corporate interview coordination."
+    }
+  ]
+};
+</script>
+  <script>
+/* === PART 3: FRONTEND APPLICATION LOGIC, GPS MAP & ROOM DECODER (app.js) === */
+let campusData = {
+  campusLocations: [],
+  quickHelpFinder: [],
+  campusEssentials: [],
+  campusHelplines: [],
+  messes: [],
+  roomTemplates: [],
+  hostels: []
+};
+
+let activeTab = 'navigator';
+let selectedLocationId = 'block-32';
+let mapCategoryFilter = 'all';
+let blockDirCategory = 'all';
+let essentialsCategory = 'all';
+let helplineFilter = 'all';
+let hostelFilter = 'all';
+let selectedMessId = null;
+let selectedDay = 'Monday';
+
+// Leaflet Map Instances
+let map = null;
+let streetTileLayer = null;
+let satTileLayer = null;
+let markersMap = {};
+let routeLineLayer = null;
+
+const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+// Complete mapping of ALL LPU Block numbers (1 to 58) to exact location IDs
+const BLOCK_NUMBER_MAP = {
+  '1': 'block-1-2',
+  '2': 'block-1-2',
+  '3': 'block-3',
+  '4': 'block-4-5',
+  '5': 'block-4-5',
+  '6': 'block-6',
+  '7': 'block-7-8',
+  '8': 'block-7-8',
+  '9': 'block-9-10',
+  '10': 'block-9-10',
+  '11': 'block-11-12',
+  '12': 'block-11-12',
+  '13': 'block-13',
+  '14': 'block-14',
+  '15': 'block-15',
+  '16': 'block-16-17',
+  '17': 'block-16-17',
+  '18': 'block-18-19',
+  '19': 'block-18-19',
+  '20': 'block-20-21',
+  '21': 'block-20-21',
+  '22': 'block-22-24',
+  '23': 'block-22-24',
+  '24': 'block-22-24',
+  '25': 'block-25',
+  '26': 'block-26',
+  '27': 'block-27',
+  '28': 'block-28',
+  '29': 'block-29',
+  '30': 'block-30',
+  '31': 'block-31',
+  '32': 'block-32',
+  '33': 'block-33',
+  '34': 'block-34',
+  '35': 'block-35',
+  '36': 'block-36',
+  '37': 'block-37',
+  '38': 'block-38',
+  '39': 'block-39-40',
+  '40': 'block-39-40',
+  '41': 'block-41-bh1',
+  '42': 'block-42-bh2',
+  '43': 'block-43-bh3',
+  '44': 'block-44-bh4',
+  '45': 'block-45-46-apt',
+  '46': 'block-45-46-apt',
+  '47': 'block-47-48-bh5-6',
+  '48': 'block-47-48-bh5-6',
+  '49': 'block-49-50-bh7-8',
+  '50': 'block-49-50-bh7-8',
+  '51': 'block-51-sports',
+  '52': 'block-52-robopark',
+  '53': 'block-53-54',
+  '54': 'block-53-54',
+  '55': 'block-55',
+  '56': 'block-56',
+  '57': 'block-57-58',
+  '58': 'block-57-58'
+};
+
+document.addEventListener('DOMContentLoaded', async () => {
+  initThemeToggle();
+  const todayIdx = new Date().getDay();
+  selectedDay = DAYS[todayIdx === 0 ? 6 : todayIdx - 1];
+
+  await loadAllCampusData();
+});
+
+// ===================================================================
+// 1. SEPARATE TAB SWITCHING
+// ===================================================================
+function openTab(tabName) {
+  activeTab = tabName;
+
+  document.querySelectorAll('.tab-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.tab === tabName);
+  });
+
+  document.querySelectorAll('.tab-page').forEach((sec) => {
+    sec.classList.toggle('active', sec.id === `page-${tabName}`);
+  });
+
+  if (tabName === 'navigator' && map) {
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 100);
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===================================================================
+// 2. MULTI-THEME SWITCHER (ROYAL BLUE / LPU ORANGE / EMERALD / DARK)
+// ===================================================================
+const THEME_ORDER = ['blue', 'orange', 'green', 'dark'];
+const THEME_META = {
+  blue: { icon: '🔵', label: 'Theme: Blue' },
+  orange: { icon: '🟠', label: 'Theme: LPU Orange' },
+  green: { icon: '🟢', label: 'Theme: Emerald' },
+  dark: { icon: '🌙', label: 'Theme: Dark' }
+};
+
+function initThemeToggle() {
+  const html = document.documentElement;
+  let saved = localStorage.getItem('lpu_nav_theme') || 'blue';
+  if (!THEME_META[saved]) saved = 'blue';
+  html.setAttribute('data-theme', saved);
+  syncThemeButton(saved);
+
+  document.getElementById('themeToggleBtn').addEventListener('click', () => {
+    const current = html.getAttribute('data-theme') || 'blue';
+    const idx = THEME_ORDER.indexOf(current);
+    const next = THEME_ORDER[(idx + 1) % THEME_ORDER.length];
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('lpu_nav_theme', next);
+    syncThemeButton(next);
+  });
+}
+
+function syncThemeButton(theme) {
+  const meta = THEME_META[theme] || THEME_META.blue;
+  document.getElementById('themeIcon').textContent = meta.icon;
+  document.getElementById('themeLabel').textContent = meta.label;
+}
+
+// ===================================================================
+// 3. LOAD DATA & INITIALIZE MODULES (WORKS WITH SERVER OR STANDALONE)
+// ===================================================================
+async function loadAllCampusData() {
+  try {
+    if (window.location.protocol !== 'file:') {
+      const res = await fetch('/api/data');
+      if (res.ok) {
+        campusData = await res.json();
+      } else if (window.PERMANENT_CAMPUS_DATA) {
+        campusData = window.PERMANENT_CAMPUS_DATA;
+      }
+    } else if (window.PERMANENT_CAMPUS_DATA) {
+      campusData = window.PERMANENT_CAMPUS_DATA;
+    }
+  } catch (err) {
+    if (window.PERMANENT_CAMPUS_DATA) {
+      campusData = window.PERMANENT_CAMPUS_DATA;
+    }
+  }
+
+  if (campusData.messes && campusData.messes.length > 0) {
+    selectedMessId = campusData.messes[0].id;
+  }
+
+  initRouteSelectors();
+  renderQuickHelpPills();
+  initCampusMap();
+  selectCampusLocation('block-32', false);
+  calculateCampusRoute();
+
+  renderBlocksDirectory();
+  renderEssentialsSection();
+  renderHostelsSection();
+  renderMessSection();
+  renderHelplinesSection();
+}
+
+// ===================================================================
+// 4. TAB 1: CAMPUS NAVIGATOR, ROOM CODE DECODER & ROUTE CALCULATOR
+// ===================================================================
+function initRouteSelectors() {
+  const fromSel = document.getElementById('routeFromSelect');
+  const toSel = document.getElementById('routeToSelect');
+
+  const optionsHtml = campusData.campusLocations
+    .map((loc) => `<option value="${loc.id}">${loc.code} — ${loc.name}</option>`)
+    .join('');
+
+  fromSel.innerHTML = optionsHtml;
+  toSel.innerHTML = optionsHtml;
+
+  fromSel.value = 'gate-1';
+  toSel.value = 'block-32';
+}
+
+function swapRoutePoints() {
+  const fromSel = document.getElementById('routeFromSelect');
+  const toSel = document.getElementById('routeToSelect');
+  const temp = fromSel.value;
+  fromSel.value = toSel.value;
+  toSel.value = temp;
+  calculateCampusRoute();
+}
+
+function renderQuickHelpPills() {
+  const container = document.getElementById('quickHelpPills');
+  if (!campusData.quickHelpFinder) return;
+
+  container.innerHTML = campusData.quickHelpFinder
+    .map(
+      (item) => `
+      <button class="help-chip" onclick="jumpToDestination('${item.locationId}')">
+        ${item.task} → <strong>${item.blockCode}</strong>
+      </button>
+    `
+    )
+    .join('');
+}
+
+function jumpToDestination(locationId) {
+  openTab('navigator');
+  const toSel = document.getElementById('routeToSelect');
+  if (toSel) {
+    toSel.value = locationId;
+  }
+  selectCampusLocation(locationId, true);
+  calculateCampusRoute();
+}
+
+function handleQuickMapSearch(query) {
+  const dropdown = document.getElementById('quickSearchDropdown');
+  const raw = (query || '').trim();
+  const q = raw.toLowerCase();
+
+  if (!q) {
+    dropdown.classList.add('hidden');
+    return;
+  }
+
+  let html = '';
+
+  // 1. Check if user typed an LPU Timetable Room Code like "32-405", "14-202", "55-103"
+  const roomMatch = raw.match(/^(?:block\s*)?(\d{1,2})\s*[-/\s]\s*(\d{3})$/i);
+  if (roomMatch) {
+    const blockNum = roomMatch[1];
+    const roomPart = roomMatch[2];
+    const floorDigit = roomPart.charAt(0);
+    const roomNo = roomPart.slice(1);
+    const floorText =
+      floorDigit === '0'
+        ? 'Ground Floor'
+        : floorDigit === '1'
+        ? '1st Floor'
+        : floorDigit === '2'
+        ? '2nd Floor'
+        : floorDigit === '3'
+        ? '3rd Floor'
+        : `${floorDigit}th Floor`;
+
+    const locId = BLOCK_NUMBER_MAP[blockNum];
+    const loc = campusData.campusLocations.find((l) => l.id === locId);
+
+    if (loc) {
+      html += `
+        <div class="search-result-item" style="background:var(--emerald-tint)" onclick="selectSearchResult('${loc.id}')">
+          <div>
+            <strong>🎓 Room ${blockNum}-${roomPart} Decoded → ${loc.code} (${floorText}, Room #${roomNo})</strong>
+            <div style="font-size:0.78rem;color:var(--text-muted)">📍 ${loc.name} • ${loc.landmark}</div>
+          </div>
+          <span>Show Route →</span>
+        </div>
+      `;
+    }
+  }
+
+  // 2. Check if user typed a bare block number like "32" or "Block 56"
+  const bareBlockMatch = raw.match(/^(?:block\s*)?(\d{1,2})$/i);
+  if (bareBlockMatch && BLOCK_NUMBER_MAP[bareBlockMatch[1]]) {
+    const locId = BLOCK_NUMBER_MAP[bareBlockMatch[1]];
+    const exactLoc = campusData.campusLocations.find((l) => l.id === locId);
+    if (exactLoc) {
+      html += `
+        <div class="search-result-item" onclick="selectSearchResult('${exactLoc.id}')">
+          <div>
+            <strong>${exactLoc.code} — ${exactLoc.name}</strong>
+            <div style="font-size:0.77rem;color:var(--text-muted)">📍 ${exactLoc.landmark}</div>
+          </div>
+          <span>Show Route →</span>
+        </div>
+      `;
+    }
+  }
+
+  // 3. Standard keyword search across all 49 locations
+  const matches = campusData.campusLocations.filter(
+    (loc) =>
+      loc.code.toLowerCase().includes(q) ||
+      loc.name.toLowerCase().includes(q) ||
+      loc.landmark.toLowerCase().includes(q) ||
+      loc.inside.some((line) => line.toLowerCase().includes(q))
+  );
+
+  html += matches
+    .slice(0, 8)
+    .map(
+      (loc) => `
+      <div class="search-result-item" onclick="selectSearchResult('${loc.id}')">
+        <div>
+          <strong>${loc.code} — ${loc.name}</strong>
+          <div style="font-size:0.77rem;color:var(--text-muted)">📍 ${loc.landmark}</div>
+        </div>
+        <span>Show Route →</span>
+      </div>
+    `
+    )
+    .join('');
+
+  if (!html) {
+    dropdown.innerHTML = `<div class="search-result-item"><span>No matching block found. Try "32-405", "Block 32", "Admission", "CSE", or "Hospital".</span></div>`;
+    dropdown.classList.remove('hidden');
+    return;
+  }
+
+  dropdown.innerHTML = html;
+  dropdown.classList.remove('hidden');
+}
+
+function selectSearchResult(locationId) {
+  document.getElementById('quickSearchDropdown').classList.add('hidden');
+  document.getElementById('quickMapSearch').value = '';
+  jumpToDestination(locationId);
+}
+
+// Haversine distance in meters
+function getDistanceMeters(lat1, lon1, lat2, lon2) {
+  const R = 6371000;
+  const toRad = (deg) => (deg * Math.PI) / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+  return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) * 1.25);
+}
+
+function getShortPinCode(loc) {
+  const c = loc.code || '';
+  if (c.startsWith('Block ')) return 'B' + c.replace('Block ', '').replace(/\s+/g, '');
+  if (c.includes('Main Gate 1')) return 'Gate 1';
+  if (c.includes('Law Gate')) return 'Gate 2';
+  if (c.includes('North Gate')) return 'Gate 3';
+  if (c.includes('BH-1')) return 'BH 1-4';
+  if (c.includes('BH-5')) return 'BH 5-8';
+  if (c.includes('GH-1')) return 'GH 1-4';
+  if (c.includes('GH-5')) return 'GH 5-6';
+  if (c.includes('Apartments')) return 'Studio Apt';
+  return c.length > 10 ? c.slice(0, 9) : c;
+}
+
+let liveWalkTimer = null;
+let liveWalkerMarker = null;
+let currentRoutePoints = [];
+let currentRouteSteps = [];
+let realGpsWatchId = null;
+
+function buildCampusSpineWaypoints(fromLoc, toLoc, distMeters) {
+  if (fromLoc.id === toLoc.id || distMeters < 120) {
+    return [
+      [fromLoc.lat, fromLoc.lng],
+      [toLoc.lat, toLoc.lng]
+    ];
+  }
+  const spineLng = 75.7048;
+  const p1 = [fromLoc.lat, fromLoc.lng];
+  const p2 = [fromLoc.lat + (toLoc.lat - fromLoc.lat) * 0.2, (fromLoc.lng + spineLng) / 2];
+  const p3 = [fromLoc.lat + (toLoc.lat - fromLoc.lat) * 0.5, spineLng];
+  const p4 = [fromLoc.lat + (toLoc.lat - fromLoc.lat) * 0.8, (toLoc.lng + spineLng) / 2];
+  const p5 = [toLoc.lat, toLoc.lng];
+  return [p1, p2, p3, p4, p5];
+}
+
+// Interpolate dense sub-points along a polyline so the live blue GPS dot glides smoothly
+function interpolateDensePath(coords, stepsPerSegment = 14) {
+  if (!coords || coords.length < 2) return coords || [];
+  const dense = [];
+  for (let i = 0; i < coords.length - 1; i++) {
+    const [lat1, lng1] = coords[i];
+    const [lat2, lng2] = coords[i + 1];
+    for (let s = 0; s < stepsPerSegment; s++) {
+      const t = s / stepsPerSegment;
+      dense.push([lat1 + (lat2 - lat1) * t, lng1 + (lng2 - lng1) * t]);
+    }
+  }
+  dense.push(coords[coords.length - 1]);
+  return dense;
+}
+
+async function fetchOsrmCampusRoute(fromLoc, toLoc) {
+  if (fromLoc.id === toLoc.id) return null;
+  try {
+    const url = `https://router.project-osrm.org/route/v1/foot/${fromLoc.lng},${fromLoc.lat};${toLoc.lng},${toLoc.lat}?overview=full&geometries=geojson&steps=true`;
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (data.code !== 'Ok' || !data.routes || !data.routes.length) return null;
+    const r = data.routes[0];
+    const latLngs = r.geometry.coordinates.map(([lng, lat]) => [lat, lng]);
+    // Prepend exact start building pin and append exact destination building pin
+    latLngs.unshift([fromLoc.lat, fromLoc.lng]);
+    latLngs.push([toLoc.lat, toLoc.lng]);
+    const steps = (r.legs && r.legs[0] && r.legs[0].steps) || [];
+    return {
+      latLngs,
+      distanceMeters: Math.round(r.distance || getDistanceMeters(fromLoc.lat, fromLoc.lng, toLoc.lat, toLoc.lng)),
+      steps
+    };
+  } catch (e) {
+    return null;
+  }
+}
+
+async function calculateCampusRoute() {
+  const fromId = document.getElementById('routeFromSelect').value;
+  const toId = document.getElementById('routeToSelect').value;
+
+  const fromLoc = campusData.campusLocations.find((l) => l.id === fromId);
+  const toLoc = campusData.campusLocations.find((l) => l.id === toId);
+  if (!fromLoc || !toLoc) return;
+
+  stopLiveRouteSimulation();
+  selectCampusLocation(toLoc.id, false);
+
+  let distMeters = fromLoc.id === toLoc.id ? 0 : getDistanceMeters(fromLoc.lat, fromLoc.lng, toLoc.lat, toLoc.lng);
+  let waypoints = buildCampusSpineWaypoints(fromLoc, toLoc, distMeters);
+
+  // Fetch real street/footpath geometry from OSRM
+  const osrmData = await fetchOsrmCampusRoute(fromLoc, toLoc);
+  if (osrmData && osrmData.latLngs && osrmData.latLngs.length >= 2) {
+    waypoints = osrmData.latLngs;
+    distMeters = osrmData.distanceMeters;
+  }
+
+  const walkMins = distMeters === 0 ? 0 : Math.max(1, Math.round(distMeters / 75));
+  const erickshawMins = distMeters === 0 ? 0 : Math.max(1, Math.round(distMeters / 220));
+
+  currentRoutePoints = interpolateDensePath(waypoints, 8);
+  currentRouteSteps = [
+    { icon: '🟢', text: `Start at ${fromLoc.code} — ${fromLoc.name} (${fromLoc.landmark})` },
+    { icon: '⬆️', text: `Follow LPU Campus Road toward ${toLoc.zone} (${distMeters} m)` },
+    { icon: '↱', text: `Pass near ${toLoc.landmark} via ${toLoc.nearestGate}` },
+    { icon: '🏁', text: `Arrive at ${toLoc.code} — ${toLoc.name}` }
+  ];
+
+  updateGmapHud(
+    '⬆️',
+    fromLoc.id === toLoc.id
+      ? `At ${toLoc.code} — ${toLoc.name}`
+      : `Head toward ${toLoc.code} (${toLoc.name}) via ${toLoc.zone}`,
+    `🚶 ${walkMins} min (${distMeters} m) • 🛺 ${erickshawMins} min E-Rickshaw (₹10) • Landmark: ${toLoc.landmark}`
+  );
+
+  const stepGuide =
+    fromLoc.id === toLoc.id
+      ? `You are already at <strong>${toLoc.code} — ${toLoc.name}</strong> (${toLoc.landmark}).`
+      : `1. Start at <strong>🟢 ${fromLoc.code}</strong> → 2. Follow Live Campus Road toward <strong>${toLoc.zone}</strong> (${toLoc.landmark}) → 3. Arrive at <strong>🏁 ${toLoc.code} — ${toLoc.name}</strong>`;
+
+  const banner = document.getElementById('routeResultBanner');
+  banner.innerHTML = `
+    <div class="route-main-info">
+      <div class="route-title-line">
+        <h3>🧭 Live Route: ${fromLoc.code} ➔ ${toLoc.code}</h3>
+        <span class="route-badge">🚶 ${walkMins} min (${distMeters} m)</span>
+        <span class="route-badge amber">🛺 ${erickshawMins} min E-Rickshaw (₹10)</span>
+      </div>
+      <p class="route-steps-text">${stepGuide}</p>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn-primary" onclick="toggleLiveRouteSimulation()">
+        ▶️ Start Live Navigation
+      </button>
+      <a
+        href="https://www.google.com/maps/dir/?api=1&origin=${fromLoc.lat},${fromLoc.lng}&destination=${toLoc.lat},${toLoc.lng}&travelmode=walking"
+        target="_blank"
+        rel="noopener"
+        class="btn-outline-emerald"
+        style="text-decoration:none;display:inline-flex;align-items:center;padding:9px 14px;border-radius:10px;font-weight:700;font-size:0.84rem"
+      >
+        Google Maps App ↗
+      </a>
+    </div>
+  `;
+
+  if (map) {
+    if (routeLineLayer) {
+      map.removeLayer(routeLineLayer);
+    }
+
+    // Google Maps Dark Blue Casing
+    const outerCasing = L.polyline(waypoints, {
+      color: '#185abc',
+      weight: 10,
+      opacity: 0.9,
+      lineCap: 'round',
+      lineJoin: 'round'
+    });
+
+    // Google Maps Primary Live Blue Route Line
+    const innerBlue = L.polyline(waypoints, {
+      color: '#1a73e8',
+      weight: 6,
+      opacity: 1,
+      lineCap: 'round',
+      lineJoin: 'round'
+    });
+
+    // Animated Directional Flow Line
+    const pulseLine = L.polyline(waypoints, {
+      color: '#ffffff',
+      weight: 2.5,
+      opacity: 0.85,
+      dashArray: '8, 14'
+    });
+
+    const startBadge = L.marker([fromLoc.lat, fromLoc.lng], {
+      icon: L.divIcon({
+        className: '',
+        html: `<div class="route-endpoint-badge start-badge">🟢 ${getShortPinCode(fromLoc)}</div>`
+      }),
+      zIndexOffset: 1000
+    });
+
+    const endBadge = L.marker([toLoc.lat, toLoc.lng], {
+      icon: L.divIcon({
+        className: '',
+        html: `<div class="route-endpoint-badge end-badge">🏁 ${getShortPinCode(toLoc)}</div>`
+      }),
+      zIndexOffset: 1001
+    });
+
+    // Floating Google Maps White ETA Callout Bubble on the midpoint of the road route
+    const midCoord = waypoints[Math.floor(waypoints.length / 2)];
+    const etaCallout = L.marker(midCoord, {
+      icon: L.divIcon({
+        className: '',
+        html: `<div class="gmap-eta-bubble">🚶 <strong>${walkMins} min</strong> <span>(${distMeters} m)</span></div>`
+      }),
+      zIndexOffset: 1002
+    });
+
+    // Live Pulsing Google Maps Blue GPS Dot
+    liveWalkerMarker = L.marker([fromLoc.lat, fromLoc.lng], {
+      icon: L.divIcon({
+        className: '',
+        html: `<div class="gmap-live-blue-dot" title="Live GPS Position"></div>`
+      }),
+      zIndexOffset: 1500
+    });
+
+    routeLineLayer = L.layerGroup([outerCasing, innerBlue, pulseLine, startBadge, endBadge, etaCallout, liveWalkerMarker]).addTo(map);
+
+    map.fitBounds(L.latLngBounds(waypoints), { padding: [65, 65], maxZoom: 17 });
+  }
+}
+
+function updateGmapHud(icon, stepText, subText) {
+  const iconEl = document.getElementById('gmapTurnIcon');
+  const stepEl = document.getElementById('gmapNavStep');
+  const subEl = document.getElementById('gmapNavSub');
+  if (iconEl) iconEl.textContent = icon;
+  if (stepEl) stepEl.textContent = stepText;
+  if (subEl) subEl.textContent = subText;
+}
+
+function stopLiveRouteSimulation() {
+  if (liveWalkTimer) {
+    clearInterval(liveWalkTimer);
+    liveWalkTimer = null;
+  }
+  const btn = document.getElementById('liveWalkBtn');
+  if (btn) {
+    btn.textContent = '▶️ Start Live Walk';
+    btn.classList.remove('active-sim');
+  }
+}
+
+function toggleLiveRouteSimulation() {
+  if (liveWalkTimer) {
+    stopLiveRouteSimulation();
+    return;
+  }
+  if (!currentRoutePoints || currentRoutePoints.length < 2 || !liveWalkerMarker) return;
+
+  const btn = document.getElementById('liveWalkBtn');
+  if (btn) {
+    btn.textContent = '⏹️ Stop Live Walk';
+    btn.classList.add('active-sim');
+  }
+
+  let idx = 0;
+  const total = currentRoutePoints.length;
+
+  liveWalkTimer = setInterval(() => {
+    if (idx >= total) {
+      stopLiveRouteSimulation();
+      const step = currentRouteSteps[currentRouteSteps.length - 1];
+      if (step) updateGmapHud('🏁', step.text, 'You have reached your destination!');
+      return;
+    }
+
+    const pt = currentRoutePoints[idx];
+    liveWalkerMarker.setLatLng(pt);
+
+    const progress = idx / total;
+    if (progress < 0.25 && currentRouteSteps[0]) {
+      updateGmapHud('🟢', currentRouteSteps[0].text, `Live GPS Navigation • ${Math.round((1 - progress) * 100)}% distance remaining`);
+    } else if (progress < 0.65 && currentRouteSteps[1]) {
+      updateGmapHud('⬆️', currentRouteSteps[1].text, `Walking along LPU Campus Avenue • ${Math.round((1 - progress) * 100)}% remaining`);
+    } else if (progress < 0.92 && currentRouteSteps[2]) {
+      updateGmapHud('↱', currentRouteSteps[2].text, `Approaching destination block • Almost there`);
+    } else if (currentRouteSteps[3]) {
+      updateGmapHud('🏁', currentRouteSteps[3].text, `Arriving at destination`);
+    }
+
+    idx++;
+  }, 110);
+}
+
+function toggleRealGpsTracking() {
+  const btn = document.getElementById('realGpsTrackBtn');
+  if (realGpsWatchId !== null) {
+    navigator.geolocation.clearWatch(realGpsWatchId);
+    realGpsWatchId = null;
+    if (btn) btn.textContent = '📡 Live GPS';
+    return;
+  }
+
+  if (!navigator.geolocation) {
+    alert('Geolocation is not supported on this browser.');
+    return;
+  }
+
+  if (btn) btn.textContent = '🔴 GPS Active';
+  realGpsWatchId = navigator.geolocation.watchPosition(
+    (pos) => {
+      const { latitude, longitude } = pos.coords;
+      const distToLpu = getDistanceMeters(latitude, longitude, 31.2552, 75.7048);
+      if (distToLpu < 10000 && liveWalkerMarker && map) {
+        liveWalkerMarker.setLatLng([latitude, longitude]);
+        map.panTo([latitude, longitude]);
+        updateGmapHud('📡', 'Tracking Your Live Campus GPS Position', `Coordinates: ${latitude.toFixed(5)}, ${longitude.toFixed(5)}`);
+      } else {
+        // Outside campus: demonstrate live GPS route movement along LPU road
+        toggleLiveRouteSimulation();
+      }
+    },
+    () => {
+      toggleLiveRouteSimulation();
+    },
+    { enableHighAccuracy: true }
+  );
+}
+
+function initCampusMap() {
+  const mapEl = document.getElementById('campusMap');
+  if (!mapEl) return;
+
+  map = L.map('campusMap', {
+    center: [31.2552, 75.7048],
+    zoom: 16,
+    zoomControl: true
+  });
+
+  // High-definition Google Maps Road Layer (shows real LPU buildings, internal roads & block labels)
+  streetTileLayer = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    attribution: '© Google Maps • LPU Campus Navigator'
+  }).addTo(map);
+
+  // High-definition Google Satellite Hybrid Layer (Satellite imagery + real building labels)
+  satTileLayer = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    attribution: '© Google Satellite HD • LPU Campus Navigator'
+  });
+
+  renderMapPinsAndSidebar();
+}
+
+function resetCampusMapView() {
+  if (!map || !campusData.campusLocations.length) return;
+  const coords = campusData.campusLocations.map((l) => [l.lat, l.lng]);
+  map.fitBounds(L.latLngBounds(coords), { padding: [35, 35], maxZoom: 16 });
+}
+
+function setMapLayer(mode) {
+  if (!map) return;
+  document.getElementById('btnStreet').classList.toggle('active', mode === 'street');
+  document.getElementById('btnSat').classList.toggle('active', mode === 'sat');
+
+  if (mode === 'sat') {
+    map.removeLayer(streetTileLayer);
+    satTileLayer.addTo(map);
+  } else {
+    map.removeLayer(satTileLayer);
+    streetTileLayer.addTo(map);
+  }
+}
+
+function filterMapMarkers(category, btnEl) {
+  mapCategoryFilter = category;
+  document.querySelectorAll('#mapCategoryPills .cat-pill').forEach((b) => b.classList.remove('active'));
+  if (btnEl) btnEl.classList.add('active');
+  renderMapPinsAndSidebar();
+}
+
+function renderMapPinsAndSidebar() {
+  if (!map) return;
+
+  Object.values(markersMap).forEach((m) => map.removeLayer(m));
+  markersMap = {};
+
+  const filtered = campusData.campusLocations.filter(
+    (loc) => mapCategoryFilter === 'all' || loc.category === mapCategoryFilter
+  );
+
+  document.getElementById('mapListCount').textContent = `${filtered.length} Locations`;
+
+  filtered.forEach((loc) => {
+    let catClass = 'cat-Academic';
+    if (loc.category === 'Hostels') catClass = 'cat-Hostels';
+    else if (loc.category === 'Admin & Support') catClass = 'cat-Admin';
+    else if (loc.category === 'Gates & Transit') catClass = 'cat-Gates';
+    else if (loc.category === 'Facilities & Mall') catClass = 'cat-Mall';
+
+    const isSelected = loc.id === selectedLocationId ? 'active-pin' : '';
+    const shortCode = getShortPinCode(loc);
+
+    const icon = L.divIcon({
+      className: '',
+      html: `<div class="lpu-map-pin ${catClass} ${isSelected}" title="${loc.code} — ${loc.name}">${shortCode}</div>`
+    });
+
+    const marker = L.marker([loc.lat, loc.lng], { icon }).addTo(map);
+
+    const popupHtml = `
+      <div class="lpu-popup-card">
+        <img src="${loc.photo}" alt="${loc.name}" />
+        <div class="lpu-popup-body">
+          <span class="lpu-popup-tag">${loc.code} • ${loc.zone}</span>
+          <strong>${loc.name}</strong>
+          <p>📍 ${loc.landmark}</p>
+          <button onclick="document.getElementById('routeToSelect').value='${loc.id}';calculateCampusRoute();">
+            🧭 Route to ${loc.code} →
+          </button>
+        </div>
+      </div>
+    `;
+    marker.bindPopup(popupHtml, { maxWidth: 250, offset: [0, -10] });
+
+    marker.on('click', () => {
+      document.getElementById('routeToSelect').value = loc.id;
+      selectCampusLocation(loc.id, false);
+      calculateCampusRoute();
+      marker.openPopup();
+    });
+
+    markersMap[loc.id] = marker;
+  });
+
+  const listEl = document.getElementById('mapLocationsList');
+  listEl.innerHTML = filtered
+    .map(
+      (loc) => `
+      <div class="map-loc-item ${loc.id === selectedLocationId ? 'active' : ''}" onclick="jumpToDestination('${loc.id}')">
+        <div>
+          <strong>${loc.name}</strong>
+          <small>📍 ${loc.landmark}</small>
+        </div>
+        <span class="loc-code-pill">${loc.code}</span>
+      </div>
+    `
+    )
+    .join('');
+}
+
+function selectCampusLocation(locationId, panMap = true) {
+  const loc = campusData.campusLocations.find((l) => l.id === locationId) || campusData.campusLocations[0];
+  if (!loc) return;
+
+  selectedLocationId = loc.id;
+
+  const card = document.getElementById('selectedBlockCard');
+  card.innerHTML = `
+    <div class="selected-block-banner">
+      <img src="${loc.photo}" alt="${loc.name}" />
+      <div class="selected-block-overlay">
+        <span class="selected-block-code">${loc.code} • ${loc.zone}</span>
+        <h3>${loc.name}</h3>
+      </div>
+    </div>
+    <div class="selected-block-body">
+      <div class="nav-quick-facts">
+        <div class="fact-row">
+          <strong>📍 Landmark:</strong>
+          <span>${loc.landmark}</span>
+        </div>
+        <div class="fact-row">
+          <strong>🚶 From Gate 1:</strong>
+          <span>${loc.walkFromGate}</span>
+        </div>
+        <div class="fact-row">
+          <strong>🛺 E-Rickshaw:</strong>
+          <span>${loc.erickshaw}</span>
+        </div>
+      </div>
+
+      <div class="inside-floors-box">
+        <h4>What's Inside This Block (Floors & Offices):</h4>
+        <ul class="inside-list">
+          ${loc.inside.map((f) => `<li>${f}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="inspector-actions">
+        <button class="btn-outline-emerald" onclick="setAsRouteStart('${loc.id}')">
+          📍 Set as Starting Point
+        </button>
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lng}"
+          target="_blank"
+          rel="noopener"
+          class="btn-primary"
+        >
+          Google Maps GPS ↗
+        </a>
+      </div>
+    </div>
+  `;
+
+  renderMapPinsAndSidebar();
+
+  if (panMap && map) {
+    map.flyTo([loc.lat, loc.lng], 17, { duration: 0.7 });
+  }
+}
+
+function setAsRouteStart(locationId) {
+  document.getElementById('routeFromSelect').value = locationId;
+  calculateCampusRoute();
+}
+
+// ===================================================================
+// 5. TAB 2: COMPLETE BLOCK & DEPARTMENT DIRECTORY (ALL BLOCKS 1–58)
+// ===================================================================
+function setBlockDirCategory(cat, btnEl) {
+  blockDirCategory = cat;
+  document.querySelectorAll('#blockCategoryBar .pill-btn').forEach((b) => b.classList.remove('active'));
+  if (btnEl) btnEl.classList.add('active');
+  renderBlocksDirectory();
+}
+
+function renderBlocksDirectory() {
+  const searchVal = (document.getElementById('blockDirectorySearch')?.value || '').trim().toLowerCase();
+  const grid = document.getElementById('blocksDirectoryGrid');
+
+  const filtered = campusData.campusLocations.filter((loc) => {
+    const matchCat = blockDirCategory === 'all' || loc.category === blockDirCategory;
+    const matchSearch =
+      !searchVal ||
+      loc.code.toLowerCase().includes(searchVal) ||
+      loc.name.toLowerCase().includes(searchVal) ||
+      loc.landmark.toLowerCase().includes(searchVal) ||
+      loc.description.toLowerCase().includes(searchVal) ||
+      loc.inside.some((line) => line.toLowerCase().includes(searchVal));
+    return matchCat && matchSearch;
+  });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<p style="grid-column:1/-1;color:var(--text-muted);padding:20px 0;">No blocks matched your search. Try searching "Block 32", "CSE", "Admission", "Library", or "Hospital".</p>`;
+    return;
+  }
+
+  grid.innerHTML = filtered
+    .map(
+      (loc) => `
+      <article class="dir-block-card">
+        <div class="dir-block-img">
+          <img src="${loc.photo}" alt="${loc.name}" loading="lazy" />
+          <span class="dir-code-tag">${loc.code}</span>
+          <span class="dir-zone-tag">${loc.zone}</span>
+        </div>
+        <div class="dir-block-body">
+          <h3>${loc.name}</h3>
+          <div class="dir-landmark">📍 ${loc.landmark}</div>
+          <div class="dir-walk">🚶 ${loc.walkFromGate} • 🛺 ${loc.erickshaw}</div>
+          <ul class="dir-floors">
+            ${loc.inside.map((f) => `<li>${f}</li>`).join('')}
+          </ul>
+          <div class="dir-card-actions">
+            <button class="btn-primary" onclick="jumpToDestination('${loc.id}')">
+              🧭 Show Route on Map
+            </button>
+          </div>
+        </div>
+      </article>
+    `
+    )
+    .join('');
+}
+
+// ===================================================================
+// 6. TAB 3: CAMPUS ESSENTIALS (FOOD COURTS, NIGHT CANTEENS, ATMs, PRINTOUT)
+// ===================================================================
+function setEssentialsCategory(cat, btnEl) {
+  essentialsCategory = cat;
+  document.querySelectorAll('#essentialsCategoryBar .pill-btn').forEach((b) => b.classList.remove('active'));
+  if (btnEl) btnEl.classList.add('active');
+  renderEssentialsSection();
+}
+
+function renderEssentialsSection() {
+  const grid = document.getElementById('essentialsGrid');
+  if (!grid || !campusData.campusEssentials) return;
+
+  const q = (document.getElementById('essentialsSearchInput')?.value || '').trim().toLowerCase();
+
+  const filtered = campusData.campusEssentials.filter((item) => {
+    const matchCat = essentialsCategory === 'all' || item.category === essentialsCategory;
+    const matchSearch =
+      !q ||
+      item.name.toLowerCase().includes(q) ||
+      item.blockCode.toLowerCase().includes(q) ||
+      item.category.toLowerCase().includes(q) ||
+      item.highlights.some((h) => h.toLowerCase().includes(q));
+    return matchCat && matchSearch;
+  });
+
+  grid.innerHTML = filtered
+    .map(
+      (item) => `
+      <article class="dir-block-card">
+        <div class="dir-block-img">
+          <img src="${item.photo}" alt="${item.name}" loading="lazy" />
+          <span class="dir-code-tag">${item.blockCode}</span>
+          <span class="dir-zone-tag">${item.category}</span>
+        </div>
+        <div class="dir-block-body">
+          <h3>${item.name}</h3>
+          <div class="dir-landmark">🕒 ${item.timings}</div>
+          <div class="dir-walk">💳 ${item.priceRange}</div>
+          <ul class="dir-floors">
+            ${item.highlights.map((h) => `<li>✓ ${h}</li>`).join('')}
+          </ul>
+          <div class="dir-card-actions">
+            <button class="btn-primary" onclick="jumpToDestination('${item.locationId}')">
+              🧭 Locate on Campus Map
+            </button>
+          </div>
+        </div>
+      </article>
+    `
+    )
+    .join('');
+}
+
+// ===================================================================
+// 7. TAB 4: HOSTELS, NEAREST BLOCKS & ROOM INTERIORS
+// ===================================================================
+function setHostelFilter(filter, btnEl) {
+  hostelFilter = filter;
+  document.querySelectorAll('#hostelFilterGroup .pill-btn').forEach((b) => b.classList.remove('active'));
+  if (btnEl) btnEl.classList.add('active');
+  renderHostelsSection();
+}
+
+function renderHostelsSection() {
+  const hostelsGrid = document.getElementById('hostelsGrid');
+  const filtered = campusData.hostels.filter((h) => hostelFilter === 'all' || h.type === hostelFilter);
+
+  hostelsGrid.innerHTML = filtered
+    .map(
+      (h) => `
+      <div class="hostel-card">
+        <div>
+          <span class="hostel-badge">${h.type} Residential Zone</span>
+          <h3>${h.name}</h3>
+          <div class="hostel-meta-rows">
+            <div><span>Nearest Academic Blocks</span><strong>${h.nearestBlocks}</strong></div>
+            <div><span>Attached Mess</span><strong>${h.mess}</strong></div>
+            <div><span>Annual Fee Range</span><strong>${h.feeRange}</strong></div>
+            <div><span>Entry Curfew</span><strong>${h.curfew}</strong></div>
+            <div><span>Warden Helpline</span><strong>${h.warden}</strong></div>
+          </div>
+          <div class="tag-row">
+            ${h.facilities.map((f) => `<span class="tag-chip">${f}</span>`).join('')}
+          </div>
+        </div>
+        <button class="btn-outline-emerald" style="width:100%;padding:10px;border-radius:8px;font-weight:700;cursor:pointer" onclick="jumpToDestination('${h.locationId}')">
+          📍 Locate This Hostel Zone on Map
+        </button>
+      </div>
+    `
+    )
+    .join('');
+
+  const roomsGrid = document.getElementById('roomsGrid');
+  roomsGrid.innerHTML = campusData.roomTemplates
+    .map(
+      (r) => `
+      <div class="room-card">
+        <img src="${r.image}" alt="${r.title}" loading="lazy" />
+        <div class="room-body">
+          <div class="room-price">${r.price} • ${r.size}</div>
+          <h3 style="margin-bottom:10px;font-size:1.05rem">${r.title}</h3>
+          <div class="tag-row">
+            ${r.features.map((f) => `<span class="tag-chip">✓ ${f}</span>`).join('')}
+          </div>
+        </div>
+      </div>
+    `
+    )
+    .join('');
+}
+
+// ===================================================================
+// 8. TAB 5: MESS & DAILY MENU
+// ===================================================================
+function renderMessSection() {
+  const mess = campusData.messes.find((m) => m.id === selectedMessId) || campusData.messes[0];
+  if (!mess) return;
+
+  document.getElementById('messSelectorPills').innerHTML = campusData.messes
+    .map(
+      (m) => `
+      <button class="pill-btn ${m.id === mess.id ? 'active' : ''}" onclick="selectMess('${m.id}')">
+        ${m.name}
+      </button>
+    `
+    )
+    .join('');
+
+  document.getElementById('messSummaryBar').innerHTML = `
+    <div>
+      <h2 style="font-size:1.25rem;font-weight:800">${mess.name}</h2>
+      <p style="font-size:0.86rem;color:var(--text-muted)">📍 ${mess.zone} • ${mess.type}</p>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <span class="route-badge">★ ${mess.rating} Rating</span>
+      <span class="route-badge amber">Live Crowd: ${mess.crowdStatus} (${mess.crowdPercent}%)</span>
+    </div>
+  `;
+
+  document.getElementById('dayTabs').innerHTML = DAYS.map(
+    (day) => `
+      <button class="day-tab ${day === selectedDay ? 'active' : ''}" onclick="selectMessDay('${day}')">
+        ${day}
+      </button>
+    `
+  ).join('');
+
+  const dayMenu = mess.weeklyMenu[selectedDay] || mess.weeklyMenu.Monday;
+  const meals = [
+    { title: '🌅 Breakfast', time: mess.timings.breakfast, items: dayMenu.breakfast },
+    { title: '☀️ Lunch', time: mess.timings.lunch, items: dayMenu.lunch },
+    { title: '☕ Evening Snacks', time: mess.timings.snacks, items: dayMenu.snacks },
+    { title: '🌙 Dinner', time: mess.timings.dinner, items: dayMenu.dinner }
+  ];
+
+  document.getElementById('mealsGrid').innerHTML = meals
+    .map(
+      (meal) => `
+      <div class="meal-card">
+        <span class="meal-time">${meal.time}</span>
+        <h3>${meal.title}</h3>
+        <p>${meal.items}</p>
+      </div>
+    `
+    )
+    .join('');
+
+  document.getElementById('dishesGrid').innerHTML = (mess.signatureDishes || [])
+    .map(
+      (d) => `
+      <div class="dish-card">
+        <img src="${d.image}" alt="${d.name}" loading="lazy" />
+        <div class="dish-body">
+          <div class="room-price">${d.meal} • ${d.calories}</div>
+          <h3 style="font-size:1rem;margin-bottom:6px">${d.name}</h3>
+          <span class="tag-chip">👍 ${d.votes} Student Votes</span>
+        </div>
+      </div>
+    `
+    )
+    .join('');
+}
+
+function selectMess(id) {
+  selectedMessId = id;
+  renderMessSection();
+}
+
+function selectMessDay(day) {
+  selectedDay = day;
+  renderMessSection();
+}
+
+// ===================================================================
+// 9. TAB 6: 24x7 EMERGENCY & STUDENT HELPLINES DIRECTORY
+// ===================================================================
+function setHelplineFilter(filter, btnEl) {
+  helplineFilter = filter;
+  document.querySelectorAll('#helplineFilterGroup .pill-btn').forEach((b) => b.classList.remove('active'));
+  if (btnEl) btnEl.classList.add('active');
+  renderHelplinesSection();
+}
+
+function renderHelplinesSection() {
+  const grid = document.getElementById('helplinesGrid');
+  if (!grid || !campusData.campusHelplines) return;
+
+  const filtered = campusData.campusHelplines.filter(
+    (h) => helplineFilter === 'all' || h.category === helplineFilter
+  );
+
+  grid.innerHTML = filtered
+    .map(
+      (h) => `
+      <div class="hostel-card">
+        <div>
+          <span class="hostel-badge">${h.category} • ${h.availability}</span>
+          <h3>${h.title}</h3>
+          <p style="font-size:0.83rem;color:var(--text-muted);margin-bottom:12px">${h.description}</p>
+          <div class="hostel-meta-rows">
+            <div><span>Primary Helpline</span><strong style="color:var(--primary)">${h.phone}</strong></div>
+            <div><span>Alternate / Email</span><strong>${h.altPhone}</strong></div>
+            <div><span>Campus Office</span><strong>${h.officeBlock}</strong></div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <a href="tel:${h.phone}" class="btn-primary" style="flex:1;text-align:center;text-decoration:none;padding:10px;border-radius:8px">
+            📞 Call ${h.phone}
+          </a>
+          <button class="btn-outline-emerald" style="flex:1;padding:10px;border-radius:8px;font-weight:700;cursor:pointer" onclick="jumpToDestination('${h.locationId}')">
+            🧭 Locate Office
+          </button>
+        </div>
+      </div>
+    `
+    )
+    .join('');
+}
+
+// ===================================================================
+// 10. LPU AI CAMPUS ASSISTANT, VOICE SEARCH, LIVE GPS & PROJECT MODAL
+// ===================================================================
+function toggleAiAssistant() {
+  const panel = document.getElementById('aiAssistantPanel');
+  if (!panel) return;
+  panel.classList.toggle('hidden');
+  if (!panel.classList.contains('hidden')) {
+    const inp = document.getElementById('aiQueryInput');
+    if (inp) inp.focus();
+  }
+}
+
+function toggleProjectModal() {
+  const modal = document.getElementById('projectModalBackdrop');
+  if (!modal) return;
+  modal.classList.toggle('hidden');
+}
+
+function handleAiFormSubmit(e) {
+  e.preventDefault();
+  const inp = document.getElementById('aiQueryInput');
+  if (!inp || !inp.value.trim()) return;
+  const q = inp.value.trim();
+  inp.value = '';
+  askLpuAi(q);
+}
+
+function askLpuAi(question) {
+  const box = document.getElementById('aiMessagesBox');
+  const panel = document.getElementById('aiAssistantPanel');
+  if (panel && panel.classList.contains('hidden')) {
+    panel.classList.remove('hidden');
+  }
+  if (!box) return;
+
+  const userDiv = document.createElement('div');
+  userDiv.className = 'ai-msg ai-msg-user';
+  userDiv.textContent = question;
+  box.appendChild(userDiv);
+
+  const replyHtml = generateLpuAiAnswer(question);
+  const botDiv = document.createElement('div');
+  botDiv.className = 'ai-msg ai-msg-bot';
+  botDiv.innerHTML = replyHtml;
+  box.appendChild(botDiv);
+  box.scrollTop = box.scrollHeight;
+}
+
+function generateLpuAiAnswer(rawQuery) {
+  const q = rawQuery.trim().toLowerCase();
+
+  // 1. Check for Room Code (e.g. 32-405 or 14-202)
+  const roomMatch = rawQuery.match(/(\d{1,2})\s*[-–]\s*(\d)(\d{2}[A-Za-z]?)/);
+  if (roomMatch) {
+    const decoded = decodeRoomQuery(roomMatch[0]);
+    if (decoded && decoded.location) {
+      const loc = decoded.location;
+      return `
+        <strong>🔢 Decoded Timetable Room: <code>${decoded.rawCode}</code></strong><br/>
+        • <strong>Block:</strong> ${loc.code} — ${loc.name}<br/>
+        • <strong>Floor:</strong> ${decoded.floorLabel}<br/>
+        • <strong>Room / Lab:</strong> Room ${decoded.roomNumber}<br/>
+        • <strong>Nearest Gate:</strong> ${loc.nearestGate}<br/>
+        <button class="btn-primary" style="margin-top:8px;padding:6px 12px;font-size:0.76rem;border-radius:6px" onclick="applyDecodedRoom('${loc.id}', '${decoded.rawCode}', '${decoded.floorLabel}', '${decoded.roomNumber}')">
+          🧭 Plot Route to ${decoded.rawCode} on Map →
+        </button>
+      `;
+    }
+  }
+
+  // 2. Check for specific Block number (e.g., "block 32" or "34")
+  const blockNumMatch = q.match(/block\s*(\d{1,2})|\b(\d{1,2})\b/);
+  if (blockNumMatch) {
+    const num = Number(blockNumMatch[1] || blockNumMatch[2]);
+    if (num >= 1 && num <= 58 && BLOCK_NUMBER_MAP[num]) {
+      const locId = BLOCK_NUMBER_MAP[num];
+      const loc = (campusData.campusLocations || []).find((l) => l.id === locId);
+      if (loc) {
+        return `
+          <strong>🏛️ Block ${num} — ${loc.name}</strong><br/>
+          ${loc.summary}<br/>
+          • <strong>Key Facilities:</strong> ${(loc.departments || []).slice(0, 3).join(', ')}<br/>
+          • <strong>Nearest Gate:</strong> ${loc.nearestGate}<br/>
+          <button class="btn-primary" style="margin-top:8px;padding:6px 12px;font-size:0.76rem;border-radius:6px" onclick="jumpToDestination('${loc.id}')">
+            📍 Show Block ${num} on GPS Map →
+          </button>
+        `;
+      }
+    }
+  }
+
+  // 3. CSE / AI & Data Science / Coding Blocks
+  if (q.includes('cse') || q.includes('computer') || q.includes('ai') || q.includes('data science') || q.includes('coding')) {
+    return `
+      <strong>💻 CSE, AI &amp; Data Science Blocks at LPU:</strong><br/>
+      • <strong>Block 32:</strong> Main School of CSE, AI/ML Labs &amp; Programming Labs.<br/>
+      • <strong>Block 33 &amp; 34:</strong> Software Engineering, Data Science, Cloud Computing &amp; Dean CSE.<br/>
+      • <strong>Block 36–38:</strong> Computer Applications (BCA/MCA) &amp; Central Server Labs.<br/>
+      <button class="btn-primary" style="margin-top:8px;padding:6px 12px;font-size:0.76rem;border-radius:6px" onclick="jumpToDestination('block-32')">
+        🧭 Navigate to Block 32 (CSE &amp; AI Hub) →
+      </button>
+    `;
+  }
+
+  // 4. Hospital / Medical / Emergency
+  if (q.includes('hospital') || q.includes('medical') || q.includes('emergency') || q.includes('ambulance') || q.includes('doctor')) {
+    return `
+      <strong>🚑 24×7 Uni Hospital &amp; Medical Emergency:</strong><br/>
+      • <strong>Location:</strong> Block 4 / Uni Hospital (Near Main Entrance Zone)<br/>
+      • <strong>Emergency Helpline:</strong> <code>01824-517000</code> / <code>01824-444079</code><br/>
+      • <strong>Facilities:</strong> 24×7 Emergency Ward, Ambulance, Pharmacy &amp; Diagnostics.<br/>
+      <button class="btn-primary" style="margin-top:8px;padding:6px 12px;font-size:0.76rem;border-radius:6px" onclick="jumpToDestination('uni-hospital')">
+        🚑 Plot Emergency Route to Uni Hospital →
+      </button>
+    `;
+  }
+
+  // 5. Night Canteens / Food
+  if (q.includes('night') || q.includes('food') || q.includes('eat') || q.includes('canteen') || q.includes('cafe')) {
+    return `
+      <strong>🍕 Food Courts &amp; Night Canteens (Open till 1:30 AM):</strong><br/>
+      • <strong>Uni Mall Food Court (Block 13):</strong> Domino's, Subway, Cafes &amp; 30+ Outlets.<br/>
+      • <strong>BH-1 to BH-6 Night Canteens:</strong> Open <code>9:00 PM – 1:30 AM</code> (Parathas, Maggi, Burgers, Shakes).<br/>
+      • <strong>Block 34 Kiosk Strip:</strong> Quick rolls, coffee &amp; snacks between CSE lectures.<br/>
+      <button class="btn-primary" style="margin-top:8px;padding:6px 12px;font-size:0.76rem;border-radius:6px" onclick="openTab('essentials')">
+        🍕 Open Food, ATMs &amp; Shops Directory →
+      </button>
+    `;
+  }
+
+  // 6. Mess Menu
+  if (q.includes('mess') || q.includes('breakfast') || q.includes('lunch') || q.includes('dinner') || q.includes('menu')) {
+    const mess = (campusData.messes || [])[0];
+    const dayMenu = mess && mess.weeklyMenu ? mess.weeklyMenu[selectedDay] : null;
+    return `
+      <strong>🍽️ Today's LPU Hostel Mess Menu (${selectedDay}):</strong><br/>
+      • <strong>Breakfast:</strong> ${dayMenu ? dayMenu.breakfast : 'Aloo Paratha, Curd, Tea & Fruit'}<br/>
+      • <strong>Lunch:</strong> ${dayMenu ? dayMenu.lunch : 'Rajma Masala, Jeera Rice, Roti & Salad'}<br/>
+      • <strong>Dinner:</strong> ${dayMenu ? dayMenu.dinner : 'Paneer Butter Masala, Dal Makhani & Gulab Jamun'}<br/>
+      <button class="btn-primary" style="margin-top:8px;padding:6px 12px;font-size:0.76rem;border-radius:6px" onclick="openTab('mess')">
+        🍽️ View Full 7-Day Mess Timetable →
+      </button>
+    `;
+  }
+
+  // Default smart search fallback across all 49 campus locations
+  const match = (campusData.campusLocations || []).find(
+    (l) =>
+      l.name.toLowerCase().includes(q) ||
+      l.code.toLowerCase().includes(q) ||
+      l.summary.toLowerCase().includes(q) ||
+      (l.departments || []).some((d) => d.toLowerCase().includes(q))
+  );
+
+  if (match) {
+    return `
+      <strong>📍 Found: ${match.code} — ${match.name}</strong><br/>
+      ${match.summary}<br/>
+      • <strong>Nearest Gate:</strong> ${match.nearestGate}<br/>
+      <button class="btn-primary" style="margin-top:8px;padding:6px 12px;font-size:0.76rem;border-radius:6px" onclick="jumpToDestination('${match.id}')">
+        🧭 Show ${match.code} on Map &amp; Route →
+      </button>
+    `;
+  }
+
+  return `
+    I can help you locate all <strong>58 LPU Blocks</strong>, decode timetable room numbers like <code>32-405</code> or <code>14-202</code>, or check Hostels, Night Canteens, Mess Menus, and Helplines! Try asking: <em>"Where is 32-405?"</em> or <em>"CSE blocks"</em>.
+  `;
+}
+
+// Voice Search using Web Speech API
+function startVoiceCampusSearch() {
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const btn = document.getElementById('voiceSearchBtn');
+  const inp = document.getElementById('quickMapSearch');
+
+  if (!SpeechRec) {
+    alert('Voice recognition is supported in Google Chrome and Microsoft Edge. Try typing "32-405" or "Block 32"!');
+    return;
+  }
+
+  const recognition = new SpeechRec();
+  recognition.lang = 'en-IN';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  if (btn) {
+    btn.classList.add('listening');
+    btn.textContent = '🔴 Listening...';
+  }
+
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript.trim();
+    if (inp) {
+      inp.value = transcript;
+      handleQuickMapSearch(transcript);
+    }
+  };
+
+  recognition.onerror = () => {
+    if (btn) {
+      btn.classList.remove('listening');
+      btn.textContent = '🎤 Voice';
+    }
+  };
+
+  recognition.onend = () => {
+    if (btn) {
+      btn.classList.remove('listening');
+      btn.textContent = '🎤 Voice';
+    }
+  };
+
+  recognition.start();
+}
+
+// Live GPS Nearest-Block Finder
+function locateNearestCampusBlock() {
+  if (!navigator.geolocation) {
+    alert('Geolocation is not supported by your browser.');
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const userLat = pos.coords.latitude;
+      const userLng = pos.coords.longitude;
+      findAndHighlightNearestBlock(userLat, userLng);
+    },
+    () => {
+      // Fallback demo coordinate inside LPU Academic Spine near Block 32
+      findAndHighlightNearestBlock(31.2549, 75.7052);
+    },
+    { enableHighAccuracy: true, timeout: 5000 }
+  );
+}
+
+function findAndHighlightNearestBlock(lat, lng) {
+  const locs = campusData.campusLocations || [];
+  if (!locs.length) return;
+
+  let nearest = locs[0];
+  let minMeters = Infinity;
+
+  locs.forEach((loc) => {
+    const d = haversineMeters(lat, lng, loc.lat, loc.lng);
+    if (d < minMeters) {
+      minMeters = d;
+      nearest = loc;
+    }
+  });
+
+  // If user is outside Phagwara (> 15 km away), show LPU Main Gate 1 -> Block 32 live demo
+  if (minMeters > 15000) {
+    selectCampusLocation('block-32', true);
+    askLpuAi('Where is room 32-405 and how far from Main Gate?');
+    return;
+  }
+
+  selectCampusLocation(nearest.id, true);
+}
+
+</script>
+<!--
+/* === PART 4: BACKEND NODE.JS + EXPRESS SERVER (server.js) === */
+const express = require('express');
+const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+const DB_PATH = path.join(__dirname, 'data', 'db.json');
+
+app.use(cors());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
+function readDB() {
+  const raw = fs.readFileSync(DB_PATH, 'utf-8');
+  return JSON.parse(raw);
+}
+
+function writeDB(data) {
+  fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), 'utf-8');
+}
+
+// Get complete campus data
+app.get('/api/data', (req, res) => {
+  try {
+    const db = readDB();
+    res.json(db);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to read database', details: err.message });
+  }
+});
+
+// Submit a new Mess Review & Rating
+app.post('/api/reviews', (req, res) => {
+  try {
+    const { messId, studentName, rating, mealType, comment } = req.body;
+    if (!messId || !studentName || !rating || !comment) {
+      return res.status(400).json({ error: 'Please fill all required review fields.' });
+    }
+
+    const db = readDB();
+    const mess = db.messes.find((m) => m.id === messId);
+    if (!mess) {
+      return res.status(404).json({ error: 'Mess not found' });
+    }
+
+    const numericRating = Math.min(5, Math.max(1, Number(rating)));
+    const newReview = {
+      id: 'rev-' + Date.now(),
+      messId,
+      studentName: studentName.trim(),
+      rating: numericRating,
+      mealType: mealType || 'Dinner',
+      comment: comment.trim(),
+      timestamp: 'Just now'
+    };
+
+    db.reviews.unshift(newReview);
+
+    // Recalculate weighted average rating
+    const totalScore = mess.rating * mess.reviewCount + numericRating;
+    mess.reviewCount += 1;
+    mess.rating = Number((totalScore / mess.reviewCount).toFixed(1));
+
+    writeDB(db);
+    res.status(201).json({ review: newReview, updatedMess: mess });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to save review', details: err.message });
+  }
+});
+
+// Update Live Crowd Status for a Mess
+app.post('/api/messes/:id/crowd', (req, res) => {
+  try {
+    const { id } = req.params;
+    const { crowdStatus, crowdPercent } = req.body;
+
+    const db = readDB();
+    const mess = db.messes.find((m) => m.id === id);
+    if (!mess) {
+      return res.status(404).json({ error: 'Mess not found' });
+    }
+
+    if (crowdStatus) mess.crowdStatus = crowdStatus;
+    if (crowdPercent !== undefined) mess.crowdPercent = Number(crowdPercent);
+
+    writeDB(db);
+    res.json({ updatedMess: mess });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to update crowd status', details: err.message });
+  }
+});
+
+// Update Mess Menu for a specific Day or Today's Special
+app.post('/api/messes/:id/menu', (req, res) => {
+  try {
+    const { id } = req.params;
+    const { day, breakfast, lunch, snacks, dinner, specialToday } = req.body;
+
+    const db = readDB();
+    const mess = db.messes.find((m) => m.id === id);
+    if (!mess) {
+      return res.status(404).json({ error: 'Mess not found' });
+    }
+
+    if (day && mess.weeklyMenu[day]) {
+      if (breakfast) mess.weeklyMenu[day].breakfast = breakfast;
+      if (lunch) mess.weeklyMenu[day].lunch = lunch;
+      if (snacks) mess.weeklyMenu[day].snacks = snacks;
+      if (dinner) mess.weeklyMenu[day].dinner = dinner;
+    }
+    if (specialToday) {
+      mess.specialToday = specialToday;
+    }
+
+    writeDB(db);
+    res.json({ updatedMess: mess });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to update menu', details: err.message });
+  }
+});
+
+// Upvote / Crave a Zomato-style Signature Dish
+app.post('/api/dishes/:dishId/vote', (req, res) => {
+  try {
+    const { dishId } = req.params;
+    const db = readDB();
+    let foundDish = null;
+
+    for (const mess of db.messes) {
+      if (mess.signatureDishes) {
+        const d = mess.signatureDishes.find((item) => item.id === dishId);
+        if (d) {
+          d.votes = (d.votes || 100) + 1;
+          foundDish = d;
+          break;
+        }
+      }
+    }
+
+    if (!foundDish) {
+      return res.status(404).json({ error: 'Dish not found' });
+    }
+
+    writeDB(db);
+    res.json({ dish: foundDish });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to upvote dish', details: err.message });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`LPU Campus Hub Server running at http://localhost:${PORT}`);
+});
+
+-->
+</body>
+</html>

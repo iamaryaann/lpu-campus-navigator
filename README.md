@@ -1,4 +1,4 @@
-﻿# LPU Campus Navigator
+# LPU Campus Navigator
 
 A student-built campus guide for Lovely Professional University (LPU), with a campus map, block and room lookup, and student resource sections.
 
@@ -6,11 +6,13 @@ A student-built campus guide for Lovely Professional University (LPU), with a ca
 
 ## Features
 
-- Leaflet-based campus map and location search
-- Timetable room-code lookup, such as `32-405`
-- Block, campus essentials, hostel, mess-menu, and helpline sections
-- Light and dark themes
-- Optional Express API for serving campus data and accepting updates when run with Node.js
+- **Google Maps HD Road & Satellite Hybrid Map**: Powered by Google Maps Road/Satellite tiles and real OSRM road/footpath routing across the 600-acre LPU Phagwara campus (Blocks 1 to 58, Main Gates 1A/1B/2, Uni Mall, Shanti Devi Mittal Auditorium, Baldev Raj Mittal UniPolis, and Hostels BH-1 to BH-8 / GH-1 to GH-6).
+- **Turn-by-Turn Live Navigation HUD & Moving Blue GPS Dot**: Real-time walking ETA, e-rickshaw time, live GPS position tracking (`📡 Live GPS`), and interactive **`▶️ Start Live Walk`** road simulation.
+- **🤖 LPU AI Campus Assistant**: Interactive campus chatbot answering natural-language queries about room numbers, CSE/AI blocks, night canteens, mess timings, and medical emergencies with 1-click route plotting.
+- **🎤 Voice Search & Timetable Room Decoder**: Instant lookup for LPU timetable room codes such as `32-405` or `34-210` (decoding Block, Floor, Wing, and Lift/Staircase instructions).
+- **4-Theme Surface System**: Switch seamlessly between **🔵 Royal Sapphire Blue**, **🟠 LPU Amber Orange**, **🟢 Emerald Campus**, and **🌙 Midnight Dark** modes.
+- **Complete Student Utility Suite**: Academic blocks directory, campus food courts & essentials, hostel guides, daily mess menu tracker, and 1-tap emergency helplines.
+- **Optional Express REST API**: Node.js + Express backend for serving campus data and accepting live student updates when run locally or on a server.
 
 ## Technology
 
