@@ -121,17 +121,27 @@ function openTab(tabName) {
 }
 
 // ===================================================================
-// 2. THEME TOGGLE (WHITE & EMERALD DEFAULT / DARK MODE)
+// 2. MULTI-THEME SWITCHER (ROYAL BLUE / LPU ORANGE / EMERALD / DARK)
 // ===================================================================
+const THEME_ORDER = ['blue', 'orange', 'green', 'dark'];
+const THEME_META = {
+  blue: { icon: '🔵', label: 'Theme: Blue' },
+  orange: { icon: '🟠', label: 'Theme: LPU Orange' },
+  green: { icon: '🟢', label: 'Theme: Emerald' },
+  dark: { icon: '🌙', label: 'Theme: Dark' }
+};
+
 function initThemeToggle() {
   const html = document.documentElement;
-  const saved = localStorage.getItem('lpu_nav_theme') || 'emerald';
+  let saved = localStorage.getItem('lpu_nav_theme') || 'blue';
+  if (!THEME_META[saved]) saved = 'blue';
   html.setAttribute('data-theme', saved);
   syncThemeButton(saved);
 
   document.getElementById('themeToggleBtn').addEventListener('click', () => {
-    const current = html.getAttribute('data-theme');
-    const next = current === 'emerald' ? 'dark' : 'emerald';
+    const current = html.getAttribute('data-theme') || 'blue';
+    const idx = THEME_ORDER.indexOf(current);
+    const next = THEME_ORDER[(idx + 1) % THEME_ORDER.length];
     html.setAttribute('data-theme', next);
     localStorage.setItem('lpu_nav_theme', next);
     syncThemeButton(next);
@@ -139,8 +149,9 @@ function initThemeToggle() {
 }
 
 function syncThemeButton(theme) {
-  document.getElementById('themeIcon').textContent = theme === 'emerald' ? '🌙' : '☀️';
-  document.getElementById('themeLabel').textContent = theme === 'emerald' ? 'Dark Mode' : 'White & Emerald';
+  const meta = THEME_META[theme] || THEME_META.blue;
+  document.getElementById('themeIcon').textContent = meta.icon;
+  document.getElementById('themeLabel').textContent = meta.label;
 }
 
 // ===================================================================
@@ -960,7 +971,7 @@ function generateLpuAiAnswer(rawQuery) {
     const num = Number(blockNumMatch[1] || blockNumMatch[2]);
     if (num >= 1 && num <= 58 && BLOCK_NUMBER_MAP[num]) {
       const locId = BLOCK_NUMBER_MAP[num];
-      const loc = (campusData.mapLocations || []).find((l) => l.id === locId);
+      const loc = (campusData.campusLocations || []).find((l) => l.id === locId);
       if (loc) {
         return `
           <strong>🏛️ Block ${num} — ${loc.name}</strong><br/>
@@ -1030,7 +1041,7 @@ function generateLpuAiAnswer(rawQuery) {
   }
 
   // Default smart search fallback across all 49 campus locations
-  const match = (campusData.mapLocations || []).find(
+  const match = (campusData.campusLocations || []).find(
     (l) =>
       l.name.toLowerCase().includes(q) ||
       l.code.toLowerCase().includes(q) ||
@@ -1122,7 +1133,7 @@ function locateNearestCampusBlock() {
 }
 
 function findAndHighlightNearestBlock(lat, lng) {
-  const locs = campusData.mapLocations || [];
+  const locs = campusData.campusLocations || [];
   if (!locs.length) return;
 
   let nearest = locs[0];
@@ -1138,10 +1149,10 @@ function findAndHighlightNearestBlock(lat, lng) {
 
   // If user is outside Phagwara (> 15 km away), show LPU Main Gate 1 -> Block 32 live demo
   if (minMeters > 15000) {
-    selectBlockOnMap('block-32', true);
+    selectCampusLocation('block-32', true);
     askLpuAi('Where is room 32-405 and how far from Main Gate?');
     return;
   }
 
-  selectBlockOnMap(nearest.id, true);
+  selectCampusLocation(nearest.id, true);
 }
