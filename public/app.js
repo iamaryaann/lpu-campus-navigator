@@ -882,3 +882,266 @@ function renderHelplinesSection() {
     )
     .join('');
 }
+
+// ===================================================================
+// 10. LPU AI CAMPUS ASSISTANT, VOICE SEARCH, LIVE GPS & PROJECT MODAL
+// ===================================================================
+function toggleAiAssistant() {
+  const panel = document.getElementById('aiAssistantPanel');
+  if (!panel) return;
+  panel.classList.toggle('hidden');
+  if (!panel.classList.contains('hidden')) {
+    const inp = document.getElementById('aiQueryInput');
+    if (inp) inp.focus();
+  }
+}
+
+function toggleProjectModal() {
+  const modal = document.getElementById('projectModalBackdrop');
+  if (!modal) return;
+  modal.classList.toggle('hidden');
+}
+
+function handleAiFormSubmit(e) {
+  e.preventDefault();
+  const inp = document.getElementById('aiQueryInput');
+  if (!inp || !inp.value.trim()) return;
+  const q = inp.value.trim();
+  inp.value = '';
+  askLpuAi(q);
+}
+
+function askLpuAi(question) {
+  const box = document.getElementById('aiMessagesBox');
+  const panel = document.getElementById('aiAssistantPanel');
+  if (panel && panel.classList.contains('hidden')) {
+    panel.classList.remove('hidden');
+  }
+  if (!box) return;
+
+  const userDiv = document.createElement('div');
+  userDiv.className = 'ai-msg ai-msg-user';
+  userDiv.textContent = question;
+  box.appendChild(userDiv);
+
+  const replyHtml = generateLpuAiAnswer(question);
+  const botDiv = document.createElement('div');
+  botDiv.className = 'ai-msg ai-msg-bot';
+  botDiv.innerHTML = replyHtml;
+  box.appendChild(botDiv);
+  box.scrollTop = box.scrollHeight;
+}
+
+function generateLpuAiAnswer(rawQuery) {
+  const q = rawQuery.trim().toLowerCase();
+
+  // 1. Check for Room Code (e.g. 32-405 or 14-202)
+  const roomMatch = rawQuery.match(/(\d{1,2})\s*[-–]\s*(\d)(\d{2}[A-Za-z]?)/);
+  if (roomMatch) {
+    const decoded = decodeRoomQuery(roomMatch[0]);
+    if (decoded && decoded.location) {
+      const loc = decoded.location;
+      return `
+        <strong>🔢 Decoded Timetable Room: <code>${decoded.rawCode}</code></strong><br/>
+        • <strong>Block:</strong> ${loc.code} — ${loc.name}<br/>
+        • <strong>Floor:</strong> ${decoded.floorLabel}<br/>
+        • <strong>Room / Lab:</strong> Room ${decoded.roomNumber}<br/>
+        • <strong>Nearest Gate:</strong> ${loc.nearestGate}<br/>
+        <button class="btn-primary" style="margin-top:8px;padding:6px 12px;font-size:0.76rem;border-radius:6px" onclick="applyDecodedRoom('${loc.id}', '${decoded.rawCode}', '${decoded.floorLabel}', '${decoded.roomNumber}')">
+          🧭 Plot Route to ${decoded.rawCode} on Map →
+        </button>
+      `;
+    }
+  }
+
+  // 2. Check for specific Block number (e.g., "block 32" or "34")
+  const blockNumMatch = q.match(/block\s*(\d{1,2})|\b(\d{1,2})\b/);
+  if (blockNumMatch) {
+    const num = Number(blockNumMatch[1] || blockNumMatch[2]);
+    if (num >= 1 && num <= 58 && BLOCK_NUMBER_MAP[num]) {
+      const locId = BLOCK_NUMBER_MAP[num];
+      const loc = (campusData.mapLocations || []).find((l) => l.id === locId);
+      if (loc) {
+        return `
+          <strong>🏛️ Block ${num} — ${loc.name}</strong><br/>
+          ${loc.summary}<br/>
+          • <strong>Key Facilities:</strong> ${(loc.departments || []).slice(0, 3).join(', ')}<br/>
+          • <strong>Nearest Gate:</strong> ${loc.nearestGate}<br/>
+          <button class="btn-primary" style="margin-top:8px;padding:6px 12px;font-size:0.76rem;border-radius:6px" onclick="jumpToDestination('${loc.id}')">
+            📍 Show Block ${num} on GPS Map →
+          </button>
+        `;
+      }
+    }
+  }
+
+  // 3. CSE / AI & Data Science / Coding Blocks
+  if (q.includes('cse') || q.includes('computer') || q.includes('ai') || q.includes('data science') || q.includes('coding')) {
+    return `
+      <strong>💻 CSE, AI &amp; Data Science Blocks at LPU:</strong><br/>
+      • <strong>Block 32:</strong> Main School of CSE, AI/ML Labs &amp; Programming Labs.<br/>
+      • <strong>Block 33 &amp; 34:</strong> Software Engineering, Data Science, Cloud Computing &amp; Dean CSE.<br/>
+      • <strong>Block 36–38:</strong> Computer Applications (BCA/MCA) &amp; Central Server Labs.<br/>
+      <button class="btn-primary" style="margin-top:8px;padding:6px 12px;font-size:0.76rem;border-radius:6px" onclick="jumpToDestination('block-32')">
+        🧭 Navigate to Block 32 (CSE &amp; AI Hub) →
+      </button>
+    `;
+  }
+
+  // 4. Hospital / Medical / Emergency
+  if (q.includes('hospital') || q.includes('medical') || q.includes('emergency') || q.includes('ambulance') || q.includes('doctor')) {
+    return `
+      <strong>🚑 24×7 Uni Hospital &amp; Medical Emergency:</strong><br/>
+      • <strong>Location:</strong> Block 4 / Uni Hospital (Near Main Entrance Zone)<br/>
+      • <strong>Emergency Helpline:</strong> <code>01824-517000</code> / <code>01824-444079</code><br/>
+      • <strong>Facilities:</strong> 24×7 Emergency Ward, Ambulance, Pharmacy &amp; Diagnostics.<br/>
+      <button class="btn-primary" style="margin-top:8px;padding:6px 12px;font-size:0.76rem;border-radius:6px" onclick="jumpToDestination('uni-hospital')">
+        🚑 Plot Emergency Route to Uni Hospital →
+      </button>
+    `;
+  }
+
+  // 5. Night Canteens / Food
+  if (q.includes('night') || q.includes('food') || q.includes('eat') || q.includes('canteen') || q.includes('cafe')) {
+    return `
+      <strong>🍕 Food Courts &amp; Night Canteens (Open till 1:30 AM):</strong><br/>
+      • <strong>Uni Mall Food Court (Block 13):</strong> Domino's, Subway, Cafes &amp; 30+ Outlets.<br/>
+      • <strong>BH-1 to BH-6 Night Canteens:</strong> Open <code>9:00 PM – 1:30 AM</code> (Parathas, Maggi, Burgers, Shakes).<br/>
+      • <strong>Block 34 Kiosk Strip:</strong> Quick rolls, coffee &amp; snacks between CSE lectures.<br/>
+      <button class="btn-primary" style="margin-top:8px;padding:6px 12px;font-size:0.76rem;border-radius:6px" onclick="openTab('essentials')">
+        🍕 Open Food, ATMs &amp; Shops Directory →
+      </button>
+    `;
+  }
+
+  // 6. Mess Menu
+  if (q.includes('mess') || q.includes('breakfast') || q.includes('lunch') || q.includes('dinner') || q.includes('menu')) {
+    const mess = (campusData.messes || [])[0];
+    const dayMenu = mess && mess.weeklyMenu ? mess.weeklyMenu[selectedDay] : null;
+    return `
+      <strong>🍽️ Today's LPU Hostel Mess Menu (${selectedDay}):</strong><br/>
+      • <strong>Breakfast:</strong> ${dayMenu ? dayMenu.breakfast : 'Aloo Paratha, Curd, Tea & Fruit'}<br/>
+      • <strong>Lunch:</strong> ${dayMenu ? dayMenu.lunch : 'Rajma Masala, Jeera Rice, Roti & Salad'}<br/>
+      • <strong>Dinner:</strong> ${dayMenu ? dayMenu.dinner : 'Paneer Butter Masala, Dal Makhani & Gulab Jamun'}<br/>
+      <button class="btn-primary" style="margin-top:8px;padding:6px 12px;font-size:0.76rem;border-radius:6px" onclick="openTab('mess')">
+        🍽️ View Full 7-Day Mess Timetable →
+      </button>
+    `;
+  }
+
+  // Default smart search fallback across all 49 campus locations
+  const match = (campusData.mapLocations || []).find(
+    (l) =>
+      l.name.toLowerCase().includes(q) ||
+      l.code.toLowerCase().includes(q) ||
+      l.summary.toLowerCase().includes(q) ||
+      (l.departments || []).some((d) => d.toLowerCase().includes(q))
+  );
+
+  if (match) {
+    return `
+      <strong>📍 Found: ${match.code} — ${match.name}</strong><br/>
+      ${match.summary}<br/>
+      • <strong>Nearest Gate:</strong> ${match.nearestGate}<br/>
+      <button class="btn-primary" style="margin-top:8px;padding:6px 12px;font-size:0.76rem;border-radius:6px" onclick="jumpToDestination('${match.id}')">
+        🧭 Show ${match.code} on Map &amp; Route →
+      </button>
+    `;
+  }
+
+  return `
+    I can help you locate all <strong>58 LPU Blocks</strong>, decode timetable room numbers like <code>32-405</code> or <code>14-202</code>, or check Hostels, Night Canteens, Mess Menus, and Helplines! Try asking: <em>"Where is 32-405?"</em> or <em>"CSE blocks"</em>.
+  `;
+}
+
+// Voice Search using Web Speech API
+function startVoiceCampusSearch() {
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const btn = document.getElementById('voiceSearchBtn');
+  const inp = document.getElementById('quickMapSearch');
+
+  if (!SpeechRec) {
+    alert('Voice recognition is supported in Google Chrome and Microsoft Edge. Try typing "32-405" or "Block 32"!');
+    return;
+  }
+
+  const recognition = new SpeechRec();
+  recognition.lang = 'en-IN';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  if (btn) {
+    btn.classList.add('listening');
+    btn.textContent = '🔴 Listening...';
+  }
+
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript.trim();
+    if (inp) {
+      inp.value = transcript;
+      handleQuickMapSearch(transcript);
+    }
+  };
+
+  recognition.onerror = () => {
+    if (btn) {
+      btn.classList.remove('listening');
+      btn.textContent = '🎤 Voice';
+    }
+  };
+
+  recognition.onend = () => {
+    if (btn) {
+      btn.classList.remove('listening');
+      btn.textContent = '🎤 Voice';
+    }
+  };
+
+  recognition.start();
+}
+
+// Live GPS Nearest-Block Finder
+function locateNearestCampusBlock() {
+  if (!navigator.geolocation) {
+    alert('Geolocation is not supported by your browser.');
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const userLat = pos.coords.latitude;
+      const userLng = pos.coords.longitude;
+      findAndHighlightNearestBlock(userLat, userLng);
+    },
+    () => {
+      // Fallback demo coordinate inside LPU Academic Spine near Block 32
+      findAndHighlightNearestBlock(31.2549, 75.7052);
+    },
+    { enableHighAccuracy: true, timeout: 5000 }
+  );
+}
+
+function findAndHighlightNearestBlock(lat, lng) {
+  const locs = campusData.mapLocations || [];
+  if (!locs.length) return;
+
+  let nearest = locs[0];
+  let minMeters = Infinity;
+
+  locs.forEach((loc) => {
+    const d = haversineMeters(lat, lng, loc.lat, loc.lng);
+    if (d < minMeters) {
+      minMeters = d;
+      nearest = loc;
+    }
+  });
+
+  // If user is outside Phagwara (> 15 km away), show LPU Main Gate 1 -> Block 32 live demo
+  if (minMeters > 15000) {
+    selectBlockOnMap('block-32', true);
+    askLpuAi('Where is room 32-405 and how far from Main Gate?');
+    return;
+  }
+
+  selectBlockOnMap(nearest.id, true);
+}

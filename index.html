@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="emerald">
 <head>
   <meta charset="UTF-8" />
@@ -88,6 +88,12 @@
       </nav>
 
       <div class="nav-actions">
+        <button class="ai-nav-btn" onclick="toggleAiAssistant()" title="Open LPU AI Campus Assistant">
+          🤖 Ask LPU AI
+        </button>
+        <button class="theme-btn" onclick="toggleProjectModal()" title="View Project Architecture & Developer Info">
+          👨‍💻 About Project
+        </button>
         <button class="theme-btn" id="themeToggleBtn" title="Switch White/Emerald or Dark Theme">
           <span id="themeIcon">🌙</span>
           <span id="themeLabel">Dark Mode</span>
@@ -108,17 +114,34 @@
         <div class="navigator-hero-card">
           <div class="navigator-hero-top">
             <div>
-              <span class="eyebrow">LOVELY PROFESSIONAL UNIVERSITY • CAMPUS DIRECTORY</span>
+              <span class="eyebrow">LOVELY PROFESSIONAL UNIVERSITY • 600+ ACRE GIS DIRECTORY</span>
               <h1>Campus Map & Block Navigation</h1>
               <p>Locate all 58 academic blocks, decode room numbers (e.g. <code>32-405</code>), and calculate walking or E-Rickshaw routes across LPU.</p>
+              <div class="hero-stats-ribbon">
+                <span class="stat-pill">🏛️ <strong>58</strong> Blocks Mapped</span>
+                <span class="stat-pill">📐 <strong>Haversine</strong> GPS Routing</span>
+                <span class="stat-pill">🔢 <strong>32-405</strong> Room Decoder</span>
+                <span class="stat-pill">🏢 <strong>14</strong> Hostels &amp; Mess</span>
+                <button class="stat-pill stat-pill-ai" onclick="toggleAiAssistant()">🤖 Ask LPU AI Assistant →</button>
+              </div>
             </div>
-            <!-- Instant Search Input + Room Decoder -->
+            <!-- Instant Search Input + Room Decoder + Voice & GPS -->
             <div class="instant-search-box">
-              <label for="quickMapSearch">🔍 Search Block, Office or Room Code (e.g. 32-405)</label>
+              <div class="search-label-row">
+                <label for="quickMapSearch">🔍 Search Block, Office or Room Code (e.g. 32-405)</label>
+                <div class="search-tool-btns">
+                  <button type="button" class="mini-tool-btn" id="voiceSearchBtn" onclick="startVoiceCampusSearch()" title="Speak Block or Room Code (e.g. '32-405' or 'Block 32')">
+                    🎤 Voice
+                  </button>
+                  <button type="button" class="mini-tool-btn" onclick="locateNearestCampusBlock()" title="Find Nearest LPU Block using GPS">
+                    📡 My GPS
+                  </button>
+                </div>
+              </div>
               <input
                 type="text"
                 id="quickMapSearch"
-                placeholder="Type '32-405', '14-202', 'Block 32', 'CSE', 'Admission', 'Hospital'..."
+                placeholder="Type or speak '32-405', '14-202', 'Block 32', 'CSE', 'Hospital'..."
                 oninput="handleQuickMapSearch(this.value)"
               />
               <div id="quickSearchDropdown" class="search-dropdown hidden"></div>
@@ -400,6 +423,92 @@
       </div>
     </div>
   </footer>
+
+  <!-- FLOATING LPU AI CAMPUS ASSISTANT -->
+  <button class="floating-ai-fab" onclick="toggleAiAssistant()" title="Ask LPU AI Campus Assistant">
+    <span>🤖</span>
+    <span>Ask LPU AI</span>
+  </button>
+
+  <div class="ai-assistant-panel hidden" id="aiAssistantPanel">
+    <div class="ai-panel-header">
+      <div>
+        <strong>🤖 LPU AI Campus Assistant</strong>
+        <span>Powered by LPU 58-Blocks GIS &amp; Room Decoder Engine</span>
+      </div>
+      <button class="ai-close-btn" onclick="toggleAiAssistant()">✕</button>
+    </div>
+    <div class="ai-quick-prompts">
+      <button onclick="askLpuAi('Where is room 32-405 and how far from Main Gate?')">🔢 Room 32-405</button>
+      <button onclick="askLpuAi('Which blocks have CSE and AI & Data Science labs?')">💻 CSE / AI Blocks</button>
+      <button onclick="askLpuAi('Emergency route to Uni Hospital')">🚑 Uni Hospital</button>
+      <button onclick="askLpuAi('Where can I eat food at night after 11 PM?')">🌙 Night Canteens</button>
+      <button onclick="askLpuAi('What is today hostel mess menu?')">🍽️ Today Mess Menu</button>
+    </div>
+    <div class="ai-messages-box" id="aiMessagesBox">
+      <div class="ai-msg ai-msg-bot">
+        👋 Welcome to <strong>LPU AI Campus Assistant</strong>! Ask me about any LPU Block (<code>1–58</code>), timetable room code (e.g. <code>32-405</code> or <code>14-202</code>), walking distances, hostels, night canteens, mess menus, or emergency helplines.
+      </div>
+    </div>
+    <form class="ai-input-row" onsubmit="handleAiFormSubmit(event)">
+      <input
+        type="text"
+        id="aiQueryInput"
+        placeholder="Ask e.g. 'Where is 32-405?' or 'CSE blocks'..."
+        autocomplete="off"
+      />
+      <button type="submit" class="btn-primary">Ask →</button>
+    </form>
+  </div>
+
+  <!-- OFFICIAL UNIVERSITY PROJECT ARCHITECTURE & DEVELOPER MODAL -->
+  <div class="project-modal-backdrop hidden" id="projectModalBackdrop" onclick="if(event.target===this)toggleProjectModal()">
+    <div class="project-modal-card">
+      <div class="project-modal-header">
+        <div>
+          <span class="eyebrow">LOVELY PROFESSIONAL UNIVERSITY • STUDENT INNOVATION SHOWCASE</span>
+          <h2>LPU Campus Navigator &amp; Student Guide (v2.0)</h2>
+        </div>
+        <button class="ai-close-btn" onclick="toggleProjectModal()">✕</button>
+      </div>
+      <div class="project-modal-body">
+        <div class="dev-profile-banner">
+          <div class="dev-avatar">AK</div>
+          <div>
+            <h3>Aryan Khan (<code>@iamaryaann</code>)</h3>
+            <p><strong>B.Tech in Computer Science &amp; Engineering (Artificial Intelligence &amp; Data Science)</strong> — 1st Semester</p>
+            <p>Lovely Professional University (LPU), Phagwara, Punjab</p>
+            <div class="dev-social-links">
+              <a href="https://github.com/iamaryaann" target="_blank" rel="noopener noreferrer">💻 GitHub (@iamaryaann)</a>
+              <a href="https://www.linkedin.com/in/iamaryaann" target="_blank" rel="noopener noreferrer">💼 LinkedIn</a>
+              <a href="https://www.instagram.com/iamaryaannn3" target="_blank" rel="noopener noreferrer">📸 Instagram (@iamaryaannn3)</a>
+              <a href="mailto:khanaryan1889@gmail.com">📧 Email</a>
+            </div>
+          </div>
+        </div>
+
+        <h4 class="modal-sec-title">⚙️ Core Engineering &amp; Algorithms Implemented</h4>
+        <div class="algo-grid">
+          <div class="algo-box">
+            <strong>1. Haversine Geodesic Routing Engine</strong>
+            <p>Calculates real-time spherical distance in meters, campus walkway distance (<code>1.28×</code> factor), walking minutes (<code>80 m/min</code>), and E-Rickshaw travel time across 600+ acres.</p>
+          </div>
+          <div class="algo-box">
+            <strong>2. Regex Timetable Room-Code Decoder</strong>
+            <p>Parses LPU timetable codes (e.g. <code>32-405</code> or <code>14-202</code>) into exact Block Number, Department Name, Floor Level, and Room Number with instant GPS map pinning.</p>
+          </div>
+          <div class="algo-box">
+            <strong>3. LPU Domain NLP AI Assistant &amp; Voice Recognition</strong>
+            <p>Natural-language campus query engine + Web Speech API voice search answering queries across all 58 blocks, hostels, night canteens, mess menus, and helplines.</p>
+          </div>
+          <div class="algo-box">
+            <strong>4. Full-Stack Node.js + Express + Leaflet GIS</strong>
+            <p>49 GPS-verified campus markers covering Blocks 1–58, 3 Entry Gates, Unipolis, Uni Mall, Uni Hospital, Hostels (BH 1–8, GH 1–6), and REST API endpoints.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="data.js"></script>
