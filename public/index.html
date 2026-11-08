@@ -50,7 +50,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="stylesheet" href="styles.css?v=5" />
 </head>
 <body>
 
@@ -199,8 +199,9 @@
                 <button class="cat-pill" onclick="filterMapMarkers('Gates & Transit', this)">🚧 Gates</button>
               </div>
               <div class="map-layer-switch">
-                <button class="layer-btn active" id="btnStreet" onclick="setMapLayer('street')">Street Map</button>
-                <button class="layer-btn" id="btnSat" onclick="setMapLayer('sat')">Satellite View</button>
+                <button class="layer-btn active" id="btnStreet" onclick="setMapLayer('street')">🗺️ Google Map</button>
+                <button class="layer-btn" id="btnSat" onclick="setMapLayer('sat')">🛰️ Satellite HD</button>
+                <button class="layer-btn" onclick="resetCampusMapView()" title="Fit Entire LPU Campus">🎯 Full Campus</button>
               </div>
             </div>
 
@@ -511,7 +512,7 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="data.js?v=4"></script>
-  <script src="app.js?v=4"></script>
+  <script src="data.js?v=5"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>

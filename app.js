@@ -360,6 +360,39 @@ function getDistanceMeters(lat1, lon1, lat2, lon2) {
   return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) * 1.25);
 }
 
+function getShortPinCode(loc) {
+  const c = loc.code || '';
+  if (c.startsWith('Block ')) return 'B' + c.replace('Block ', '').replace(/\s+/g, '');
+  if (c.includes('Main Gate 1')) return 'Gate 1';
+  if (c.includes('Law Gate')) return 'Gate 2';
+  if (c.includes('North Gate')) return 'Gate 3';
+  if (c.includes('BH-1')) return 'BH 1-4';
+  if (c.includes('BH-5')) return 'BH 5-8';
+  if (c.includes('GH-1')) return 'GH 1-4';
+  if (c.includes('GH-5')) return 'GH 5-6';
+  if (c.includes('Apartments')) return 'Studio Apt';
+  return c.length > 10 ? c.slice(0, 9) : c;
+}
+
+function buildCampusSpineWaypoints(fromLoc, toLoc, distMeters) {
+  if (fromLoc.id === toLoc.id || distMeters < 180) {
+    return [
+      [fromLoc.lat, fromLoc.lng],
+      [toLoc.lat, toLoc.lng]
+    ];
+  }
+  // Route smoothly along LPU's Central Academic Spine (longitude ~75.7048)
+  const spineLng = 75.7048;
+  const midLat1 = fromLoc.lat + (toLoc.lat - fromLoc.lat) * 0.33;
+  const midLat2 = fromLoc.lat + (toLoc.lat - fromLoc.lat) * 0.68;
+  return [
+    [fromLoc.lat, fromLoc.lng],
+    [midLat1, (fromLoc.lng + spineLng) / 2],
+    [midLat2, (toLoc.lng + spineLng) / 2],
+    [toLoc.lat, toLoc.lng]
+  ];
+}
+
 function calculateCampusRoute() {
   const fromId = document.getElementById('routeFromSelect').value;
   const toId = document.getElementById('routeToSelect').value;
@@ -374,23 +407,11 @@ function calculateCampusRoute() {
   const walkMins = distMeters === 0 ? 0 : Math.max(1, Math.round(distMeters / 75));
   const erickshawMins = distMeters === 0 ? 0 : Math.max(1, Math.round(distMeters / 220));
 
-  const uniMall = campusData.campusLocations.find((l) => l.id === 'uni-mall');
-  const block30 = campusData.campusLocations.find((l) => l.id === 'block-30');
-
-  let waypoints = [
-    [fromLoc.lat, fromLoc.lng],
-    [toLoc.lat, toLoc.lng]
-  ];
-  let stepGuide = `Start at <strong>${fromLoc.code}</strong> → Follow main campus avenue toward <strong>${toLoc.zone}</strong> → Arrive at <strong>${toLoc.code} (${toLoc.landmark})</strong>`;
-
-  if (fromLoc.id !== toLoc.id && distMeters > 350 && uniMall && block30) {
-    waypoints = [
-      [fromLoc.lat, fromLoc.lng],
-      [(fromLoc.lat + toLoc.lat) / 2, (fromLoc.lng + toLoc.lng) / 2],
-      [toLoc.lat, toLoc.lng]
-    ];
-    stepGuide = `1. Start from <strong>${fromLoc.code}</strong> → 2. Pass along Central Spine (${toLoc.landmark}) → 3. Reach <strong>${toLoc.code} — ${toLoc.name}</strong>`;
-  }
+  const waypoints = buildCampusSpineWaypoints(fromLoc, toLoc, distMeters);
+  const stepGuide =
+    fromLoc.id === toLoc.id
+      ? `You are already at <strong>${toLoc.code} — ${toLoc.name}</strong> (${toLoc.landmark}).`
+      : `1. Start at <strong>🟢 ${fromLoc.code}</strong> → 2. Follow LPU Central Spine toward <strong>${toLoc.zone}</strong> (${toLoc.landmark}) → 3. Arrive at <strong>🏁 ${toLoc.code} — ${toLoc.name}</strong>`;
 
   const banner = document.getElementById('routeResultBanner');
   banner.innerHTML = `
@@ -419,14 +440,49 @@ function calculateCampusRoute() {
     if (routeLineLayer) {
       map.removeLayer(routeLineLayer);
     }
-    routeLineLayer = L.polyline(waypoints, {
-      color: '#059669',
-      weight: 5,
-      opacity: 0.9,
-      dashArray: '10, 8'
-    }).addTo(map);
 
-    map.fitBounds(L.latLngBounds(waypoints), { padding: [55, 55], maxZoom: 17 });
+    const outerLine = L.polyline(waypoints, {
+      color: '#ffffff',
+      weight: 9,
+      opacity: 0.95,
+      lineCap: 'round',
+      lineJoin: 'round'
+    });
+
+    const innerLine = L.polyline(waypoints, {
+      color: '#2563eb',
+      weight: 5,
+      opacity: 1,
+      lineCap: 'round',
+      lineJoin: 'round'
+    });
+
+    const dashLine = L.polyline(waypoints, {
+      color: '#93c5fd',
+      weight: 2,
+      opacity: 0.95,
+      dashArray: '6, 10'
+    });
+
+    const startBadge = L.marker([fromLoc.lat, fromLoc.lng], {
+      icon: L.divIcon({
+        className: '',
+        html: `<div class="route-endpoint-badge start-badge">🟢 START: ${getShortPinCode(fromLoc)}</div>`
+      }),
+      zIndexOffset: 1000
+    });
+
+    const endBadge = L.marker([toLoc.lat, toLoc.lng], {
+      icon: L.divIcon({
+        className: '',
+        html: `<div class="route-endpoint-badge end-badge">🏁 TO: ${getShortPinCode(toLoc)}</div>`
+      }),
+      zIndexOffset: 1001
+    });
+
+    routeLineLayer = L.layerGroup([outerLine, innerLine, dashLine, startBadge, endBadge]).addTo(map);
+
+    map.fitBounds(L.latLngBounds(waypoints), { padding: [65, 65], maxZoom: 17 });
   }
 }
 
@@ -435,24 +491,30 @@ function initCampusMap() {
   if (!mapEl) return;
 
   map = L.map('campusMap', {
-    center: [31.2555, 75.7048],
-    zoom: 16
+    center: [31.2552, 75.7048],
+    zoom: 16,
+    zoomControl: true
   });
 
-  streetTileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '© OpenStreetMap • LPU Campus Navigator'
+  // High-definition Google Maps Road Layer (shows real LPU buildings, internal roads & block labels)
+  streetTileLayer = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    attribution: '© Google Maps • LPU Campus Navigator'
   }).addTo(map);
 
-  satTileLayer = L.tileLayer(
-    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    {
-      maxZoom: 19,
-      attribution: '© Esri Satellite'
-    }
-  );
+  // High-definition Google Satellite Hybrid Layer (Satellite imagery + real building labels)
+  satTileLayer = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    attribution: '© Google Satellite HD • LPU Campus Navigator'
+  });
 
   renderMapPinsAndSidebar();
+}
+
+function resetCampusMapView() {
+  if (!map || !campusData.campusLocations.length) return;
+  const coords = campusData.campusLocations.map((l) => [l.lat, l.lng]);
+  map.fitBounds(L.latLngBounds(coords), { padding: [35, 35], maxZoom: 16 });
 }
 
 function setMapLayer(mode) {
@@ -493,19 +555,38 @@ function renderMapPinsAndSidebar() {
     if (loc.category === 'Hostels') catClass = 'cat-Hostels';
     else if (loc.category === 'Admin & Support') catClass = 'cat-Admin';
     else if (loc.category === 'Gates & Transit') catClass = 'cat-Gates';
+    else if (loc.category === 'Facilities & Mall') catClass = 'cat-Mall';
 
     const isSelected = loc.id === selectedLocationId ? 'active-pin' : '';
+    const shortCode = getShortPinCode(loc);
 
     const icon = L.divIcon({
       className: '',
-      html: `<div class="lpu-map-pin ${catClass} ${isSelected}">${loc.code}</div>`
+      html: `<div class="lpu-map-pin ${catClass} ${isSelected}" title="${loc.code} — ${loc.name}">${shortCode}</div>`
     });
 
     const marker = L.marker([loc.lat, loc.lng], { icon }).addTo(map);
+
+    const popupHtml = `
+      <div class="lpu-popup-card">
+        <img src="${loc.photo}" alt="${loc.name}" />
+        <div class="lpu-popup-body">
+          <span class="lpu-popup-tag">${loc.code} • ${loc.zone}</span>
+          <strong>${loc.name}</strong>
+          <p>📍 ${loc.landmark}</p>
+          <button onclick="document.getElementById('routeToSelect').value='${loc.id}';calculateCampusRoute();">
+            🧭 Route to ${loc.code} →
+          </button>
+        </div>
+      </div>
+    `;
+    marker.bindPopup(popupHtml, { maxWidth: 250, offset: [0, -10] });
+
     marker.on('click', () => {
       document.getElementById('routeToSelect').value = loc.id;
-      selectCampusLocation(loc.id, true);
+      selectCampusLocation(loc.id, false);
       calculateCampusRoute();
+      marker.openPopup();
     });
 
     markersMap[loc.id] = marker;
